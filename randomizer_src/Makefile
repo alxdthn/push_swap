@@ -6,7 +6,7 @@
 #    By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/29 16:28:19 by nalexand          #+#    #+#              #
-#    Updated: 2019/06/25 17:20:39 by nalexand         ###   ########.fr        #
+#    Updated: 2019/06/25 17:47:28 by nalexand         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ LIBFT = ../libft/libft.a
 
 C_FLAGS = -g
 
-HEADER = -I includes
+HEADER = -I ../includes
 
 SRC = src/main.c
 
