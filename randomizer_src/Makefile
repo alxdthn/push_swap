@@ -6,24 +6,36 @@
 #    By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/29 16:28:19 by nalexand          #+#    #+#              #
-#    Updated: 2019/06/25 17:37:32 by nalexand         ###   ########.fr        #
+#    Updated: 2019/06/25 17:20:39 by nalexand         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-PROG_1 = randomizer
-PROG_1_PATH = randomizer_src/
+NAME = randomizer
 
-all: $(PROG_1)
+LIBFT = ../libft/libft.a
 
-$(PROG_1):
-	make -C $(PROG_1_PATH)
-	cp $(PROG_1_PATH)$(PROG_1) .
+C_FLAGS = -g
+
+HEADER = -I includes
+
+SRC = src/main.c
+
+all: $(NAME)
+
+$(NAME): $(LIBFT) $(SRC)
+	gcc $(C_FLAGS) -o $(NAME) $(SRC) $(LIBFT) $(HEADER)
+
+$(LIBFT):
+	make -C ../libft
 
 clean:
-	rm -f $(PROG_1)
-	@make -C $(PROG_1_PATH) clean
+	@make -C ../libft clean
 
 fclean: clean
-	@make -C $(PROG_1_PATH) fclean
+	@rm -f $(NAME)
+	@make -C ../libft fclean
+
+val:
+	valgrind --leak-check=full ./$(NAME)
 
 re: fclean all

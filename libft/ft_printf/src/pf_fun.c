@@ -6,13 +6,11 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/24 01:38:31 by nalexand          #+#    #+#             */
-/*   Updated: 2019/05/24 14:42:48 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/06/25 17:39:30 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#define RUS_WIDTH 60
-#define RUS_SQR RUS_WIDTH * 15
 
 static int	fun_flag_rus(void)
 {

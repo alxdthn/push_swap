@@ -6,11 +6,11 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/11 22:19:55 by nalexand          #+#    #+#             */
-/*   Updated: 2019/04/21 07:45:53 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/06/25 17:38:30 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "libft.h"
 
 static int			get_ofset(t_list **elem, size_t size)
 {
