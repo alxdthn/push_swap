@@ -6,11 +6,11 @@
 #    By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/29 16:28:19 by nalexand          #+#    #+#              #
-#    Updated: 2019/06/25 20:08:43 by nalexand         ###   ########.fr        #
+#    Updated: 2019/06/25 19:45:05 by nalexand         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = randomizer
+NAME = push_swap
 
 LIBFT = ../libft/libft.a
 
@@ -20,13 +20,13 @@ HEADER = -I ../includes
 
 SRC = src/$(NAME).c
 
-randomizer_prog: $(NAME)
+push_swap_prog: $(NAME)
 
 $(NAME): $(LIBFT) $(SRC)
 	gcc $(C_FLAGS) -o $(NAME) $(SRC) $(LIBFT) $(HEADER)
 
 $(LIBFT):
-	make -C ../libft
+	@make -C ../libft
 
 clean:
 	@make -C ../libft clean
