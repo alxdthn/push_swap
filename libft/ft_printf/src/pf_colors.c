@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/23 08:25:53 by nalexand          #+#    #+#             */
-/*   Updated: 2019/05/27 07:50:26 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/06/26 02:32:06 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,24 +65,24 @@ int			solve_color(char *clr, va_list *args)
 	return (ret);
 }
 
-int			parse_color(char **fmt, t_task *task, va_list *args)
+int			parse_color(char **fmt, t_ftask *ftask, va_list *args)
 {
 	int		ret;
 
 	ret = 0;
-	get_color(fmt, &task->clr);
-	if (task->clr)
+	get_color(fmt, &ftask->clr);
+	if (ftask->clr)
 	{
-		ret += solve_color(task->clr, args);
+		ret += solve_color(ftask->clr, args);
 		if (!find_type(*fmt))
 		{
-			task->clr = NULL;
+			ftask->clr = NULL;
 			return (ret);
 		}
 	}
 	else
 	{
-		task->type = '{';
+		ftask->type = '{';
 		(*fmt)++;
 	}
 	return (ret);

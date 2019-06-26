@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/10 00:39:22 by nalexand          #+#    #+#             */
-/*   Updated: 2019/05/28 10:59:06 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/06/26 02:32:06 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static void		round_mod(t_lnbr *nbr, char div_value, int prc)
 		rounding(nbr, point);
 }
 
-static t_res	std_core(t_lnbr *div, t_lnbr *mod, t_task *task)
+static t_res	std_core(t_lnbr *div, t_lnbr *mod, t_ftask *ftask)
 {
 	t_res	res;
 	int		i;
@@ -51,7 +51,7 @@ static t_res	std_core(t_lnbr *div, t_lnbr *mod, t_task *task)
 	int		k;
 
 	res.str = NULL;
-	res.len = div->len + task->prc + ((!task->prc) ? task->flags.sharp : 0);
+	res.len = div->len + ftask->prc + ((!ftask->prc) ? ftask->flags.sharp : 0);
 	if ((res.str = (char *)malloc(sizeof(char) * res.len)))
 	{
 		ft_memset(res.str, '0', res.len);
@@ -85,22 +85,22 @@ void			set_over(t_lnbr *nbr, int over)
 		nbr->vls[nbr->len++] = over;
 }
 
-void			get_ldbl(t_res *res, t_task *task, t_ems *uni)
+void			get_ldbl(t_res *res, t_ftask *ftask, t_ems *uni)
 {
 	t_lnbr	div;
 	t_lnbr	mod;
 	int		over;
 
 	get_float_div(&div, *uni);
-	get_float_mod(&mod, *uni, task->prc);
+	get_float_mod(&mod, *uni, ftask->prc);
 	res->str = NULL;
 	res->len = 0;
-	round_mod(&mod, div.vls[0], task->prc);
+	round_mod(&mod, div.vls[0], ftask->prc);
 	if (mod.vls[mod.len - 1])
 	{
 		div.vls[0] += mod.vls[mod.len - 1];
 		if (div.vls[0] > 9)
 			set_over(&div, div.vls[0] / 10);
 	}
-	*res = std_core(&div, &mod, task);
+	*res = std_core(&div, &mod, ftask);
 }

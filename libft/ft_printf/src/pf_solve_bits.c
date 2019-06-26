@@ -6,23 +6,23 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/24 04:28:23 by nalexand          #+#    #+#             */
-/*   Updated: 2019/05/27 02:25:55 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/06/26 02:32:06 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-t_res	solve_bits(t_task *task, va_list *args)
+t_res	solve_bits(t_ftask *ftask, va_list *args)
 {
 	t_res	res;
 
 	res.len = 0;
 	if ((res.str = ft_btoa((unsigned long)va_arg(*args, unsigned long),
-	(task->prc == -1) ? task->size.value * 8 : task->prc, task->flags.sharp)))
+	(ftask->prc == -1) ? ftask->size.value * 8 : ftask->prc, ftask->flags.sharp)))
 	{
 		res.len = ft_strlen(res.str);
-		if (task->width > res.len)
-			set_width(&res, task, ' ');
+		if (ftask->width > res.len)
+			set_width(&res, ftask, ' ');
 	}
 	else
 		res.len = -1;

@@ -1,2 +1,5 @@
 */*.dSYM
 *.dSYM
+*/obj
+push_swap
+randomizer

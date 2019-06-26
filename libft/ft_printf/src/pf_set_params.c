@@ -6,13 +6,13 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/04 22:10:39 by nalexand          #+#    #+#             */
-/*   Updated: 2019/05/27 02:06:21 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/06/26 02:32:06 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void		set_sign(t_res *res, t_task *task, long nbr)
+void		set_sign(t_res *res, t_ftask *ftask, long nbr)
 {
 	t_res	tmp;
 	int		i;
@@ -24,9 +24,9 @@ void		set_sign(t_res *res, t_task *task, long nbr)
 	if ((tmp.str = (char *)malloc(sizeof(char) * tmp.len)))
 	{
 		i = 0;
-		if (task->flags.space)
+		if (ftask->flags.space)
 			tmp.str[i] = ' ';
-		if (task->flags.plus)
+		if (ftask->flags.plus)
 			tmp.str[i] = '+';
 		if (nbr < 0)
 			tmp.str[i] = '-';
@@ -107,10 +107,10 @@ static void	set_forward(t_res *res, int width, char filler)
 	*res = tmp;
 }
 
-void		set_width(t_res *res, t_task *task, char filler)
+void		set_width(t_res *res, t_ftask *ftask, char filler)
 {
-	if (task->flags.minus)
-		set_forward(res, task->width, filler);
+	if (ftask->flags.minus)
+		set_forward(res, ftask->width, filler);
 	else
-		set_backward(res, task->width, filler);
+		set_backward(res, ftask->width, filler);
 }

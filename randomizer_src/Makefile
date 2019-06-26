@@ -6,7 +6,7 @@
 #    By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/29 16:28:19 by nalexand          #+#    #+#              #
-#    Updated: 2019/06/25 20:08:43 by nalexand         ###   ########.fr        #
+#    Updated: 2019/06/26 02:31:02 by nalexand         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,7 @@ clean:
 
 fclean: clean
 	@rm -f $(NAME)
+	@rm -rf *.dSYM
 	@make -C ../libft fclean
 
 val:

@@ -6,28 +6,28 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/04 22:38:38 by nalexand          #+#    #+#             */
-/*   Updated: 2019/05/28 12:06:33 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/06/26 02:32:06 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int			get_flags(char fmt, t_task *task)
+int			get_flags(char fmt, t_ftask *ftask)
 {
 	if (fmt == '#')
-		return (task->flags.sharp = 1);
+		return (ftask->flags.sharp = 1);
 	else if (fmt == '-')
-		return (task->flags.minus = 1);
+		return (ftask->flags.minus = 1);
 	else if (fmt == '+')
-		return (task->flags.plus = 1);
+		return (ftask->flags.plus = 1);
 	else if (fmt == ' ')
-		return (task->flags.space = 1);
+		return (ftask->flags.space = 1);
 	else if (fmt == '0')
-		return (task->flags.zero = 1);
+		return (ftask->flags.zero = 1);
 	return (0);
 }
 
-void		get_width(char **fmt, t_task *task, va_list *args)
+void		get_width(char **fmt, t_ftask *ftask, va_list *args)
 {
 	long	tmp;
 
@@ -37,22 +37,22 @@ void		get_width(char **fmt, t_task *task, va_list *args)
 		{
 			if (tmp < 0)
 			{
-				task->width = -tmp;
-				task->flags.minus = 1;
+				ftask->width = -tmp;
+				ftask->flags.minus = 1;
 			}
 			else
-				task->width = tmp;
+				ftask->width = tmp;
 		}
 		while (**fmt && **fmt == '*')
 			(*fmt)++;
 	}
 	else
 	{
-		task->width = ft_atoi(*fmt);
+		ftask->width = ft_atoi(*fmt);
 		while (**fmt && ft_isdigit(**fmt))
 			(*fmt)++;
-		if (task->width < 0)
-			task->width = 0;
+		if (ftask->width < 0)
+			ftask->width = 0;
 	}
 }
 

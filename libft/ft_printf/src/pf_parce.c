@@ -6,27 +6,27 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/04 22:30:06 by nalexand          #+#    #+#             */
-/*   Updated: 2019/05/27 07:31:17 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/06/26 02:32:06 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static void	validation_task(t_task *task)
+static void	validation_ftask(t_ftask *ftask)
 {
-	if (task->flags.minus)
-		task->flags.zero = 0;
-	if (ft_strchr("%cCsSp", task->type))
+	if (ftask->flags.minus)
+		ftask->flags.zero = 0;
+	if (ft_strchr("%cCsSp", ftask->type))
 	{
-		task->flags.sharp = 0;
+		ftask->flags.sharp = 0;
 	}
-	if (ft_strchr("oxX", task->type))
+	if (ft_strchr("oxX", ftask->type))
 	{
-		task->flags.space = 0;
-		task->flags.plus = 0;
+		ftask->flags.space = 0;
+		ftask->flags.plus = 0;
 	}
-	if (task->type == 'O' || task->type == 'D' || task->type == 'U')
-		task->size.chr = 0;
+	if (ftask->type == 'O' || ftask->type == 'D' || ftask->type == 'U')
+		ftask->size.chr = 0;
 }
 
 static int	get_type(char **fmt, char *type)
@@ -59,7 +59,7 @@ int			find_type(char *fmt)
 	return (0);
 }
 
-static int	parse_task(char **fmt, t_task *task, va_list *args)
+static int	parse_ftask(char **fmt, t_ftask *ftask, va_list *args)
 {
 	int		ret;
 
@@ -68,21 +68,21 @@ static int	parse_task(char **fmt, t_task *task, va_list *args)
 	{
 		if (**fmt == '{')
 		{
-			ret += parse_color(fmt, task, args);
+			ret += parse_color(fmt, ftask, args);
 			if (**fmt == '%')
 				break ;
 		}
-		if (get_type(fmt, &task->type) || task->type)
+		if (get_type(fmt, &ftask->type) || ftask->type)
 			break ;
-		if (get_flags(**fmt, task))
+		if (get_flags(**fmt, ftask))
 			(*fmt)++;
 		if (**fmt != '0' && (ft_isdigit(**fmt) || **fmt == '*'))
-			get_width(fmt, task, args);
+			get_width(fmt, ftask, args);
 		if (**fmt == '.')
-			get_prc(fmt, &task->prc, args);
-		get_size(fmt, &task->size);
+			get_prc(fmt, &ftask->prc, args);
+		get_size(fmt, &ftask->size);
 	}
-	validation_task(task);
+	validation_ftask(ftask);
 	return (ret);
 }
 
@@ -100,7 +100,7 @@ int			parse(char **fmt, t_out *out, va_list *args)
 	{
 		(*fmt)++;
 		if (**fmt)
-			ret = parse_task(fmt, &out->task, args);
+			ret = parse_ftask(fmt, &out->ftask, args);
 	}
 	return (ret);
 }

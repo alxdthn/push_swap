@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/24 03:15:16 by nalexand          #+#    #+#             */
-/*   Updated: 2019/05/27 02:30:17 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/06/26 02:32:06 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void		set_unicode(t_res *res, wchar_t *u_str, int count, int prc)
 		res->len = -1;
 }
 
-t_res		solve_ustr(t_task *task, wchar_t *ustr)
+t_res		solve_ustr(t_ftask *ftask, wchar_t *ustr)
 {
 	t_res	res;
 
@@ -57,21 +57,21 @@ t_res		solve_ustr(t_task *task, wchar_t *ustr)
 	res.len = 0;
 	if (ustr == NULL)
 	{
-		if (task->prc > 6 || task->prc == -1)
+		if (ftask->prc > 6 || ftask->prc == -1)
 			res.len = 6;
 		else
-			res.len = task->prc;
+			res.len = ftask->prc;
 		if (!(res.str = ft_memdup("(null)", res.len)))
 			res.len = -1;
 	}
 	else
-		set_unicode(&res, ustr, -1, task->prc);
-	if (task->width > res.len)
-		set_width(&res, task, (task->flags.zero) ? '0' : ' ');
+		set_unicode(&res, ustr, -1, ftask->prc);
+	if (ftask->width > res.len)
+		set_width(&res, ftask, (ftask->flags.zero) ? '0' : ' ');
 	return (res);
 }
 
-t_res		solve_uchar(t_task *task, wchar_t uchar)
+t_res		solve_uchar(t_ftask *ftask, wchar_t uchar)
 {
 	t_res	res;
 
@@ -85,7 +85,7 @@ t_res		solve_uchar(t_task *task, wchar_t uchar)
 	}
 	else
 		set_unicode(&res, &uchar, 1, -1);
-	if (task->width > res.len)
-		set_width(&res, task, (task->flags.zero) ? '0' : ' ');
+	if (ftask->width > res.len)
+		set_width(&res, ftask, (ftask->flags.zero) ? '0' : ' ');
 	return (res);
 }

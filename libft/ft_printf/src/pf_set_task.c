@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pf_set_task.c                                      :+:      :+:    :+:   */
+/*   pf_set_ftask.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -21,20 +21,20 @@ static void	flags_new(t_flags *flags)
 	flags->zero = 0;
 }
 
-static void	task_new(t_task *task)
+static void	ftask_new(t_ftask *ftask)
 {
-	flags_new(&task->flags);
-	task->clr = NULL;
-	task->size.chr = 0;
-	task->size.value = sizeof(int);
-	task->width = 0;
-	task->prc = -1;
-	task->type = '\0';
+	flags_new(&ftask->flags);
+	ftask->clr = NULL;
+	ftask->size.chr = 0;
+	ftask->size.value = sizeof(int);
+	ftask->width = 0;
+	ftask->prc = -1;
+	ftask->type = '\0';
 }
 
 void		out_new(t_out *out)
 {
-	task_new(&out->task);
+	ftask_new(&out->ftask);
 	out->res.str = NULL;
 	out->res.len = 0;
 }

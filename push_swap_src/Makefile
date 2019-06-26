@@ -6,7 +6,7 @@
 #    By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/29 16:28:19 by nalexand          #+#    #+#              #
-#    Updated: 2019/06/26 05:30:33 by nalexand         ###   ########.fr        #
+#    Updated: 2019/06/26 05:34:42 by nalexand         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,7 +44,7 @@ $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	@gcc -g -c $< -o $@ $(HEADER)
 
 clean:
-	rm -rf $(OBJ_DIR)
+	@rm -rf $(OBJ_DIR)
 	@make -C ../libft clean
 
 fclean: clean

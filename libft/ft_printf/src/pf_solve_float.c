@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/05 17:10:31 by nalexand          #+#    #+#             */
-/*   Updated: 2019/05/27 04:03:47 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/06/26 02:32:06 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,45 +38,45 @@ static void	check_ldbl(t_res *res, t_ems *uni, char type)
 	}
 }
 
-static void	set_params_float(t_res *res, t_ems *uni, t_task *task)
+static void	set_params_float(t_res *res, t_ems *uni, t_ftask *ftask)
 {
 	if (res->str[0] == 'n' || res->str[0] == 'N')
 	{
-		task->flags.plus = 0;
-		task->flags.zero = 0;
-		task->flags.space = 0;
+		ftask->flags.plus = 0;
+		ftask->flags.zero = 0;
+		ftask->flags.space = 0;
 		uni->ems.s = 0;
 	}
 	if (res->str[0] == 'i' || res->str[0] == 'I')
-		task->flags.zero = 0;
-	task->prc = -1;
-	if (res->str && (task->flags.plus || task->flags.space || uni->ems.s))
-		set_sign(res, task, -uni->ems.s);
-	if (res->str && task->flags.zero && task->width > res->len)
-		set_zero(res, task->width);
-	else if (task->width > res->len)
-		set_width(res, task, ' ');
+		ftask->flags.zero = 0;
+	ftask->prc = -1;
+	if (res->str && (ftask->flags.plus || ftask->flags.space || uni->ems.s))
+		set_sign(res, ftask, -uni->ems.s);
+	if (res->str && ftask->flags.zero && ftask->width > res->len)
+		set_zero(res, ftask->width);
+	else if (ftask->width > res->len)
+		set_width(res, ftask, ' ');
 }
 
-t_res		solve_float(t_task *task, va_list *args)
+t_res		solve_float(t_ftask *ftask, va_list *args)
 {
 	long double	ldbl;
 	t_ems		uni;
 	t_res		res;
 
-	if (task->size.chr == 'f')
+	if (ftask->size.chr == 'f')
 		ldbl = va_arg(*args, long double);
 	else
 		ldbl = va_arg(*args, double);
 	uni.ldbl = ldbl;
 	res.len = 0;
 	res.str = NULL;
-	check_ldbl(&res, &uni, task->type);
-	if (task->prc)
-		task->prc = (task->prc == -1) ? 7 : ++task->prc;
+	check_ldbl(&res, &uni, ftask->type);
+	if (ftask->prc)
+		ftask->prc = (ftask->prc == -1) ? 7 : ++ftask->prc;
 	if (!res.str && res.len != -1)
-		get_ldbl(&res, task, &uni);
+		get_ldbl(&res, ftask, &uni);
 	if (res.len != -1)
-		set_params_float(&res, &uni, task);
+		set_params_float(&res, &uni, ftask);
 	return (res);
 }

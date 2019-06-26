@@ -6,13 +6,13 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/04 22:03:03 by nalexand          #+#    #+#             */
-/*   Updated: 2019/05/27 04:00:50 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/06/26 02:32:06 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static void	set_sharp_hex(t_res *res, t_task *task)
+static void	set_sharp_hex(t_res *res, t_ftask *ftask)
 {
 	t_res	tmp;
 
@@ -23,7 +23,7 @@ static void	set_sharp_hex(t_res *res, t_task *task)
 	if ((tmp.str = (char *)malloc(sizeof(char) * tmp.len)))
 	{
 		tmp.str[0] = '0';
-		tmp.str[1] = task->type;
+		tmp.str[1] = ftask->type;
 		ft_memcpy(tmp.str + 2, res->str, res->len);
 	}
 	else
@@ -32,7 +32,7 @@ static void	set_sharp_hex(t_res *res, t_task *task)
 	*res = tmp;
 }
 
-static void	set_sharp_octal(t_res *res, t_task *task)
+static void	set_sharp_octal(t_res *res, t_ftask *ftask)
 {
 	t_res	tmp;
 
@@ -44,9 +44,9 @@ static void	set_sharp_octal(t_res *res, t_task *task)
 	{
 		tmp.str[0] = '0';
 		ft_memcpy(tmp.str + 1, res->str, res->len);
-		if (task->prc == -1 && task->flags.zero &&
-		task->width > res->len && !task->flags.minus)
-			set_zero(&tmp, task->width);
+		if (ftask->prc == -1 && ftask->flags.zero &&
+		ftask->width > res->len && !ftask->flags.minus)
+			set_zero(&tmp, ftask->width);
 	}
 	else
 		tmp.len = -1;
@@ -54,26 +54,26 @@ static void	set_sharp_octal(t_res *res, t_task *task)
 	*res = tmp;
 }
 
-static void	set_params(t_res *res, t_task *task, long nbr)
+static void	set_params(t_res *res, t_ftask *ftask, long nbr)
 {
 	if (res->len != -1)
 	{
-		if (task->flags.sharp && (task->type == 'o' || task->type == 'O'))
-			set_sharp_octal(res, task);
-		if (nbr && task->flags.sharp
-		&& (task->type == 'x' || task->type == 'X'))
-			set_sharp_hex(res, task);
-		if ((task->flags.plus || task->flags.space || nbr < 0)
-		&& ft_strchr("dDi", task->type))
-			set_sign(res, task, nbr);
-		if (task->prc == -1 && task->flags.zero && task->width > res->len)
-			set_zero(res, task->width);
-		else if (task->width > res->len)
-			set_width(res, task, ' ');
+		if (ftask->flags.sharp && (ftask->type == 'o' || ftask->type == 'O'))
+			set_sharp_octal(res, ftask);
+		if (nbr && ftask->flags.sharp
+		&& (ftask->type == 'x' || ftask->type == 'X'))
+			set_sharp_hex(res, ftask);
+		if ((ftask->flags.plus || ftask->flags.space || nbr < 0)
+		&& ft_strchr("dDi", ftask->type))
+			set_sign(res, ftask, nbr);
+		if (ftask->prc == -1 && ftask->flags.zero && ftask->width > res->len)
+			set_zero(res, ftask->width);
+		else if (ftask->width > res->len)
+			set_width(res, ftask, ' ');
 	}
 }
 
-t_res		solve_digit(t_task *task, long arg)
+t_res		solve_digit(t_ftask *ftask, long arg)
 {
 	char			base;
 	unsigned long	nbr;
@@ -81,21 +81,21 @@ t_res		solve_digit(t_task *task, long arg)
 
 	res.str = NULL;
 	res.len = 0;
-	if (!task->prc && !arg)
-		set_params(&res, task, arg);
+	if (!ftask->prc && !arg)
+		set_params(&res, ftask, arg);
 	else
 	{
 		base = 10;
-		if (ft_strchr("oO", task->type))
+		if (ft_strchr("oO", ftask->type))
 			base = 8;
-		else if (ft_strchr("xX", task->type))
+		else if (ft_strchr("xX", ftask->type))
 			base = 16;
-		if (arg < 0 && ft_strchr("dDi", task->type))
+		if (arg < 0 && ft_strchr("dDi", ftask->type))
 			nbr = -arg;
 		else
 			nbr = arg;
-		res = pf_ltoa_base(nbr, base, task);
-		set_params(&res, task, arg);
+		res = pf_ltoa_base(nbr, base, ftask);
+		set_params(&res, ftask, arg);
 	}
 	return (res);
 }

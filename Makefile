@@ -6,7 +6,7 @@
 #    By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/29 16:28:19 by nalexand          #+#    #+#              #
-#    Updated: 2019/06/26 02:29:17 by nalexand         ###   ########.fr        #
+#    Updated: 2019/06/26 02:30:42 by nalexand         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,7 @@ clean:
 	@make -C $(PROG_2_PATH) clean
 
 fclean: clean
+	@rm -rf *.dSYM
 	@make -C $(PROG_1_PATH) fclean
 	@make -C $(PROG_2_PATH) fclean
 

@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/04 22:25:47 by nalexand          #+#    #+#             */
-/*   Updated: 2019/05/27 02:19:25 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/06/26 02:32:06 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static void		pf_ltoa_nbr(t_res *res, unsigned long nbr, char base, char type)
 		res->len = -1;
 }
 
-t_res			pf_ltoa_base(unsigned long nbr, char base, t_task *task)
+t_res			pf_ltoa_base(unsigned long nbr, char base, t_ftask *ftask)
 {
 	t_res		res;
 
@@ -64,8 +64,8 @@ t_res			pf_ltoa_base(unsigned long nbr, char base, t_task *task)
 	if (nbr == 0)
 		pf_ltoa_zero(&res);
 	else
-		pf_ltoa_nbr(&res, nbr, base, (task->type == 'X') ? 55 : 87);
-	if (task->prc > 0)
-		set_prc(&res, task->prc);
+		pf_ltoa_nbr(&res, nbr, base, (ftask->type == 'X') ? 55 : 87);
+	if (ftask->prc > 0)
+		set_prc(&res, ftask->prc);
 	return (res);
 }

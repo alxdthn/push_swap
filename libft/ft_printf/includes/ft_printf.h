@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/30 15:27:31 by nalexand          #+#    #+#             */
-/*   Updated: 2019/06/25 17:39:50 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/06/26 02:32:06 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ typedef struct			s_size
 	size_t				value;
 }						t_size;
 
-typedef struct			s_task
+typedef struct			s_ftask
 {
 	t_flags				flags;
 	t_size				size;
@@ -58,7 +58,7 @@ typedef struct			s_task
 	int					width;
 	int					prc;
 	char				type;
-}						t_task;
+}						t_ftask;
 
 typedef struct			s_res
 {
@@ -69,7 +69,7 @@ typedef struct			s_res
 typedef struct			s_out
 {
 	t_res				res;
-	t_task				task;
+	t_ftask				ftask;
 }						t_out;
 
 typedef	union			u_ems
@@ -102,15 +102,15 @@ typedef union			u_unicode
 	}					parts;
 }						t_unic;
 
-int						parse_color(char **fmt, t_task *task, va_list *args);
+int						parse_color(char **fmt, t_ftask *ftask, va_list *args);
 int						solve_color(char *clr, va_list *args);
 void					get_color(char **fmt, char **clr);
 
 size_t					unicode_len(wchar_t *u_str, int count, int prc);
 char					*get_uchar(char *buf, int uchar, int size);
 
-t_res					solve_float(t_task *task, va_list *args);
-void					get_ldbl(t_res *res, t_task *task, t_ems *uni);
+t_res					solve_float(t_ftask *ftask, va_list *args);
+void					get_ldbl(t_res *res, t_ftask *ftask, t_ems *uni);
 void					get_float_div(t_lnbr *div, t_ems uni);
 void					get_float_mod(t_lnbr *mod, t_ems uni, int prc);
 
@@ -129,23 +129,23 @@ void					out_new(t_out *out);
 int						solve_fun(char *clr, va_list *args);
 void					get_size(char **fmt, t_size *size);
 void					get_prc(char **fmt, int *prc, va_list *args);
-void					get_width(char **fmt, t_task *task, va_list *args);
-int						get_flags(char fmt, t_task *task);
+void					get_width(char **fmt, t_ftask *ftask, va_list *args);
+int						get_flags(char fmt, t_ftask *ftask);
 
-void					set_sign(t_res *res, t_task *task, long nbr);
+void					set_sign(t_res *res, t_ftask *ftask, long nbr);
 void					set_prc(t_res *res, int prc);
-void					set_width(t_res *res, t_task *task, char filler);
+void					set_width(t_res *res, t_ftask *ftask, char filler);
 void					set_zero(t_res *res, int width);
 
-t_res					pf_ltoa_base(unsigned long nbr, char base, t_task *task);
-t_res					set_arg_digit(t_task *task, va_list *args);
-t_res					set_arg_string(t_task *task, va_list *args);
-t_res					solve_digit(t_task *task, long arg);
-t_res					solve_uchar(t_task *task, wchar_t uchar);
-t_res					solve_ustr(t_task *task, wchar_t *ustr);
-t_res					solve_noconv(t_task *task);
-t_res					solve_ptr(t_task *task, unsigned long ptr);
-t_res					solve_bits(t_task *task, va_list *args);
+t_res					pf_ltoa_base(unsigned long nbr, char base, t_ftask *ftask);
+t_res					set_arg_digit(t_ftask *ftask, va_list *args);
+t_res					set_arg_string(t_ftask *ftask, va_list *args);
+t_res					solve_digit(t_ftask *ftask, long arg);
+t_res					solve_uchar(t_ftask *ftask, wchar_t uchar);
+t_res					solve_ustr(t_ftask *ftask, wchar_t *ustr);
+t_res					solve_noconv(t_ftask *ftask);
+t_res					solve_ptr(t_ftask *ftask, unsigned long ptr);
+t_res					solve_bits(t_ftask *ftask, va_list *args);
 
 int						find_type(char *fmt);
 int						parse(char **fmt, t_out *out, va_list *args);
