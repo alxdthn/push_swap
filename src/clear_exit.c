@@ -1,25 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstdel.c                                        :+:      :+:    :+:   */
+/*   clear_exit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/08 08:10:05 by nalexand          #+#    #+#             */
-/*   Updated: 2019/06/27 07:16:32 by nalexand         ###   ########.fr       */
+/*   Created: 2019/06/26 05:23:01 by nalexand          #+#    #+#             */
+/*   Updated: 2019/06/27 21:44:19 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "push_swap.h"
 
-void	ft_lstdel(t_list **alst, void (*del)(void *, size_t))
+void		push_swap_clear_exit(t_ps *ps)
 {
-	if (*alst)
-	{
-		if ((*alst)->next)
-			ft_lstdel(&((*alst)->next), del);
-		del((*alst)->content, (*alst)->content_size);
-		free(*alst);
-		*alst = NULL;
-	}
+	free(ps->a);
+	free(ps->b);
+	exit(EXIT_FAILURE);
 }

@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 01:55:55 by nalexand          #+#    #+#             */
-/*   Updated: 2019/06/25 17:25:44 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/06/27 00:29:09 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void				ft_putstr(char const *s);
 void				ft_putstr_fd(char const *s, int fd);
 void				ft_putendl(char const *s);
 void				ft_putendl_fd(char const *s, int fd);
+int					ft_puterr(int ret, char *message);
 char				**ft_strsplit(char const *s, char c);
 void				ft_swap(void *ptr1, void *ptr2);
 int					ft_strequ(char const *s1, char const *s2);
@@ -83,6 +84,7 @@ int					ft_isalpha(int c);
 int					ft_isalnum(int c);
 int					ft_isascii(int c);
 int					ft_isprint(int c);
+int					ft_isint(char *nb);
 int					ft_toupper(int c);
 int					ft_tolower(int c);
 

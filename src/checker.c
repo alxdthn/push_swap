@@ -1,38 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   swap.c                                             :+:      :+:    :+:   */
+/*   checker.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/06/26 04:34:04 by nalexand          #+#    #+#             */
-/*   Updated: 2019/06/26 04:51:30 by nalexand         ###   ########.fr       */
+/*   Created: 2019/06/24 18:15:03 by nalexand          #+#    #+#             */
+/*   Updated: 2019/06/28 04:41:16 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	swap(int **arr)
+int			main(int ac, char **av)
 {
-	int		tmp;
+	char	*cmd;
+	t_ps	ps;
 
-	if ((*arr)[0] > 1)
+	if (init(&ps, ac, av))
+		return (1);
+	if (check_matches(ps.a))
+		auto_mode(&ps);
+	while (get_next_line(0, &cmd) > 0)
 	{
-		tmp = (*arr)[(*arr)[0]];
-		(*arr)[(*arr)[0]] = (*arr)[(*arr)[0] - 1];
-		(*arr)[(*arr)[0] - 1] = tmp;
+		if (!process_cmd(&ps, cmd))
+		{
+			ft_strdel(&cmd);			
+			break ;
+		}
+		ft_strdel(&cmd);
 	}
-}
-
-void	solve_swap(int **a, int **b, t_task *task)
-{
-	if (task->stack == 'a')
-		swap(a);
-	else if (task->stack == 'b')
-		swap(b);
-	else if (task->stack == 'x')
-	{
-		swap(a);
-		swap(b);
-	}
+	if (is_sorted(ps.a))
+		ft_printf("%{gre}s\n", "OK");
+	else
+		ft_printf("%{red}s\n", "KO");
 }

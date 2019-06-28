@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/26 04:46:03 by nalexand          #+#    #+#             */
-/*   Updated: 2019/06/26 04:51:02 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/06/28 01:58:08 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static int	get_stack(char **cmd, t_task *task)
 		task->stack = 'a';
 	else if (**cmd == 'b')
 		task->stack = 'b';
-	else if (**cmd == 's' || **cmd == 'r')
+	else if (**cmd == 's' || **cmd == 'r' || (task->action == 'v' && **cmd == '\n'))
 		task->stack = 'x';
 	if (task->stack)
 	{
@@ -48,45 +48,27 @@ static int	get_stack(char **cmd, t_task *task)
 	return (task->is_valid = 0);
 }
 
-static int	get_task(char **cmd, t_task *task)
+static int	get_task(char *cmd, t_task *task)
 {
-	while (ft_isalpha(**cmd))
-	{
-		if (**cmd == 'q')
-			return (1);
-		if (!get_action(cmd, task) || !get_stack(cmd, task))
-			return (0);
-	}
-	while (**cmd == ' ')
-		(*cmd)++;
-	if (!task->is_valid)
-		ft_putstr("Unknown command!\n");
+	if (!get_action(&cmd, task) || !get_stack(&cmd, task))
+		return (ft_puterr(1, "Unknown command!\n"));
 	return (0);
 }
 
-int			process_cmd(int **a, int **b, char **cmd)
+int			process_cmd(t_ps *ps, char *cmd)
 {
 	t_task	task;
-	char	*tmp;
 
-	tmp = *cmd;
 	task.is_valid = 0;
-	while (*tmp)
-	{
-		if (get_task(&tmp, &task))
-			return (1);
-		if (!task.is_valid)
-			break ;
-		if (task.action == 's')
-			solve_swap(a, b, &task);
-		else if (task.action == 'p')
-			solve_push(a, b, &task);
-		else if (task.action == 'r' || task.action == 'v')
-		{
-			if (solve_rotate(a, b, &task))
-				break ;
-		}
-	}
-	ft_strdel(cmd);
-	return (0);
+	if (get_task(cmd, &task))
+		return (0);
+	if (task.action == 's')
+		solve_swap(ps->a, ps->b, &task);
+	else if (task.action == 'p')
+		solve_push(ps->a, ps->b, &task);
+	else if (task.action == 'r' || task.action == 'v')
+		solve_rotate(ps->a, ps->b, &task);
+	if (ps->flag)
+		print_arr(ps->a, ps->b);
+	return (1);
 }

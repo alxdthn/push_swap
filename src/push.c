@@ -1,25 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstdel.c                                        :+:      :+:    :+:   */
+/*   push.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/08 08:10:05 by nalexand          #+#    #+#             */
-/*   Updated: 2019/06/27 07:16:32 by nalexand         ###   ########.fr       */
+/*   Created: 2019/06/26 04:35:02 by nalexand          #+#    #+#             */
+/*   Updated: 2019/06/27 06:18:42 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "push_swap.h"
 
-void	ft_lstdel(t_list **alst, void (*del)(void *, size_t))
+void	push(int *src, int *dst)
 {
-	if (*alst)
+	if (src[0])
 	{
-		if ((*alst)->next)
-			ft_lstdel(&((*alst)->next), del);
-		del((*alst)->content, (*alst)->content_size);
-		free(*alst);
-		*alst = NULL;
+		dst[0] += 1;
+		dst[dst[0]] = src[src[0]];
+		src[0] -= 1;
+	}
+}
+
+void	solve_push(int *a, int *b, t_task *task)
+{
+	if (task->stack == 'a')
+	{
+		push(b, a);
+	}
+	else if (task->stack == 'b')
+	{
+		push(a, b);
 	}
 }

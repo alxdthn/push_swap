@@ -6,16 +6,15 @@
 #    By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/08 15:02:28 by nalexand          #+#    #+#              #
-#    Updated: 2019/06/13 15:26:22 by nalexand         ###   ########.fr        #
+#    Updated: 2019/06/28 05:40:46 by nalexand         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libft.a
-
-CС = gcc -Wall -Werror -Wextra -g -c
+C_FLAGS = -g -Wall -Werror -Wextra
+HEADER = -I includes
 
 SRC_DIR = src/
-
 OBJ_DIR = obj/
 
 SRC =	ft_arraydel.c \
@@ -24,6 +23,7 @@ SRC =	ft_arraydel.c \
 		ft_bzero.c \
 		ft_emalloc.c \
 		ft_intlen.c \
+		ft_isint.c \
 		ft_isalnum.c \
 		ft_isalpha.c \
 		ft_isascii.c \
@@ -56,6 +56,7 @@ SRC =	ft_arraydel.c \
 		ft_putnbr_fd.c \
 		ft_putstr.c \
 		ft_putstr_fd.c \
+		ft_puterr.c \
 		ft_read_to_str.c \
 		ft_reverse_bits.c \
 		ft_strcat.c \
@@ -97,35 +98,27 @@ SRC =	ft_arraydel.c \
 		ft_check_file_format.c \
 		get_next_line.c
 
-OBJ = $(patsubst %.c, %.o, $(SRC))
+SRCS = $(addprefix $(SRC_DIR), $(SRC))
 
-HEADER = -I includes
+OBJ = $(addprefix $(OBJ_DIR), $(patsubst %.c, %.o, $(SRC)))
 
-C_PATH = $(addprefix $(SRC_DIR), $(SRC))
+all: $(OBJ_DIR) $(NAME)
 
-O_PATH = $(addprefix $(OBJ_DIR), $(OBJ))
-
-all: $(NAME)
-
-$(NAME): $(OBJ_DIR) $(O_PATH)
-	@ar -rc $(NAME) $(O_PATH)
-	@make -C ./ft_printf
-	@mv ./ft_printf/libftprintf.a libft.a
-	@ranlib $(NAME)
-
-$(OBJ_DIR):
-	@mkdir -p obj
+$(NAME): $(OBJ)
+	ar rc $@ $(OBJ)
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
-	@gcc -g -c $< -o $@ $(HEADER)
+	gcc $(C_FLAGS) -c $< -o $@ $(HEADER)
+
+$(OBJ_DIR):
+	mkdir $@
 
 clean:
-	@rm -f $(O_PATH)
-	@rm -rf $(OBJ_DIR)
-	@make -C ft_printf clean
+	rm -rf $(OBJ_DIR)
+	make -C ft_printf/ clean
 
 fclean: clean
-	@rm -f $(NAME)
-	@make -C ft_printf fclean
+	make -C ft_printf/ fclean
+	rm -f $(NAME)
 
 re: fclean all

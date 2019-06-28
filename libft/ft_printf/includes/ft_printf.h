@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/30 15:27:31 by nalexand          #+#    #+#             */
-/*   Updated: 2019/06/26 02:32:06 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/06/28 05:11:14 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ typedef struct			s_ftask
 typedef struct			s_res
 {
 	char				*str;
-	size_t				len;
+	ssize_t				len;
 }						t_res;
 
 typedef struct			s_out
@@ -86,7 +86,7 @@ typedef	union			u_ems
 
 typedef struct			s_lnbr
 {
-	size_t				len;
+	ssize_t				len;
 	int					vls[N_SIZE];
 }						t_lnbr;
 

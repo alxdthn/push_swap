@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/11 11:37:37 by nalexand          #+#    #+#             */
-/*   Updated: 2019/05/27 03:31:00 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/06/28 05:13:39 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ void	values_to_chars(char **data, size_t size)
 t_lnbr	set_lnbr(char *str)
 {
 	t_lnbr	res;
-	size_t	i;
-	size_t	i2;
+	ssize_t	i;
+	ssize_t	i2;
 
 	ft_bzero(res.vls, sizeof(res.vls));
 	res.len = ft_strlen(str);

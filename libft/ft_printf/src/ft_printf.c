@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/04 21:53:29 by nalexand          #+#    #+#             */
-/*   Updated: 2019/06/26 02:32:06 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/06/28 05:08:34 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static int		print_out(t_out *out, va_list *args)
 	if (out->ftask.type)
 	{
 		out->res = solve_ftask(&out->ftask, args);
-		if (out->res.len == -1)
+		if (out->res.len == (ssize_t)-1)
 			return (-1);
 		if (out->res.str)
 		{

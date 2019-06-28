@@ -6,13 +6,13 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/27 02:55:57 by nalexand          #+#    #+#             */
-/*   Updated: 2019/05/28 11:35:23 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/06/28 05:13:03 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static void	set_multi(int *tmp_len, int *i, t_lnbr *res, size_t size)
+static void	set_multi(int *tmp_len, int *i, t_lnbr *res)
 {
 	*i = 0;
 	*tmp_len = 0;
@@ -28,7 +28,7 @@ void		multi_lnbr(t_lnbr *a, t_lnbr *b)
 	int		over;
 	t_lnbr	res;
 
-	set_multi(&tmp_len, &i, &res, a->len + b->len);
+	set_multi(&tmp_len, &i, &res);
 	while (i < a->len)
 	{
 		over = 0;

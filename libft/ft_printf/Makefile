@@ -6,19 +6,16 @@
 #    By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/11 16:58:18 by nalexand          #+#    #+#              #
-#    Updated: 2019/06/26 02:32:51 by nalexand         ###   ########.fr        #
+#    Updated: 2019/06/28 05:34:44 by nalexand         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libftprintf.a
-
-CС = gcc -Wall -Werror -Wextra -g -c
+C_FLAGS = -g -Wall -Werror -Wextra
+HEADER = -I includes
 
 SRC_DIR = src/
-
 OBJ_DIR = obj/
-
-LIB = ../libft.a
 
 SRC =	ft_printf.c \
 		pf_ltoa_base.c \
@@ -44,31 +41,25 @@ SRC =	ft_printf.c \
 		pf_fun.c \
 		pf_debug.c
 
-OBJ = $(patsubst %.c, %.o, $(SRC))
+SRCS = $(addprefix $(SRC_DIR), $(SRC))
 
-HEADER = -I includes
+OBJ = $(addprefix $(OBJ_DIR), $(patsubst %.c, %.o, $(SRC)))
 
-C_PATH = $(addprefix $(SRC_DIR), $(SRC))
+all: $(OBJ_DIR) $(NAME)
 
-O_PATH = $(addprefix $(OBJ_DIR), $(OBJ))
-
-all: $(NAME)
-
-$(NAME): $(OBJ_DIR) $(O_PATH)
-	@mv $(LIB) $(NAME)
-	@ar -rc $(NAME) $(O_PATH)
-
-$(OBJ_DIR):
-	@mkdir -p obj
+$(NAME): $(OBJ)
+	ar rc $@ $(OBJ)
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
-	@gcc -g -c $< -o $@ $(HEADER)
+	gcc $(C_FLAGS) -c $< -o $@ $(HEADER)
+
+$(OBJ_DIR):
+	mkdir $@
 
 clean:
-	@rm -f $(O_PATH)
-	@rm -rf $(OBJ_DIR)
+	rm -rf $(OBJ_DIR)
 
 fclean: clean
-	@rm -f $(NAME)
+	rm -f $(NAME)
 
 re: fclean all

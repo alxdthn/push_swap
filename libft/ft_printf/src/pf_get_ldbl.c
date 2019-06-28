@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/10 00:39:22 by nalexand          #+#    #+#             */
-/*   Updated: 2019/06/26 02:32:06 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/06/28 05:11:46 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void		rounding(t_lnbr *nbr, int point)
 {
-	int		over;
+	ssize_t		over;
 
 	nbr->vls[point++] = 0;
 	over = 1;
@@ -28,7 +28,7 @@ static void		rounding(t_lnbr *nbr, int point)
 
 static void		round_mod(t_lnbr *nbr, char div_value, int prc)
 {
-	int		point;
+	ssize_t	point;
 	int		value;
 
 	point = nbr->len - 1 - ((prc == 0) ? 1 : prc);
@@ -89,7 +89,6 @@ void			get_ldbl(t_res *res, t_ftask *ftask, t_ems *uni)
 {
 	t_lnbr	div;
 	t_lnbr	mod;
-	int		over;
 
 	get_float_div(&div, *uni);
 	get_float_mod(&mod, *uni, ftask->prc);
