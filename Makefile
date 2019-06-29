@@ -6,7 +6,7 @@
 #    By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/29 16:28:19 by nalexand          #+#    #+#              #
-#    Updated: 2019/06/29 04:53:33 by nalexand         ###   ########.fr        #
+#    Updated: 2019/06/29 07:51:42 by nalexand         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,7 @@ PS = push_swap
 CH = checker
 
 LIB = push_swap.a
+CH_LIB = checker.a
 
 LIBFT = libft.a
 FTPRINTF = libftprintf.a
@@ -29,7 +30,8 @@ SRC_DIR = src/
 OBJ_DIR = obj/
 
 PS_SRC =	push_swap.c
-CH_SRC =	checker.c
+CH_SRC =	checker.c \
+			visualisation.c
 SRC =		init.c \
 			process_commands.c \
 			is_sorted.c \
@@ -41,8 +43,6 @@ SRC =		init.c \
 			check_matches.c \
 			get_info.c
 
-SRCS = $(addprefix $(SRC_DIR), $(SRC))
-
 OBJ = $(addprefix $(OBJ_DIR), $(patsubst %.c, %.o, $(SRC)))
 PS_OBJ = $(addprefix $(OBJ_DIR), $(patsubst %.c, %.o, $(PS_SRC)))
 CH_OBJ = $(addprefix $(OBJ_DIR), $(patsubst %.c, %.o, $(CH_SRC)))
@@ -50,35 +50,34 @@ CH_OBJ = $(addprefix $(OBJ_DIR), $(patsubst %.c, %.o, $(CH_SRC)))
 all: $(OBJ_DIR) $(PS) $(CH)
 
 $(PS): $(LIBFT) $(FTPRINTF) $(LIB) $(PS_OBJ)
-	gcc $(C_FLAGS) -o $@ $(PS_OBJ) $(LIB) $(LIBFT) $(FTPRINTF) $(HEADER)
+	gcc $(C_FLAGS) -o $@ $(PS_OBJ) $(LIB) $(LIBFT) $(FTPRINTF) $(HEADER) $(MLX_HEAD) $(FRAMEWORK) $(MLX_LIB)
 $(PS_OBJ): $(SRC_DIR)$(PS_SRC)
 	gcc $(C_FLAGS) -c $< -o $@ $(HEADER)
 
-$(CH): $(LIBFT) $(FTPRINTF) $(LIB) $(CH_OBJ) 
-	gcc $(C_FLAGS) -o $@ $(CH_OBJ) $(LIB) $(LIBFT) $(FTPRINTF) $(HEADER) $(MLX_HEAD) $(MLX_LIB) $(FRAMEWORK)
-$(CH_OBJ): $(SRC_DIR)$(CH_SRC)
-	gcc $(C_FLAGS) -c $< -o $@ $(HEADER)
+$(CH): $(LIBFT) $(FTPRINTF) $(LIB) $(CH_LIB) 
+	gcc $(C_FLAGS) -o $@ $(LIB) $(LIBFT) $(FTPRINTF) $(CH_LIB) $(HEADER) $(MLX_HEAD) $(FRAMEWORK) $(MLX_LIB)
 
 $(LIBFT): libft/$@
 	make -C libft/
 	cp libft/$@ .
-
 $(FTPRINTF): libft/ft_printf/$@
 	make -C libft/ft_printf/
 	cp libft/ft_printf/$@ .
 
 $(LIB): $(OBJ)
 	ar rc $@ $(OBJ)
+$(CH_LIB): $(CH_OBJ)
+	ar rc $@ $(CH_OBJ)
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	gcc $(C_FLAGS) -c $< -o $@ $(HEADER)
-
 $(OBJ_DIR):
 	mkdir $@
 
 clean:
 	rm -rf $(OBJ_DIR)
 	rm -f $(LIB)
+	rm -f $(CH_LIB)
 	rm -f $(LIBFT)
 	rm -f $(FTPRINTF)
 
@@ -91,6 +90,7 @@ re: fclean all
 
 relib:
 	make -C libft/ re
+	make -C libft/ft_printf re
 
 fclean_all: fclean
 	make -C libft/ fclean

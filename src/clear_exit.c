@@ -6,15 +6,27 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/26 05:23:01 by nalexand          #+#    #+#             */
-/*   Updated: 2019/06/27 21:44:19 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/06/29 07:39:16 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void		push_swap_clear_exit(t_ps *ps)
+void		push_swap_clear_exit(t_all *all, char *message)
 {
-	free(ps->a);
-	free(ps->b);
-	exit(EXIT_FAILURE);
+	free(all->ps.a);
+	free(all->ps.b);
+	free(all->ps.arr);
+	ft_lstdel(&all->ps.lst, ft_lstclear);
+	if (all->mlx.ptr)
+	{
+		if (all->mlx.a.ptr)
+			mlx_destroy_image(all->mlx.ptr, all->mlx.a.ptr);
+		if (all->mlx.b.ptr)
+			mlx_destroy_image(all->mlx.ptr, all->mlx.b.ptr);
+		mlx_destroy_window(all->mlx.ptr, all->mlx.win);
+	}
+	if (message)
+		ft_putstr_fd(message, 2);
+	exit(0);
 }

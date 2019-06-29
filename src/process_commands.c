@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/26 04:46:03 by nalexand          #+#    #+#             */
-/*   Updated: 2019/06/29 04:18:10 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/06/29 06:54:07 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,20 +48,14 @@ static int	get_stack(char **cmd, t_task *task)
 	return (task->is_valid = 0);
 }
 
-static int	get_task(char *cmd, t_task *task)
-{
-	if (!get_action(&cmd, task) || !get_stack(&cmd, task))
-		return (ft_puterr(0, "Unknown command!\n"));
-	return (1);
-}
-
 int			process_cmd(t_ps *ps, char *cmd)
 {
 	t_task	task;
 	int		ret;
 
 	task.is_valid = 0;
-	if (!(ret = get_task(cmd, &task)))
+	if (!get_action(&cmd, &task)
+		|| !get_stack(&cmd, &task))
 		return (QUIT);
 	if (task.action == 's')
 		ret = solve_swap(ps->a, ps->b, &task);

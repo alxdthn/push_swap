@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/24 18:13:31 by nalexand          #+#    #+#             */
-/*   Updated: 2019/06/29 04:46:44 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/06/29 09:35:55 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,37 @@
 # include "libft.h"
 # include "ft_printf.h"
 # include <mlx.h>
-# define PS_USAGE	"usage: push_swap [-h] array\n"\
-					"array: non-repeating ints\n"\
-					"example: push_swap [-h] 2 5 1 3\n"
-# define CH_USAGE	"usage: checker [-v] array\n"\
-					"array: non-repeating ints\n"\
-					"example: checker [-h] 2 5 1 3\n"
+# define PS_USAGE		"usage: push_swap [-h] array\n"\
+						"array: non-repeating ints\n"\
+						"example: push_swap [-h] 2 5 1 3\n"
+# define CH_USAGE		"usage: checker [-v] array\n"\
+						"array: non-repeating ints\n"\
+						"example: checker [-h] 2 5 1 3\n"
+# define PS_MEM_ERR		"push_swap: Mem alocate failture!\n"
+# define CH_MEM_ERR		"checker: Mem alocate failture!\n"
+# define PS_ARG_ERR		"push_swap: Invalid argument!\n"
+# define CH_ARG_ERR		"checker: Invalid argument!\n"
+# define PS_MATCH_ERR	"push_swap: Matches forbidden!\n"
+# define CH_MATCH_ERR	"checker: Matches forbidden!\n"
+# define PS_CMD_ERR		"push_swap: Invalid command!\n"
+# define CH_CMD_ERR		"checker: Invalid command!\n"
+# define PS_FLAG_ERR	"push_swap: Unknown flag\n"
+# define CH_FLAG_ERR	"checker: Unknown flag\n"
+
 # define LEFT_BACKGROUND 0x7791d1
 # define POS_LINE_COLOR 0xdc78f0
 # define NEG_LINE_COLOR 0xdfacfa
 # define RIGHT_BACKGROUND 0x99f0d1
+
 # define ESC 53
 # define ENTER 36
+# define RIGHT 124
+# define LEFT 123
+# define UP 126
+# define DOWN 125
+
+# define PUSH_SWAP 22
+# define CHECKER 21
 # define QUIT 0
 # define SA 1
 # define SB 2
@@ -60,6 +79,8 @@ typedef struct	s_info
 typedef struct	s_ps
 {
 	t_list		*lst;
+	size_t		point;
+	char		**arr;
 	int			*a;
 	int			*b;
 	int			size;
@@ -81,7 +102,8 @@ typedef struct	s_mlx
 	t_img		b;
 	void		*ptr;
 	void		*win;
-	size_t		time;
+	char		dir;
+	char		working;
 	int			width;
 	int			height;
 	int			elem_width;
@@ -92,9 +114,10 @@ typedef struct	s_all
 {
 	t_ps		ps;
 	t_mlx		mlx;
+	char		prog;
 }				t_all;
 
-int		init(t_ps *ps, int ac, char **av, char *usage);
+void	init(t_all *all, int ac, char **av);
 void	push(int *src, int *dst);
 void	swap(int *arr);
 void	rotate(int *arr, char dir);
@@ -102,11 +125,13 @@ int		solve_push(int *a, int *b, t_task *task);
 int		solve_swap(int *a, int *b, t_task *task);
 int		solve_rotate(int *a, int *b, t_task *task);
 int		process_cmd(t_ps *ps, char *cmd);
-void	push_swap_clear_exit(t_ps *ps);
+void		push_swap_clear_exit(t_all *all, char *message);
 void	print_arr(int *a, int *b);
 int		is_sorted(int *arr);
-int		check_matches(int *a);
+void	check_matches(t_all *all);
 void	print_lst(t_list **lst);
 void	get_info(t_info *info, int *a);
+void		visualisation_init(t_all *all);
+void	render(t_ps *ps, t_mlx *mlx, int cmd);
 
 #endif

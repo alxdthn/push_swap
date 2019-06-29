@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 01:55:55 by nalexand          #+#    #+#             */
-/*   Updated: 2019/06/25 17:25:44 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/06/29 07:32:52 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void				ft_putstr(char const *s);
 void				ft_putstr_fd(char const *s, int fd);
 void				ft_putendl(char const *s);
 void				ft_putendl_fd(char const *s, int fd);
+int					ft_puterr(int ret, char *message);
 char				**ft_strsplit(char const *s, char c);
 void				ft_swap(void *ptr1, void *ptr2);
 int					ft_strequ(char const *s1, char const *s2);
@@ -83,16 +84,18 @@ int					ft_isalpha(int c);
 int					ft_isalnum(int c);
 int					ft_isascii(int c);
 int					ft_isprint(int c);
+int					ft_isint(char *nb);
 int					ft_toupper(int c);
 int					ft_tolower(int c);
 
 t_list				*ft_lstnew(void const *content, size_t content_size);
 void				ft_lstdelone(t_list **alst, void (*del)(void *, size_t));
 void				ft_lstdel(t_list **alst, void (*del)(void *, size_t));
-void				ft_lstadd(t_list **alst, t_list *new);
+void				ft_lstadd(t_list **alst, t_list *lst);
 void				ft_lstiter(t_list *lst, void (*f)(t_list *elem));
 t_list				*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 void				ft_lstclear(void *content, size_t size);
+void				ft_lstpushback(t_list **alst, t_list *lst);
 
 int					ft_intlen(int n);
 size_t				ft_strclen(char const *s, char const c);
