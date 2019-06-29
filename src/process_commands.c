@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/26 04:46:03 by nalexand          #+#    #+#             */
-/*   Updated: 2019/06/28 01:58:08 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/06/29 04:18:10 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,24 +51,23 @@ static int	get_stack(char **cmd, t_task *task)
 static int	get_task(char *cmd, t_task *task)
 {
 	if (!get_action(&cmd, task) || !get_stack(&cmd, task))
-		return (ft_puterr(1, "Unknown command!\n"));
-	return (0);
+		return (ft_puterr(0, "Unknown command!\n"));
+	return (1);
 }
 
 int			process_cmd(t_ps *ps, char *cmd)
 {
 	t_task	task;
+	int		ret;
 
 	task.is_valid = 0;
-	if (get_task(cmd, &task))
-		return (0);
+	if (!(ret = get_task(cmd, &task)))
+		return (QUIT);
 	if (task.action == 's')
-		solve_swap(ps->a, ps->b, &task);
+		ret = solve_swap(ps->a, ps->b, &task);
 	else if (task.action == 'p')
-		solve_push(ps->a, ps->b, &task);
+		ret = solve_push(ps->a, ps->b, &task);
 	else if (task.action == 'r' || task.action == 'v')
-		solve_rotate(ps->a, ps->b, &task);
-	if (ps->flag)
-		print_arr(ps->a, ps->b);
-	return (1);
+		ret = solve_rotate(ps->a, ps->b, &task);
+	return (ret);
 }

@@ -1,25 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_arraydel.c                                      :+:      :+:    :+:   */
+/*   is_sorted.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/21 06:02:38 by nalexand          #+#    #+#             */
-/*   Updated: 2019/06/28 23:02:00 by nalexand         ###   ########.fr       */
+/*   Created: 2019/06/28 06:21:55 by nalexand          #+#    #+#             */
+/*   Updated: 2019/06/28 06:22:28 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "push_swap.h"
 
-void	ft_arraydel(void **array)
+int		is_sorted(int *arr)
 {
-	int i;
+	int		i;
+	int		tmp;
 
-	i = 0;
-	while (array[i])
+	i = 1;
+	while (i < arr[0])
 	{
-		ft_memdel(&array[i]);
-		i++;
+		tmp = arr[i];
+		if (tmp > arr[i + 1])
+			i++;
+		else
+			return (0);
 	}
+	return (1);
 }

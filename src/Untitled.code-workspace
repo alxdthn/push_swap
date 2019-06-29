@@ -1,0 +1,15 @@
+{
+	"folders": [
+		{
+			"path": "/Users/nalexand/push_swap"
+		},
+		{
+			"path": "/Users/nalexand/FdF"
+		}
+	],
+	"settings": {
+		"files.associations": {
+			"push_swap.h": "c"
+		}
+	}
+}

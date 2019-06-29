@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/26 04:34:04 by nalexand          #+#    #+#             */
-/*   Updated: 2019/06/27 06:16:44 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/06/29 04:19:19 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,19 +24,23 @@ void	swap(int *arr)
 	}
 }
 
-void	solve_swap(int *a, int *b, t_task *task)
+int		solve_swap(int *a, int *b, t_task *task)
 {
 	if (task->stack == 'a')
 	{
 		swap(a);
+		return (SA);
 	}
 	else if (task->stack == 'b')
 	{
 		swap(b);
+		return (SB);
 	}
 	else if (task->stack == 'x')
 	{
 		swap(a);
 		swap(b);
+		return (SS);
 	}
+	return (0);
 }

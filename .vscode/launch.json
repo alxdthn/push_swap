@@ -4,16 +4,24 @@
 	// For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
 	"version": "0.2.0",
 	"configurations": [
-
 		{
-			"name": "(lldb) Launch",
+			"name": "(lldb) checker",
 			"type": "cppdbg",
 			"request": "launch",
-			"program": "${workspaceFolder}/push_swap_src/push_swap",
-			//"program": "${workspaceFolder}/a.out",
-			"args": ["0 2"],
-			//"args": ["| ./randomizer 2 10"],
-			//"args": ["2"],
+			"program": "${workspaceFolder}/checker",
+			"args": ["-v", "0 1"],
+			"stopAtEntry": false,
+			"cwd": "${workspaceFolder}",
+			"environment": [],
+			"externalConsole": true,
+			"MIMode": "lldb"
+		},
+		{
+			"name": "(lldb) push_swap",
+			"type": "cppdbg",
+			"request": "launch",
+			"program": "${workspaceFolder}/push_swap",
+			"args": ["-h", "2", "1"],
 			"stopAtEntry": false,
 			"cwd": "${workspaceFolder}",
 			"environment": [],

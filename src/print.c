@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/26 22:14:58 by nalexand          #+#    #+#             */
-/*   Updated: 2019/06/28 02:10:11 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/06/28 05:53:27 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,7 @@ void		print_lst(t_list **lst)
 	size_t	mem;
 	t_list	*tmp;
 	char	*res;
-	int		count;
 
-	count = 0;
 	if (*lst)
 	{
 		tmp = *lst;
@@ -37,7 +35,6 @@ void		print_lst(t_list **lst)
 		{
 			mem += tmp->content_size;
 			tmp = tmp->next;
-			count++;
 		}
 		if ((res = (char *)ft_strnew(sizeof(char) * mem)))
 		{
@@ -46,7 +43,6 @@ void		print_lst(t_list **lst)
 			ft_strdel(&res);
 		}
 	}
-	ft_printf("Operations: %d\n", count);
 }
 
 void	print_arr(int *a, int *b)

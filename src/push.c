@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/26 04:35:02 by nalexand          #+#    #+#             */
-/*   Updated: 2019/06/27 06:18:42 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/06/29 04:27:06 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,17 @@ void	push(int *src, int *dst)
 	}
 }
 
-void	solve_push(int *a, int *b, t_task *task)
+int		solve_push(int *a, int *b, t_task *task)
 {
 	if (task->stack == 'a')
 	{
 		push(b, a);
+		return (PA);
 	}
 	else if (task->stack == 'b')
 	{
 		push(a, b);
+		return (PB);
 	}
+	return (0);
 }

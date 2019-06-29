@@ -1,25 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_arraydel.c                                      :+:      :+:    :+:   */
+/*   get_info.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/21 06:02:38 by nalexand          #+#    #+#             */
-/*   Updated: 2019/06/28 23:02:00 by nalexand         ###   ########.fr       */
+/*   Created: 2019/06/28 23:03:31 by nalexand          #+#    #+#             */
+/*   Updated: 2019/06/28 23:33:51 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "push_swap.h"
 
-void	ft_arraydel(void **array)
+void	get_info(t_info *info, int *a)
 {
-	int i;
+	int		i;
 
-	i = 0;
-	while (array[i])
+	info->min_adr = 1;
+	info->max_adr = 1;
+	info->min_value = a[1];
+	info->max_value = a[1];
+	i = 1;
+	while (i <= a[0])
 	{
-		ft_memdel(&array[i]);
+		if (a[i] < info->min_value)
+		{
+			info->min_value = a[i];
+			info->min_adr = i;
+		}
+		if (a[i] > info->max_value)
+		{
+			info->max_value = a[i];
+			info->max_adr = i;
+		}
 		i++;
 	}
 }

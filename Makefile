@@ -6,7 +6,7 @@
 #    By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/29 16:28:19 by nalexand          #+#    #+#              #
-#    Updated: 2019/06/28 05:42:24 by nalexand         ###   ########.fr        #
+#    Updated: 2019/06/29 04:53:33 by nalexand         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,9 @@ LIB = push_swap.a
 
 LIBFT = libft.a
 FTPRINTF = libftprintf.a
+MLX_LIB = -L /usr/local/lib/ -lmlx
+MLX_HEAD = -I /usr/local/include
+FRAMEWORK = -framework OpenGL -framework AppKit
 
 C_FLAGS = -g
 HEADER = -I includes
@@ -29,14 +32,14 @@ PS_SRC =	push_swap.c
 CH_SRC =	checker.c
 SRC =		init.c \
 			process_commands.c \
-			handle_mode.c \
-			auto_mode.c \
+			is_sorted.c \
 			push.c \
 			swap.c \
 			rotate.c \
 			clear_exit.c \
 			print.c \
-			check_matches.c
+			check_matches.c \
+			get_info.c
 
 SRCS = $(addprefix $(SRC_DIR), $(SRC))
 
@@ -52,7 +55,7 @@ $(PS_OBJ): $(SRC_DIR)$(PS_SRC)
 	gcc $(C_FLAGS) -c $< -o $@ $(HEADER)
 
 $(CH): $(LIBFT) $(FTPRINTF) $(LIB) $(CH_OBJ) 
-	gcc $(C_FLAGS) -o $@ $(CH_OBJ) $(LIB) $(LIBFT) $(FTPRINTF) $(HEADER)
+	gcc $(C_FLAGS) -o $@ $(CH_OBJ) $(LIB) $(LIBFT) $(FTPRINTF) $(HEADER) $(MLX_HEAD) $(MLX_LIB) $(FRAMEWORK)
 $(CH_OBJ): $(SRC_DIR)$(CH_SRC)
 	gcc $(C_FLAGS) -c $< -o $@ $(HEADER)
 
@@ -82,10 +85,13 @@ clean:
 fclean: clean
 	rm -f $(PS)
 	rm -f $(CH)
-	make -C libft/ fclean
-	make -C libft/ft_printf fclean
+	rm -rf *.dSYM
 
 re: fclean all
 
 relib:
 	make -C libft/ re
+
+fclean_all: fclean
+	make -C libft/ fclean
+	make -C libft/ft_printf fclean	

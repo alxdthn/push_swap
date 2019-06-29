@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/27 01:29:14 by nalexand          #+#    #+#             */
-/*   Updated: 2019/06/28 04:58:28 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/06/28 22:07:37 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int		init_stack_from_all_args(t_ps *ps, int ac, char **av)
 {
 	size_t	i;
 
-	i = 1 + ps->flag;
+	i = 1 + ((ps->flag) ? 1 : 0);
 	while (i < ac)
 	{
 		if (!ft_isint(av[i]))
@@ -31,7 +31,7 @@ int		init_stack_from_all_args(t_ps *ps, int ac, char **av)
 	ps->a[0] = ps->size;
 	ps->b[0] = 0;
 	i = 1;
-	while (ac > 1 + ps->flag)
+	while (ac > 1 + ((ps->flag) ? 1 : 0))
 		ps->a[i++] = ft_atoi(av[ac-- - 1]);
 	return (0);
 }
@@ -67,17 +67,16 @@ int		init_stack_from_one_arg(t_ps *ps, char *av)
 	return (0);
 }
 
-int		init(t_ps *ps, int ac, char **av)
+int		init(t_ps *ps, int ac, char **av, char *usage)
 {
 	if (ac < 2)
-		return (ft_puterr(1, USAGE));
-	ps->flag = (ft_strnequ(av[1], "-h", 3))
-	? ft_puterr(1, "Welcome to handle mode!\n") : 0;
+		return (ft_puterr(1, usage));
+	ps->flag = (av[1][0] == '-' && av[1][1] && ft_isalpha(av[1][1])) ? av[1][1] : 0;
 	ps->size = 0;
 	ps->a = NULL;
 	ps->b = NULL;
 	ps->lst = NULL;
-	if (ac == 2 + ps->flag)
-		return (init_stack_from_one_arg(ps, av[1 + ps->flag]));
+	if (ac == 2 + ((ps->flag) ? 1 : 0))
+		return (init_stack_from_one_arg(ps, av[1 + ((ps->flag) ? 1 : 0)]));
 	return (init_stack_from_all_args(ps, ac, av));
 }
