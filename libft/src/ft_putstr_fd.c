@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 00:28:23 by nalexand          #+#    #+#             */
-/*   Updated: 2019/06/29 22:45:01 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/06/29 23:31:47 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 void	ft_putstr_fd(char const *s, int fd)
 {
-	int		i;
-
 	if (s && (*s))
 		write(fd, s, ft_strlen(s));
 }

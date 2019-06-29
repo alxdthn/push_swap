@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/26 04:46:03 by nalexand          #+#    #+#             */
-/*   Updated: 2019/06/29 23:03:50 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/06/29 23:36:52 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,15 +58,19 @@ char		read_cmd(char *cmd)
 		|| !get_stack(&cmd, &task))
 		return (QUIT);
 	if (task.action == 's')
-		ret = solve_swap(&task);
+		ret = read_swap(&task);
 	else if (task.action == 'p')
-		ret = solve_push(&task);
+		ret = read_push(&task);
 	else if (task.action == 'r' || task.action == 'v')
-		ret = solve_rotate(&task);
+		ret = read_rotate(&task);
 	return (ret);
 }
 
-void		process_commands(t_ps *ps, char cmd)
+void		process_cmd(t_ps *ps, char cmd)
 {
-
+	if (cmd == PA)
+		push(ps->b, ps->a);
+	else if (cmd == PB)
+		push(ps->a, ps->b);
+	else if
 }

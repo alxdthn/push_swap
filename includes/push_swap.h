@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/24 18:13:31 by nalexand          #+#    #+#             */
-/*   Updated: 2019/06/29 23:13:18 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/06/29 23:35:54 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,7 @@ char	read_cmd(char *cmd);
 char	read_push(t_task *task);
 char	read_swap(t_task *task);
 char	read_rotate(t_task *task);
-int		process_cmd(t_ps *ps, char *cmd);
+void		process_cmd(t_ps *ps, char cmd);
 void		push_swap_clear_exit(t_all *all, char *message);
 void	print_arr(int *a, int *b);
 int		is_sorted(int *arr);
