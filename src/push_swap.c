@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/25 18:06:49 by nalexand          #+#    #+#             */
-/*   Updated: 2019/06/29 08:06:13 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/06/29 23:27:11 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,66 +42,54 @@ static void	auto_mode(t_all *all)
 	}
 }
 
-static void	get_cmd(t_all *all, char **cmd)
+static void	get_cmd(t_all *all)
 {
-	static char **cmds;
-	static char	**ptr;
 	char		*tmp;
 	int			ret;
+	char		cmd;
 
-	tmp = NULL;
-	if (!cmds)
-	{
-		if ((ret = get_next_line(0, &tmp) < 0))
-			push_swap_clear_exit(all, "checker: Uncknown input error\n");
-		if (!ret && !tmp)
-			return ;
-		if (!(cmds = ft_strsplit(tmp, ' ')))
-			push_swap_clear_exit(all, PS_MEM_ERR);
-		ptr = cmds;
-		ft_strdel(&tmp);
-	}
-	if (!(tmp = ft_strjoin(*cmds, "\n")))
+	if ((ret = get_next_line(0, &tmp) < 0))
+		push_swap_clear_exit(all, PS_INPUT_ERR);
+	if (!tmp)
 		push_swap_clear_exit(all, PS_MEM_ERR);
-	free(*cmds);
-	cmds++;
-	if (!*cmds)
+	if (!ret)
+		push_swap_clear_exit(all, NULL);
+	while ((cmd = read_cmd(tmp)))
 	{
-		ft_memdel((void **)&ptr);
-		cmds = NULL;
+		if (!cmd)
+			push_swap_clear_exit(all, PS_CMD_ERR);
+		ft_lstpushback(&all->ps.lst, ft_lstnew(&cmd, sizeof(char)));
+		ft_strdel(&tmp);
+		if (!all->ps.lst)
+			push_swap_clear_exit(all, PS_MEM_ERR);
 	}
-	*cmd = tmp;
 }
 
 static void	handle_mode(t_all *all)
 {
-	char	*cmd;
 	int		ret;
+	t_list	*tmp;
+	t_list	*prev;
 
 	ft_putstr("Init stacks:\n");
 	print_arr(all->ps.a, all->ps.b);
+	tmp = all->ps.lst;
 	while (42)
 	{
-		get_cmd(all, &cmd);
-		if (!ft_strcmp(cmd, "q\n"))
+		get_cmd(all);
+		while (tmp)
 		{
-			print_lst(&all->ps.lst);
-			push_swap_clear_exit(all, NULL);
-		}
-		ret = process_cmd(&all->ps, cmd);
-		if (ret)
-		{
-			ft_lstadd(&all->ps.lst, ft_lstnew(cmd, ft_strlen(cmd)));
-			if (!all->ps.lst)
+			if (*(char *)tmp->content == QUIT)
 			{
-				ft_strdel(&cmd);
-				push_swap_clear_exit(all, PS_MEM_ERR);
+				print_lst(&all->ps.lst);
+				push_swap_clear_exit(all, NULL);
 			}
+			process_cmd(&all->ps, *(char *)tmp->content);
+			if (tmp->next)
+				tmp = tmp->next;
+			else
+				break ;
 		}
-		else
-			ft_puterr(0, PS_CMD_ERR);
-		ft_strdel(&cmd);
-		print_arr(all->ps.a, all->ps.b);
 	}
 }
 
@@ -112,7 +100,7 @@ int		main(int ac, char **av)
 	all.prog = PUSH_SWAP;
 	init(&all, ac, av);
 	if (all.ps.flag == 'h')
-		ft_putstr("push_swap: Welcome to handle mode\n");
+		ft_putendl(SALUT);
 	else if (all.ps.flag && all.ps.flag != 'h')
 		all.ps.flag = ft_puterr(0, PS_FLAG_ERR);
 	check_matches(&all);

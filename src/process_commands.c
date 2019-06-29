@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/26 04:46:03 by nalexand          #+#    #+#             */
-/*   Updated: 2019/06/29 06:54:07 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/06/29 23:03:50 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,20 +48,25 @@ static int	get_stack(char **cmd, t_task *task)
 	return (task->is_valid = 0);
 }
 
-int			process_cmd(t_ps *ps, char *cmd)
+char		read_cmd(char *cmd)
 {
 	t_task	task;
-	int		ret;
+	char	ret;
 
 	task.is_valid = 0;
 	if (!get_action(&cmd, &task)
 		|| !get_stack(&cmd, &task))
 		return (QUIT);
 	if (task.action == 's')
-		ret = solve_swap(ps->a, ps->b, &task);
+		ret = solve_swap(&task);
 	else if (task.action == 'p')
-		ret = solve_push(ps->a, ps->b, &task);
+		ret = solve_push(&task);
 	else if (task.action == 'r' || task.action == 'v')
-		ret = solve_rotate(ps->a, ps->b, &task);
+		ret = solve_rotate(&task);
 	return (ret);
+}
+
+void		process_commands(t_ps *ps, char cmd)
+{
+
 }

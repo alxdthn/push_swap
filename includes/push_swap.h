@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/24 18:13:31 by nalexand          #+#    #+#             */
-/*   Updated: 2019/06/29 09:35:55 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/06/29 23:13:18 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,22 +15,24 @@
 # include "libft.h"
 # include "ft_printf.h"
 # include <mlx.h>
-# define PS_USAGE		"usage: push_swap [-h] array\n"\
+# define PS_USAGE		"usage: push_swap [-h] array"\
 						"array: non-repeating ints\n"\
-						"example: push_swap [-h] 2 5 1 3\n"
+						"example: push_swap [-h] 2 5 1 3"
 # define CH_USAGE		"usage: checker [-v] array\n"\
 						"array: non-repeating ints\n"\
-						"example: checker [-h] 2 5 1 3\n"
-# define PS_MEM_ERR		"push_swap: Mem alocate failture!\n"
-# define CH_MEM_ERR		"checker: Mem alocate failture!\n"
-# define PS_ARG_ERR		"push_swap: Invalid argument!\n"
-# define CH_ARG_ERR		"checker: Invalid argument!\n"
-# define PS_MATCH_ERR	"push_swap: Matches forbidden!\n"
-# define CH_MATCH_ERR	"checker: Matches forbidden!\n"
-# define PS_CMD_ERR		"push_swap: Invalid command!\n"
-# define CH_CMD_ERR		"checker: Invalid command!\n"
-# define PS_FLAG_ERR	"push_swap: Unknown flag\n"
-# define CH_FLAG_ERR	"checker: Unknown flag\n"
+						"example: checker [-h] 2 5 1 3"
+# define PS_MEM_ERR		"push_swap: Mem alocate failture!"
+# define CH_MEM_ERR		"checker: Mem alocate failture!"
+# define PS_ARG_ERR		"push_swap: Invalid argument!"
+# define CH_ARG_ERR		"checker: Invalid argument!"
+# define PS_MATCH_ERR	"push_swap: Matches forbidden!"
+# define CH_MATCH_ERR	"checker: Matches forbidden!"
+# define PS_CMD_ERR		"push_swap: Invalid command!"
+# define CH_CMD_ERR		"checker: Invalid command!"
+# define PS_FLAG_ERR	"push_swap: Unknown flag"
+# define CH_FLAG_ERR	"checker: Unknown flag"
+# define PS_INPUT_ERR	"push_swap: Uncknown input error"
+# define SALUT			"push_swap: Welcome to handle mode"
 
 # define LEFT_BACKGROUND 0x7791d1
 # define POS_LINE_COLOR 0xdc78f0
@@ -46,7 +48,7 @@
 
 # define PUSH_SWAP 22
 # define CHECKER 21
-# define QUIT 0
+# define QUIT -1
 # define SA 1
 # define SB 2
 # define RRA 3
@@ -121,9 +123,10 @@ void	init(t_all *all, int ac, char **av);
 void	push(int *src, int *dst);
 void	swap(int *arr);
 void	rotate(int *arr, char dir);
-int		solve_push(int *a, int *b, t_task *task);
-int		solve_swap(int *a, int *b, t_task *task);
-int		solve_rotate(int *a, int *b, t_task *task);
+char	read_cmd(char *cmd);
+char	read_push(t_task *task);
+char	read_swap(t_task *task);
+char	read_rotate(t_task *task);
 int		process_cmd(t_ps *ps, char *cmd);
 void		push_swap_clear_exit(t_all *all, char *message);
 void	print_arr(int *a, int *b);

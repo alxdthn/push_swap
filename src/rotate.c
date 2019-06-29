@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/26 04:35:34 by nalexand          #+#    #+#             */
-/*   Updated: 2019/06/29 04:51:32 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/06/29 23:04:11 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,26 +32,16 @@ void	rotate(int *arr, char dir)
 	}
 }
 
-int		solve_rotate(int *a, int *b, t_task *task)
+char	read_rotate(t_task *task)
 {
-	int		dir;
+	char	dir;
 
 	dir = (task->action == 'v') ? -1 : 1;
 	if (task->stack == 'a')
-	{
-		rotate(a, dir);
 		return (4 + dir);
-	}
 	else if (task->stack == 'b')
-	{
-		rotate(b, dir);
 		return (7 + dir);
-	}
 	else if (task->stack == 'x')
-	{
-		rotate(a, dir);
-		rotate(b, dir);
 		return (14 + dir);
-	}
 	return (0);
 }

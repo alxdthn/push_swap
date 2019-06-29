@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/26 05:23:01 by nalexand          #+#    #+#             */
-/*   Updated: 2019/06/29 07:39:16 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/06/29 22:46:40 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,6 @@ void		push_swap_clear_exit(t_all *all, char *message)
 		mlx_destroy_window(all->mlx.ptr, all->mlx.win);
 	}
 	if (message)
-		ft_putstr_fd(message, 2);
+		ft_putendl_fd(message, 2);
 	exit(0);
 }
