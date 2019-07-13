@@ -6,8 +6,7 @@ checker
 libft/ft_printf/obj
 libft/libft.a
 push_swap_src/push_swap.a
-YOBA*
-DIMAS
+ANOTHER
 *out
 *.a
 obj
