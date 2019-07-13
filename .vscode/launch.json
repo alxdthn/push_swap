@@ -4,30 +4,42 @@
 	// For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
 	"version": "0.2.0",
 	"configurations": [
-		{
-			"name": "(lldb) checker",
-			"type": "cppdbg",
-			"request": "launch",
-			"program": "${workspaceFolder}/checker",
-			"args": ["-v", "0 1"],
-			"stopAtEntry": false,
-			"cwd": "${workspaceFolder}",
-			"environment": [],
-			"externalConsole": true,
-			"MIMode": "lldb"
-		},
-		{
-			"name": "(lldb) push_swap",
-			"type": "cppdbg",
-			"request": "launch",
-			"program": "${workspaceFolder}/push_swap",
-			"args": ["-h", "2", "1"],
-			"stopAtEntry": false,
-			"cwd": "${workspaceFolder}",
-			"environment": [],
-			"externalConsole": true,
-			"internalConsoleOptions": "openOnFirstSessionStart",
-			"MIMode": "lldb"
-		}
+	{
+		"name": "(lldb) test",
+		"type": "cppdbg",
+		"request": "launch",
+		"program": "${workspaceFolder}/a.out",
+		"args": ["1 5", "2"],
+		"stopAtEntry": false,
+		"cwd": "${workspaceFolder}",
+		"environment": [],
+		"externalConsole": false,
+		"MIMode": "lldb"
+	},
+	{
+		"name": "(lldb) checker",
+		"type": "cppdbg",
+		"request": "launch",
+		"program": "${workspaceFolder}/checker",
+		"args": ["-v", "9 1 7 2 4 8 5 10 6 3"],
+		"stopAtEntry": false,
+		"cwd": "${workspaceFolder}",
+		"environment": [],
+		"externalConsole": true,
+		"MIMode": "lldb"
+	},
+	{
+		"name": "(lldb) push_swap",
+		"type": "cppdbg",
+		"request": "launch",
+		"program": "${workspaceFolder}/push_swap",
+		"args": ["6 2 1 5 4 3"],
+		"stopAtEntry": false,
+		"cwd": "${workspaceFolder}",
+		"environment": [],
+		"externalConsole": true,
+		"internalConsoleOptions": "openOnFirstSessionStart",
+		"MIMode": "lldb"
+	}
 	]
 }

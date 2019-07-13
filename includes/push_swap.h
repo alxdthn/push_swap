@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/24 18:13:31 by nalexand          #+#    #+#             */
-/*   Updated: 2019/06/29 23:35:54 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/07/13 16:49:46 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 # include "libft.h"
 # include "ft_printf.h"
 # include <mlx.h>
-# define PS_USAGE		"usage: push_swap [-h] array"\
+# define PS_USAGE		"usage: push_swap [-h] array\n"\
 						"array: non-repeating ints\n"\
 						"example: push_swap [-h] 2 5 1 3"
 # define CH_USAGE		"usage: checker [-v] array\n"\
@@ -32,12 +32,13 @@
 # define PS_FLAG_ERR	"push_swap: Unknown flag"
 # define CH_FLAG_ERR	"checker: Unknown flag"
 # define PS_INPUT_ERR	"push_swap: Uncknown input error"
+# define CH_INPUT_ERR	"checker: Uncknown input error"
 # define SALUT			"push_swap: Welcome to handle mode"
 
-# define LEFT_BACKGROUND 0x7791d1
-# define POS_LINE_COLOR 0xdc78f0
-# define NEG_LINE_COLOR 0xdfacfa
-# define RIGHT_BACKGROUND 0x99f0d1
+# define LEFT_BACKGROUND 0x252526
+# define RIGHT_BACKGROUND 0x1E1E1E
+# define POS_LINE_COLOR 0xC3C39D
+# define NEG_LINE_COLOR 0x8FBBD7
 
 # define ESC 53
 # define ENTER 36
@@ -78,14 +79,33 @@ typedef struct	s_info
 	int			max_value;
 }				t_info;
 
+typedef struct	s_oprs
+{
+	int			rr;
+	int			ra;
+	int			rb;
+	int			rrr;
+	int			rra;
+	int			rrb;
+	int			count;
+}				t_oprs;
+
+typedef struct	s_neibs
+{
+	int			value;
+	int			up;
+	int			down;
+}				t_neibs;
+
 typedef struct	s_ps
 {
 	t_list		*lst;
+	t_neibs		**neibs;
 	size_t		point;
-	char		**arr;
+	char		*cmds;
+	size_t		commands_count;
 	int			*a;
 	int			*b;
-	int			size;
 	char		flag;
 }				t_ps;
 
@@ -123,18 +143,20 @@ void	init(t_all *all, int ac, char **av);
 void	push(int *src, int *dst);
 void	swap(int *arr);
 void	rotate(int *arr, char dir);
-char	read_cmd(char *cmd);
+char	read_cmd(char *cmd,  size_t *ofset);
 char	read_push(t_task *task);
 char	read_swap(t_task *task);
 char	read_rotate(t_task *task);
-void		process_cmd(t_ps *ps, char cmd);
-void		push_swap_clear_exit(t_all *all, char *message);
+void	process_cmd(t_ps *ps, char cmd);
+void	push_swap_clear_exit(t_all *all, char *message);
 void	print_arr(int *a, int *b);
 int		is_sorted(int *arr);
+int		is_loop_sorted(int *arr, int adr);
 void	check_matches(t_all *all);
-void	print_lst(t_list **lst);
+void	print_lst(t_list *lst);
 void	get_info(t_info *info, int *a);
 void		visualisation_init(t_all *all);
-void	render(t_ps *ps, t_mlx *mlx, int cmd);
+void	render(t_ps *ps, t_mlx *mlx, char cmd);
+size_t	get_cmd(t_all *all, char **line);
 
 #endif

@@ -6,20 +6,24 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/21 06:02:38 by nalexand          #+#    #+#             */
-/*   Updated: 2019/06/28 23:02:00 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/07/13 19:09:53 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_arraydel(void **array)
+void	ft_arraydel(void ***array)
 {
 	int i;
 
-	i = 0;
-	while (array[i])
+	if (*array)
 	{
-		ft_memdel(&array[i]);
-		i++;
+		i = 0;
+		while ((*array)[i])
+		{
+			ft_memdel(&(*array[i]));
+			i++;
+		}
+		ft_memdel((void **)array);
 	}
 }

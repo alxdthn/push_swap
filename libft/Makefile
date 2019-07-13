@@ -6,7 +6,7 @@
 #    By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/08 15:02:28 by nalexand          #+#    #+#              #
-#    Updated: 2019/06/28 05:40:46 by nalexand         ###   ########.fr        #
+#    Updated: 2019/06/30 02:24:06 by nalexand         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,6 +37,7 @@ SRC =	ft_arraydel.c \
 		ft_lstiter.c \
 		ft_lstmap.c \
 		ft_lstnew.c \
+		ft_lstpushback.c \
 		ft_memalloc.c \
 		ft_memccpy.c \
 		ft_memchr.c \

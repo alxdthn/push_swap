@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 03:15:30 by nalexand          #+#    #+#             */
-/*   Updated: 2019/06/29 07:25:51 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/07/13 19:12:12 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,7 @@ char	**ft_strsplit(char const *s, char c)
 			break ;
 		if (!(res[i] = (char *)ft_strnew(sizeof(char) * ft_strclen(s, c))))
 		{
-			ft_arraydel((void **)res);
-			ft_memdel((void **)&res);
+			ft_arraydel((void ***)&res);
 			return (NULL);
 		}
 		while (*s != c && *s)

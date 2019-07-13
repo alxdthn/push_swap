@@ -6,12 +6,13 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/26 22:14:58 by nalexand          #+#    #+#             */
-/*   Updated: 2019/06/28 05:53:27 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/06/30 04:59:24 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
+/*
 void	rewrite(t_list **lst, char *res, size_t mem, size_t ofset)
 {
 	if ((*lst)->next)
@@ -43,6 +44,35 @@ void		print_lst(t_list **lst)
 			ft_strdel(&res);
 		}
 	}
+}
+*/
+
+void	print_lst(t_list *lst)
+{
+	if (lst->next)
+		print_lst (lst->next);
+	if (*(char *)lst->content == PA)
+		write(1, "pa\n", 3);
+	else if (*(char *)lst->content == PB)
+		write(1, "pb\n", 3);
+	else if (*(char *)lst->content == SA)
+		write(1, "sa\n", 3);
+	else if (*(char *)lst->content == SB)
+		write(1, "sb\n", 3);
+	else if (*(char *)lst->content == RA)
+		write(1, "ra\n", 3);
+	else if (*(char *)lst->content == RB)
+		write(1, "rb\n", 3);
+	else if (*(char *)lst->content == RRA)
+		write(1, "rra\n", 4);
+	else if (*(char *)lst->content == RRB)
+		write(1, "rrb\n", 4);
+	else if (*(char *)lst->content == SS)
+		write(1, "ss\n", 3);
+	else if (*(char *)lst->content == RR)
+		write(1, "rr\n", 3);
+	else if (*(char *)lst->content == RRR)
+		write(1, "rrr\n", 4);
 }
 
 void	print_arr(int *a, int *b)

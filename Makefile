@@ -6,7 +6,7 @@
 #    By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/29 16:28:19 by nalexand          #+#    #+#              #
-#    Updated: 2019/06/29 07:51:42 by nalexand         ###   ########.fr        #
+#    Updated: 2019/06/30 02:57:37 by nalexand         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ MLX_HEAD = -I /usr/local/include
 FRAMEWORK = -framework OpenGL -framework AppKit
 
 C_FLAGS = -g
-HEADER = -I includes
+HEADER = -I includes -I libft/includes -I libft/ft_printf/includes
 
 
 SRC_DIR = src/
@@ -41,7 +41,8 @@ SRC =		init.c \
 			clear_exit.c \
 			print.c \
 			check_matches.c \
-			get_info.c
+			get_info.c \
+			get_cmd.c
 
 OBJ = $(addprefix $(OBJ_DIR), $(patsubst %.c, %.o, $(SRC)))
 PS_OBJ = $(addprefix $(OBJ_DIR), $(patsubst %.c, %.o, $(PS_SRC)))
@@ -85,13 +86,14 @@ fclean: clean
 	rm -f $(PS)
 	rm -f $(CH)
 	rm -rf *.dSYM
+fclean_all: fclean
+	make -C libft/ fclean
+	make -C libft/ft_printf fclean
 
 re: fclean all
-
+re_all: re
+	make -C libft/ re
+	make -C libft/ft_printf re	
 relib:
 	make -C libft/ re
 	make -C libft/ft_printf re
-
-fclean_all: fclean
-	make -C libft/ fclean
-	make -C libft/ft_printf fclean	

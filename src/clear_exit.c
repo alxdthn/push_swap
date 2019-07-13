@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/26 05:23:01 by nalexand          #+#    #+#             */
-/*   Updated: 2019/06/29 22:46:40 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/07/13 19:12:43 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ void		push_swap_clear_exit(t_all *all, char *message)
 {
 	free(all->ps.a);
 	free(all->ps.b);
-	free(all->ps.arr);
+	free(all->ps.cmds);
+	ft_arraydel((void ***)&all->ps.neibs);
 	ft_lstdel(&all->ps.lst, ft_lstclear);
 	if (all->mlx.ptr)
 	{

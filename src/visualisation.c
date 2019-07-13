@@ -6,26 +6,32 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/29 06:41:10 by nalexand          #+#    #+#             */
-/*   Updated: 2019/06/29 09:41:54 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/07/13 20:03:44 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	get_back(char **tmp, char *cmd)
+void	get_back(char *res, char cmd)
 {
-	if (!ft_strcmp(cmd, "pa"))
-		*tmp = "pb";
-	else if (!ft_strcmp(cmd, "pb"))
-		*tmp = "pa";
-	else if (!ft_strcmp(cmd, "ra"))
-		*tmp = "rra";
-	else if (!ft_strcmp(cmd, "rb"))
-		*tmp = "rrb";
-	else if (!ft_strcmp(cmd, "rra"))
-		*tmp = "ra";
-	else if (!ft_strcmp(cmd, "rrb"))
-		*tmp = "rb";
+	if (cmd == PA)
+		*res = PB;
+	else if (cmd == PB)
+		*res = PA;
+	else if (cmd == RA)
+		*res = RRA;
+	else if (cmd == RB)
+		*res = RRB;
+	else if (cmd == RRA)
+		*res = RA;
+	else if (cmd == RRB)
+		*res = RB;
+	else if (cmd == RRR)
+		*res = RR;
+	else if (cmd == RR)
+		*res = RRR;
+	else if (cmd == SA || cmd == SB || cmd == SS)
+		*res = cmd;
 }
 
 int		deal_key(int key, t_all *all)
@@ -45,20 +51,17 @@ int		deal_key(int key, t_all *all)
 
 int		loop_hook(t_all *all)
 {
-	int		cmd;
-	char	*tmp;
+	char	cmd;
 
-	tmp = NULL;
 	if (!all->mlx.working)
 		return (0);
-	if (all->mlx.dir && all->ps.arr[all->ps.point])
-		tmp = all->ps.arr[all->ps.point++];
+	if (all->mlx.dir && all->ps.cmds[all->ps.point])
+		cmd = all->ps.cmds[all->ps.point++];
 	else if (!all->mlx.dir && all->ps.point)
-		get_back(&tmp, all->ps.arr[all->ps.point-- - 1]);
-	if (tmp)
+		get_back(&cmd, all->ps.cmds[all->ps.point-- - 1]);
+	if (cmd)
 	{
-		if (!(cmd = process_cmd(&all->ps, tmp)))
-			push_swap_clear_exit(all, CH_CMD_ERR);
+		process_cmd(&all->ps, cmd);
 		render(&all->ps, &all->mlx, cmd);
 	}
 	return (0);
@@ -66,16 +69,14 @@ int		loop_hook(t_all *all)
 
 int		key_press(int key, t_all *all)
 {
-	int		cmd;
-	char	*tmp;
+	char	cmd;
 
-	tmp = NULL;
+	cmd = all->ps.cmds[all->ps.point];
 	if (key == RIGHT || key == LEFT)
 	{
-		tmp = all->ps.arr[all->ps.point];
 		if (key == RIGHT)
 		{
-			if (!all->ps.arr[all->ps.point])
+			if (!cmd)
 				return (0);
 			all->ps.point++;
 		}
@@ -83,16 +84,15 @@ int		key_press(int key, t_all *all)
 		{
 			if (all->ps.point == 0)
 				return (0);
-			get_back(&tmp, all->ps.arr[all->ps.point - 1]);
+			get_back(&cmd, all->ps.cmds[all->ps.point - 1]);
 			all->ps.point--;
 		}
-		if (tmp)
+		if (cmd)
 		{
-			if (!(cmd = process_cmd(&all->ps, tmp)))
-				push_swap_clear_exit(all, CH_CMD_ERR);
+			process_cmd(&all->ps, cmd);
 			render(&all->ps, &all->mlx, cmd);
 		}
-		ft_printf("point: %d\ncmd: %s\n", all->ps.point, tmp);
+		//ft_printf("point: %d\ncmd: %s\n", all->ps.point, tmp);
 		all->mlx.working = 0;
 	}
 	return (0);
@@ -132,7 +132,7 @@ static void		put_line(int value, t_mlx *mlx, ssize_t *i, int color, int *data)
 	}
 }
 
-void	render(t_ps *ps, t_mlx *mlx, int cmd)
+void	render(t_ps *ps, t_mlx *mlx, char cmd)
 {
 	ssize_t	i;
 	int		j;
