@@ -6,14 +6,15 @@
 #    By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/29 16:28:19 by nalexand          #+#    #+#              #
-#    Updated: 2019/06/30 02:57:37 by nalexand         ###   ########.fr        #
+#    Updated: 2019/07/14 20:27:43 by nalexand         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 PS = push_swap
 CH = checker
 
-LIB = push_swap.a
+LIB = common.a
+PS_LIB = push_swap.a
 CH_LIB = checker.a
 
 LIBFT = libft.a
@@ -25,11 +26,14 @@ FRAMEWORK = -framework OpenGL -framework AppKit
 C_FLAGS = -g
 HEADER = -I includes -I libft/includes -I libft/ft_printf/includes
 
-
 SRC_DIR = src/
 OBJ_DIR = obj/
 
-PS_SRC =	push_swap.c
+PS_SRC =	push_swap.c \
+			handle_mode.c \
+			insert_method.c \
+			hard_insert_method.c \
+			common_stack_operations.c
 CH_SRC =	checker.c \
 			visualisation.c
 SRC =		init.c \
@@ -50,11 +54,8 @@ CH_OBJ = $(addprefix $(OBJ_DIR), $(patsubst %.c, %.o, $(CH_SRC)))
 
 all: $(OBJ_DIR) $(PS) $(CH)
 
-$(PS): $(LIBFT) $(FTPRINTF) $(LIB) $(PS_OBJ)
-	gcc $(C_FLAGS) -o $@ $(PS_OBJ) $(LIB) $(LIBFT) $(FTPRINTF) $(HEADER) $(MLX_HEAD) $(FRAMEWORK) $(MLX_LIB)
-$(PS_OBJ): $(SRC_DIR)$(PS_SRC)
-	gcc $(C_FLAGS) -c $< -o $@ $(HEADER)
-
+$(PS): $(LIBFT) $(FTPRINTF) $(LIB) $(PS_LIB)
+	gcc $(C_FLAGS) -o $@ $(LIB) $(LIBFT) $(FTPRINTF) $(PS_LIB) $(HEADER) $(MLX_HEAD) $(FRAMEWORK) $(MLX_LIB)
 $(CH): $(LIBFT) $(FTPRINTF) $(LIB) $(CH_LIB) 
 	gcc $(C_FLAGS) -o $@ $(LIB) $(LIBFT) $(FTPRINTF) $(CH_LIB) $(HEADER) $(MLX_HEAD) $(FRAMEWORK) $(MLX_LIB)
 
@@ -67,6 +68,8 @@ $(FTPRINTF): libft/ft_printf/$@
 
 $(LIB): $(OBJ)
 	ar rc $@ $(OBJ)
+$(PS_LIB): $(PS_OBJ)
+	ar rc $@ $(PS_OBJ)
 $(CH_LIB): $(CH_OBJ)
 	ar rc $@ $(CH_OBJ)
 

@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/24 18:13:31 by nalexand          #+#    #+#             */
-/*   Updated: 2019/07/13 21:28:09 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/07/14 20:27:14 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ typedef struct	s_info
 
 typedef struct	s_oprs
 {
+	int			pa;
 	int			rr;
 	int			ra;
 	int			rb;
@@ -155,8 +156,17 @@ int		is_loop_sorted(int *arr, int adr);
 void	check_matches(t_all *all);
 void	print_lst(t_list *lst);
 void	get_info(t_info *info, int *a);
-void		visualisation_init(t_all *all);
+void	visualisation_init(t_all *all);
 void	render(t_ps *ps, t_mlx *mlx, char cmd);
 size_t	get_cmd(t_all *all, char **line);
+void	handle_mode(t_all *all);
+void	insert_method(t_all *all);
+void	hard_insert_method(t_all *all);
+
+void	make_cmd(t_all *all, char cmd);
+void	solve_operations(t_all *all, t_oprs oprs);
+void	get_double_rotation(int *a, int *b, int *rr);
+void	init_opers(t_oprs *oprs);
+int		get_rotation(int *r, int *rr, int size, int adr, int dir);
 
 #endif
