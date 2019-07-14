@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/25 18:06:49 by nalexand          #+#    #+#             */
-/*   Updated: 2019/07/14 20:54:22 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/07/14 22:11:33 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,7 @@
 static void	auto_mode(t_all *all)
 {
 	if (!is_sorted(all->ps.a))
-	{
-		//if (all->ps.a[0] < 10)
-		//	hard_insert_method(all);
-		//else
-			insert_method(all);
-	}
+		insert_method(all);
 }
 
 int		main(int ac, char **av)

@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/24 18:15:03 by nalexand          #+#    #+#             */
-/*   Updated: 2019/07/13 21:36:24 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/07/14 22:03:56 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ static void		read_input(t_all *all)
 	int		ret;
 
 	count = 0;
-	//int fd = open("cmds.txt", O_RDONLY);
 	while ((ret = get_next_line(0, &line)))
 	{
 		if (ret < 0)
@@ -52,7 +51,6 @@ static void		read_input(t_all *all)
 		all->ps.cmds[count-- - 1] = *(char *)tmp->content;
 		tmp = tmp->next;
 	}
-	//push_swap_clear_exit(all, "DEBUG END\n");
 }
 
 int			main(int ac, char **av)

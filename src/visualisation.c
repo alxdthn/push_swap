@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/29 06:41:10 by nalexand          #+#    #+#             */
-/*   Updated: 2019/07/13 20:03:44 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/07/14 22:11:15 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,6 @@ int		key_press(int key, t_all *all)
 			process_cmd(&all->ps, cmd);
 			render(&all->ps, &all->mlx, cmd);
 		}
-		//ft_printf("point: %d\ncmd: %s\n", all->ps.point, tmp);
 		all->mlx.working = 0;
 	}
 	return (0);
@@ -178,6 +177,8 @@ void		visualisation_init(t_all *all)
 	mlx_loop_hook(all->mlx.ptr, loop_hook, all);
 	mlx_hook(all->mlx.win, 2, 0, key_press, all);
 	get_info(&info, all->ps.a);
+	if (all->ps.flag && all->ps.a[0] > 1275)
+		push_swap_clear_exit(all, "checker: For visualisation mode maximum 1275 values");
 	all->mlx.elem_height = (double)all->mlx.height / (double)all->ps.a[0] + 0.5;
 	if (all->mlx.elem_height * all->ps.a[0] > all->mlx.height)
 		all->mlx.elem_height -= 1; 

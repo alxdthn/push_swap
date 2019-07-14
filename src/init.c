@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/27 01:29:14 by nalexand          #+#    #+#             */
-/*   Updated: 2019/07/13 20:08:12 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/07/14 21:41:59 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,8 @@ static void	get_arr_from_args(t_all *all, int ac, char **av, int i)
 		{
 			all->ps.a[k] = ft_atoi(av[i] + j);
 			j += ft_intlen(all->ps.a[k]);
-			while (av[i][j] && !ft_isdigit(av[i][j]))
+			while (av[i][j] && av[i][j] != '-'
+			&& av[i][j] != '+' && !ft_isdigit(av[i][j]))
 				j++;
 			k--;
 		}
