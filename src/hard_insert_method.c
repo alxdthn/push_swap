@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/14 20:18:08 by nalexand          #+#    #+#             */
-/*   Updated: 2019/07/14 20:29:01 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/07/15 15:11:06 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,6 +138,8 @@ static void	find_better_rotation(t_all *all, t_oprs *oprs, int adr_b)
 	oprs->count = oprs->ra + oprs->rb + oprs->rr + oprs->rra + oprs->rrb + oprs->rrr;
 }
 
+
+
 void	hard_insert_method(t_all *all)
 {
 	t_neibs			neibs;
@@ -147,8 +149,16 @@ void	hard_insert_method(t_all *all)
 	int				i;
 
 	find_neibs(all);
-	while (all->ps.a[0] > 2)
-		make_cmd(all, PB);
+	get_info(&info, all->ps.a);
+	while (all->ps.a[0] && !is_loop_sorted(all->ps.a, info.min_adr))
+	{
+		get_neibs(all, &neibs, all->ps.a[all->ps.a[0]]);
+		if (all->ps.a[all->ps.a[0] - 1] == neibs.down || all->ps.a[1] == neibs.up)
+			make_cmd(all, RA);
+		else	
+			make_cmd(all, PB);
+		get_info(&info, all->ps.a);
+	}
 	while (all->ps.b[0])
 	{
 		i = 0;

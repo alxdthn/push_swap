@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/24 18:13:31 by nalexand          #+#    #+#             */
-/*   Updated: 2019/07/14 20:27:14 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/07/15 16:58:46 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,7 @@ typedef struct	s_ps
 	int			*a;
 	int			*b;
 	char		flag;
+	int			size;
 }				t_ps;
 
 typedef struct	s_img

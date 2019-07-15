@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/25 18:06:49 by nalexand          #+#    #+#             */
-/*   Updated: 2019/07/14 22:11:33 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/07/15 16:20:06 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,9 @@
 static void	auto_mode(t_all *all)
 {
 	if (!is_sorted(all->ps.a))
+	{
 		insert_method(all);
+	}
 }
 
 int		main(int ac, char **av)
@@ -24,6 +26,13 @@ int		main(int ac, char **av)
 
 	all.prog = PUSH_SWAP;
 	init(&all, ac, av);
+
+/*
+	t_info info;
+	get_info(&info, all.ps.a);
+	ft_printf("%d\n", is_loop_sorted(all.ps.a, info.min_adr));
+*/
+
 	if (all.ps.flag == 'h')
 		ft_putendl(SALUT);
 	else if (all.ps.flag && all.ps.flag != 'h')
@@ -33,5 +42,6 @@ int		main(int ac, char **av)
 	if (all.ps.lst)
 		print_lst(all.ps.lst);
 	push_swap_clear_exit(&all, NULL);
+
 	return (0);
 }

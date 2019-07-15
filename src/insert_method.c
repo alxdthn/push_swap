@@ -6,11 +6,58 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/14 20:08:37 by nalexand          #+#    #+#             */
-/*   Updated: 2019/07/14 22:17:20 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/07/15 18:40:23 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+static void	sort(int *arr)
+{
+	size_t	i;
+	size_t	size;
+	int		tmp;
+
+	i = 1;
+	while (i < arr[0])
+	{
+		if (arr[i] < arr[i + 1])
+		{
+			tmp = arr[i];
+			arr[i] = arr[i + 1];
+			arr[i + 1] = tmp;
+			i = 1;
+			continue ;
+		}
+		i++;
+	}
+}
+
+static void	find_neibs(t_all *all)
+{
+	int		*tmp_sort;
+	int		i;
+
+	if (!(tmp_sort = ft_memdup(all->ps.a, sizeof(int) * (all->ps.a[0]) + 1)))
+		push_swap_clear_exit(all, PS_MEM_ERR);
+	if (!(all->ps.neibs = (t_neibs **)ft_memalloc(sizeof(t_neibs *) * (all->ps.a[0] + 1))))
+	{
+		ft_memdel((void **)&tmp_sort);
+		push_swap_clear_exit(all, PS_MEM_ERR);
+	}
+	all->ps.neibs[all->ps.a[0]] = NULL;
+	sort(tmp_sort);
+	i = 0;
+	while (++i <= all->ps.a[0])
+	{
+		if (!(all->ps.neibs[i - 1] = (t_neibs *)malloc(sizeof(t_neibs))))
+			push_swap_clear_exit(all, PS_MEM_ERR);
+		all->ps.neibs[i - 1]->value = tmp_sort[i];
+		all->ps.neibs[i - 1]->down = (i == 1) ? tmp_sort[tmp_sort[0]] : tmp_sort[i - 1];
+		all->ps.neibs[i - 1]->up = (i == tmp_sort[0]) ? tmp_sort[1] : tmp_sort[i + 1];
+	}
+	ft_memdel((void **)&tmp_sort);
+}
 
 static int	get_place_to_put(int *arr, int value)
 {
@@ -47,25 +94,31 @@ void		insert_method(t_all *all)
 	t_oprs		tmp_oprs;
 	t_info		info;
 	int			i;
+	int			delta;
+	t_neibs		neibs;
 
+	find_neibs(all);
 	get_info(&info, all->ps.a);
-	while (all->ps.a[0] > 3)
+	delta = (info.min_value + info.max_value) / 2;
+	while (all->ps.a[0] > 3 && !is_loop_sorted(all->ps.a, info.min_adr))
 	{
 		if (all->ps.a[all->ps.a[0]] == info.max_value
 		|| all->ps.a[all->ps.a[0]] == info.min_value)
 			make_cmd(all, RA);
 		else
+		{
 			make_cmd(all, PB);
-		if (is_loop_sorted(all->ps.a, info.min_value))
-			break ;
+			if (all->ps.size > 5 && all->ps.b[all->ps.b[0]] > delta)
+				make_cmd(all, RB);
+		}
+		get_info(&info, all->ps.a);
 	}
-	if (!is_loop_sorted(all->ps.a, info.min_value))
+	if (!is_loop_sorted(all->ps.a, info.min_adr))
 	{
 		get_info(&info, all->ps.a);
 		if (all->ps.a[1] != info.max_value && all->ps.a[1] != info.min_value)
 			make_cmd(all, RA);
-		else
-			make_cmd(all, SA);
+		make_cmd(all, SA);
 	}
 	while (all->ps.b[0])
 	{

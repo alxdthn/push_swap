@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/27 01:29:14 by nalexand          #+#    #+#             */
-/*   Updated: 2019/07/14 21:41:59 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/07/15 16:59:23 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ static void	read_args_to_array(t_all *all, int ac, char **av)
 	all->ps.a[0] = size;
 	all->ps.b[0] = 0;
 	get_arr_from_args(all, ac, av, arg_ofset);
+	all->ps.size = all->ps.a[0];
 }
 
 void		init(t_all *all, int ac, char **av)
