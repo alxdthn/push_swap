@@ -6,58 +6,11 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/14 20:08:37 by nalexand          #+#    #+#             */
-/*   Updated: 2019/07/15 18:40:23 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/07/15 22:56:00 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-static void	sort(int *arr)
-{
-	size_t	i;
-	size_t	size;
-	int		tmp;
-
-	i = 1;
-	while (i < arr[0])
-	{
-		if (arr[i] < arr[i + 1])
-		{
-			tmp = arr[i];
-			arr[i] = arr[i + 1];
-			arr[i + 1] = tmp;
-			i = 1;
-			continue ;
-		}
-		i++;
-	}
-}
-
-static void	find_neibs(t_all *all)
-{
-	int		*tmp_sort;
-	int		i;
-
-	if (!(tmp_sort = ft_memdup(all->ps.a, sizeof(int) * (all->ps.a[0]) + 1)))
-		push_swap_clear_exit(all, PS_MEM_ERR);
-	if (!(all->ps.neibs = (t_neibs **)ft_memalloc(sizeof(t_neibs *) * (all->ps.a[0] + 1))))
-	{
-		ft_memdel((void **)&tmp_sort);
-		push_swap_clear_exit(all, PS_MEM_ERR);
-	}
-	all->ps.neibs[all->ps.a[0]] = NULL;
-	sort(tmp_sort);
-	i = 0;
-	while (++i <= all->ps.a[0])
-	{
-		if (!(all->ps.neibs[i - 1] = (t_neibs *)malloc(sizeof(t_neibs))))
-			push_swap_clear_exit(all, PS_MEM_ERR);
-		all->ps.neibs[i - 1]->value = tmp_sort[i];
-		all->ps.neibs[i - 1]->down = (i == 1) ? tmp_sort[tmp_sort[0]] : tmp_sort[i - 1];
-		all->ps.neibs[i - 1]->up = (i == tmp_sort[0]) ? tmp_sort[1] : tmp_sort[i + 1];
-	}
-	ft_memdel((void **)&tmp_sort);
-}
 
 static int	get_place_to_put(int *arr, int value)
 {
@@ -88,6 +41,29 @@ static void	better_rotation(t_all *all, t_oprs *oprs, int adr_b)
 	+ oprs->rra + oprs->rrb + oprs->rrr;
 }
 
+int	G_G = 0;
+
+static void rotate_to_finish(t_all *all)
+{
+	t_info		info;
+
+	get_info(&info, all->ps.a);
+	while (all->ps.a[1] != info.min_value)
+	{
+		ft_printf("%d\n", G_G++);
+		if (info.min_adr > all->ps.a[0] / 2)
+		{
+			make_cmd(all, RA);
+		}
+		else
+		{
+			printf("RRA\n");
+			make_cmd(all, RRA);
+		}
+	}
+	ft_printf("ASSA");
+}
+
 void		insert_method(t_all *all)
 {
 	t_oprs		oprs;
@@ -95,9 +71,7 @@ void		insert_method(t_all *all)
 	t_info		info;
 	int			i;
 	int			delta;
-	t_neibs		neibs;
 
-	find_neibs(all);
 	get_info(&info, all->ps.a);
 	delta = (info.min_value + info.max_value) / 2;
 	while (all->ps.a[0] > 3 && !is_loop_sorted(all->ps.a, info.min_adr))
@@ -115,7 +89,6 @@ void		insert_method(t_all *all)
 	}
 	if (!is_loop_sorted(all->ps.a, info.min_adr))
 	{
-		get_info(&info, all->ps.a);
 		if (all->ps.a[1] != info.max_value && all->ps.a[1] != info.min_value)
 			make_cmd(all, RA);
 		make_cmd(all, SA);
@@ -124,20 +97,14 @@ void		insert_method(t_all *all)
 	{
 		i = 0;
 		oprs.count = INT32_MAX;
-		while (++i <= all->ps.b[0])
+		while (oprs.count != 0 && ++i <= all->ps.b[0])
 		{
 			better_rotation(all, &tmp_oprs, i);
 			if (tmp_oprs.pa && tmp_oprs.count < oprs.count)
 				ft_memcpy(&oprs, &tmp_oprs, sizeof(t_oprs));
 		}
+		printf("%d\n", all->ps.b[0]);
 		solve_operations(all, oprs);
 	}
-	get_info(&info, all->ps.a);
-	while (!is_sorted(all->ps.a))
-	{
-		if (info.min_adr > all->ps.a[0] / 2)
-			make_cmd(all, RA);
-		else
-			make_cmd(all, RRA);
-	}
+	rotate_to_finish(all);
 }

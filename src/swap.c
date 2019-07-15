@@ -6,13 +6,13 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/26 04:34:04 by nalexand          #+#    #+#             */
-/*   Updated: 2019/06/29 23:03:59 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/07/15 22:05:14 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	swap(int *arr)
+int		swap(int *arr)
 {
 	int		tmp;
 
@@ -21,7 +21,9 @@ void	swap(int *arr)
 		tmp = arr[arr[0]];
 		arr[arr[0]] = arr[arr[0] - 1];
 		arr[arr[0] - 1] = tmp;
+		return (1);
 	}
+	return (0);
 }
 
 char	read_swap(t_task *task)

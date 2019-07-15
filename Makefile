@@ -6,7 +6,7 @@
 #    By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/29 16:28:19 by nalexand          #+#    #+#              #
-#    Updated: 2019/07/14 20:27:43 by nalexand         ###   ########.fr        #
+#    Updated: 2019/07/15 19:50:27 by nalexand         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,10 +32,10 @@ OBJ_DIR = obj/
 PS_SRC =	push_swap.c \
 			handle_mode.c \
 			insert_method.c \
-			hard_insert_method.c \
-			common_stack_operations.c
+			stack_operations.c
 CH_SRC =	checker.c \
-			visualisation.c
+			visualisation.c \
+			neibrs_operations.c
 SRC =		init.c \
 			process_commands.c \
 			is_sorted.c \

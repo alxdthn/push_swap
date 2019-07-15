@@ -6,18 +6,18 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/26 04:35:34 by nalexand          #+#    #+#             */
-/*   Updated: 2019/07/13 19:16:52 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/07/15 22:52:41 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	rotate(int *arr, char dir)
+int		rotate(int *arr, char dir)
 {
 	int		tmp;
 
 	if (arr[0] < 2)
-		return ;
+		return (0);
 	if (dir == 1)
 	{
 		tmp = arr[arr[0]];
@@ -30,6 +30,7 @@ void	rotate(int *arr, char dir)
 		ft_memmove(arr + 1, arr + 2, (arr[0] - 1) * sizeof(int));
 		arr[arr[0]] = tmp;
 	}
+	return (1);
 }
 
 char	read_rotate(t_task *task)

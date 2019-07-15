@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/29 06:41:10 by nalexand          #+#    #+#             */
-/*   Updated: 2019/07/14 22:11:15 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/07/15 22:14:54 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,8 @@ int		loop_hook(t_all *all)
 		get_back(&cmd, all->ps.cmds[all->ps.point-- - 1]);
 	if (cmd)
 	{
-		process_cmd(&all->ps, cmd);
-		render(&all->ps, &all->mlx, cmd);
+		make_cmd(all, cmd);
+		render(all, cmd);
 	}
 	return (0);
 }
@@ -89,15 +89,25 @@ int		key_press(int key, t_all *all)
 		}
 		if (cmd)
 		{
-			process_cmd(&all->ps, cmd);
-			render(&all->ps, &all->mlx, cmd);
+			make_cmd(all, cmd);
+			render(all, cmd);
 		}
 		all->mlx.working = 0;
 	}
 	return (0);
 }
 
-static void		put_line(int value, t_mlx *mlx, ssize_t *i, int color, int *data)
+static int		get_line_color(t_all *all, int value)
+{
+	int		i;
+
+	i = 0;
+	while (all->ps.neibs[i]->value != value)
+		i++;
+	return (all->ps.neibs[i]->color);
+}
+
+static void		put_box(t_all *all, int value, ssize_t *i, int *data)
 {
 	size_t	tmp_width;
 	size_t	box;
@@ -105,16 +115,19 @@ static void		put_line(int value, t_mlx *mlx, ssize_t *i, int color, int *data)
 	ssize_t	ofset;
 	int		line_color;
 
-	box = mlx->a.size_line * mlx->elem_height;
-	line_color = (value >= 0) ? POS_LINE_COLOR : NEG_LINE_COLOR;
+	box = all->mlx.a.size_line * all->mlx.elem_height;
+	if (value && all->mlx.flag)
+		line_color = get_line_color(all, value);
+	else
+		line_color = (value > 0) ? POS_LINE_COLOR : NEG_LINE_COLOR;
 	x = 0;
 	while (*i >= 0 && box)
 	{
 		if (!x)
 		{
-			tmp_width = mlx->elem_width * ABS(value);
-			ofset = (mlx->a.size_line - tmp_width) / 2 + 0.5;
-			x = mlx->a.size_line;
+			tmp_width = all->mlx.elem_width * ABS(value);
+			ofset = (all->mlx.a.size_line - tmp_width) / 2 + 0.5;
+			x = all->mlx.a.size_line;
 		}
 		if (tmp_width && ofset <= 0)
 		{
@@ -123,15 +136,15 @@ static void		put_line(int value, t_mlx *mlx, ssize_t *i, int color, int *data)
 		}
 		else
 		{
-			data[(*i)--] = color;
+			data[(*i)--] = all->mlx.bckg_color;
 			ofset--;
 		}
-		x--;
+		--x;
 		box--;
 	}
 }
 
-void	render(t_ps *ps, t_mlx *mlx, char cmd)
+void	render(t_all *all, char cmd)
 {
 	ssize_t	i;
 	int		j;
@@ -139,18 +152,20 @@ void	render(t_ps *ps, t_mlx *mlx, char cmd)
 	if (cmd > 9 || cmd == SA || cmd == RA || cmd == RRA)
 	{
 		j = 0;
-		i = mlx->a.size_line * mlx->height - 1;
+		i = all->mlx.a.size_line * all->mlx.height - 1;
+		all->mlx.bckg_color = LEFT_BACKGROUND;
 		while (i >= 0)
-			put_line((j < ps->a[0]) ? ps->a[j++ + 1] : 0, mlx, &i, LEFT_BACKGROUND, mlx->a.data);
-		mlx_put_image_to_window(mlx->ptr, mlx->win, mlx->a.ptr, 0, 0);
+			put_box(all, (j < all->ps.a[0]) ? all->ps.a[j++ + 1] : 0, &i, all->mlx.a.data);
+		mlx_put_image_to_window(all->mlx.ptr, all->mlx.win, all->mlx.a.ptr, 0, 0);
 	}
 	if (cmd > 9 || cmd == SB || cmd == RB || cmd == RRB)
 	{
 		j = 0;
-		i = mlx->b.size_line * mlx->height - 1;
+		i = all->mlx.b.size_line * all->mlx.height - 1;
+		all->mlx.bckg_color = RIGHT_BACKGROUND;
 		while (i >= 0)
-			put_line((j < ps->b[0]) ? ps->b[j++ + 1] : 0, mlx, &i, RIGHT_BACKGROUND, mlx->b.data);		
-		mlx_put_image_to_window(mlx->ptr, mlx->win, mlx->b.ptr, mlx->width / 2, 0);
+			put_box(all, (j < all->ps.b[0]) ? all->ps.b[j++ + 1] : 0, &i, all->mlx.b.data);		
+		mlx_put_image_to_window(all->mlx.ptr, all->mlx.win, all->mlx.b.ptr, all->mlx.width / 2, 0);
 	}
 }
 

@@ -11,4 +11,7 @@ CHECKERS
 *out
 *.a
 obj
+log.txt
+ps_checker
 test.c
+clrs.html

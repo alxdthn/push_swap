@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/27 01:29:14 by nalexand          #+#    #+#             */
-/*   Updated: 2019/07/15 16:59:23 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/07/15 20:56:33 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,31 @@ static void	read_args_to_array(t_all *all, int ac, char **av)
 	all->ps.size = all->ps.a[0];
 }
 
+static void	get_flag(t_all *all, char **av)
+{
+	all->ps.flag = 0;
+	all->mlx.flag = 0;
+
+	if (av[1][0] == '-' && av[1][1]
+	&& ft_isalpha(av[1][1]))
+	{
+		if (ft_strequ(av[1], "-h") && all->prog == PUSH_SWAP)
+			all->ps.flag = 1;
+		else if (ft_strequ(av[1], "-v") && all->prog == CHECKER)
+			all->ps.flag = 1;
+		else if (ft_strequ(av[1], "-vrus") && all->prog == CHECKER)
+		{
+			all->mlx.flag = 1;
+			all->ps.flag = 1;
+		}
+		else
+		{
+			push_swap_clear_exit(all, (all->prog == PUSH_SWAP)
+			? PS_FLAG_ERR : CH_FLAG_ERR);
+		}
+	}
+}
+
 void		init(t_all *all, int ac, char **av)
 {
 	if (ac < 2)
@@ -82,8 +107,7 @@ void		init(t_all *all, int ac, char **av)
 		: ft_putendl(CH_USAGE);
 		exit(EXIT_SUCCESS);
 	}
-	all->ps.flag = (av[1][0] == '-' && av[1][1]
-	&& ft_isalpha(av[1][1])) ? av[1][1] : 0;
+	get_flag(all, av);
 	all->ps.commands_count = 0;
 	all->ps.point = 0;
 	all->ps.a = NULL;

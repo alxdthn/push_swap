@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/24 18:13:31 by nalexand          #+#    #+#             */
-/*   Updated: 2019/07/15 16:58:46 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/07/15 22:10:43 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,10 @@
 # define RIGHT_BACKGROUND 0x1E1E1E
 # define POS_LINE_COLOR 0xC3C39D
 # define NEG_LINE_COLOR 0x8FBBD7
+# define TOP_COLOR 0xa8a8a8
+# define MID_COLOR 0x143885
+# define BOT_COLOR 0x851414
+
 
 # define ESC 53
 # define ENTER 36
@@ -96,6 +100,7 @@ typedef struct	s_neibs
 	int			value;
 	int			up;
 	int			down;
+	int			color;
 }				t_neibs;
 
 typedef struct	s_ps
@@ -132,6 +137,8 @@ typedef struct	s_mlx
 	int			height;
 	int			elem_width;
 	int			elem_height;
+	int			bckg_color;
+	char		flag;
 }				t_mlx;
 
 typedef struct	s_all
@@ -142,14 +149,13 @@ typedef struct	s_all
 }				t_all;
 
 void	init(t_all *all, int ac, char **av);
-void	push(int *src, int *dst);
-void	swap(int *arr);
-void	rotate(int *arr, char dir);
+int		push(int *src, int *dst);
+int		swap(int *arr);
+int		rotate(int *arr, char dir);
 char	read_cmd(char *cmd,  size_t *ofset);
 char	read_push(t_task *task);
 char	read_swap(t_task *task);
 char	read_rotate(t_task *task);
-void	process_cmd(t_ps *ps, char cmd);
 void	push_swap_clear_exit(t_all *all, char *message);
 void	print_arr(int *a, int *b);
 int		is_sorted(int *arr);
@@ -158,7 +164,7 @@ void	check_matches(t_all *all);
 void	print_lst(t_list *lst);
 void	get_info(t_info *info, int *a);
 void	visualisation_init(t_all *all);
-void	render(t_ps *ps, t_mlx *mlx, char cmd);
+void	render(t_all *all, char cmd);
 size_t	get_cmd(t_all *all, char **line);
 void	handle_mode(t_all *all);
 void	insert_method(t_all *all);
@@ -169,5 +175,9 @@ void	solve_operations(t_all *all, t_oprs oprs);
 void	get_double_rotation(int *a, int *b, int *rr);
 void	init_opers(t_oprs *oprs);
 int		get_rotation(int *r, int *rr, int size, int adr, int dir);
+
+int		get_value_adr(int *arr, int value);
+void	get_neibs(t_all *all, t_neibs *cur, int value);
+void	find_neibs(t_all *all);
 
 #endif

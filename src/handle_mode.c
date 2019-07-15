@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/14 19:59:11 by nalexand          #+#    #+#             */
-/*   Updated: 2019/07/14 20:00:30 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/07/15 22:14:04 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	solve_and_print(t_all *all, t_list *tmp, size_t count)
 		print_lst(all->ps.lst);
 		push_swap_clear_exit(all, NULL);
 	}
-	process_cmd(&all->ps, *(char *)tmp->content);
+	make_cmd(all, *(char *)tmp->content);
 	print_arr(all->ps.a, all->ps.b);
 }
 

@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/24 18:15:03 by nalexand          #+#    #+#             */
-/*   Updated: 2019/07/14 22:03:56 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/07/15 22:14:26 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	check_mode(t_all *all)
 	count = 0;
 	while (all->ps.cmds[all->ps.point])
 	{
-		process_cmd(&all->ps, all->ps.cmds[all->ps.point++]);
+		make_cmd(all, all->ps.cmds[all->ps.point++]);
 		count++;
 	}
 	if (!all->ps.b[0] && is_sorted(all->ps.a))
@@ -63,14 +63,10 @@ int			main(int ac, char **av)
 	read_input(&all);
 	if (all.ps.flag)
 	{
-		if (all.ps.flag == 'v')
-		{
-			visualisation_init(&all);
-			render(&all.ps, &all.mlx, START);
-			mlx_loop(&all.mlx.ptr);
-		}
-		else
-			all.ps.flag = ft_puterr(0, CH_FLAG_ERR);
+		find_neibs(&all);
+		visualisation_init(&all);
+		render(&all, START);
+		mlx_loop(&all.mlx.ptr);
 	}
 	else
 		check_mode(&all);

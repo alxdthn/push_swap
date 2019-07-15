@@ -1,24 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   common_stack_operations.c                          :+:      :+:    :+:   */
+/*   stack_operations.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/14 20:13:26 by nalexand          #+#    #+#             */
-/*   Updated: 2019/07/14 20:15:23 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/07/15 21:50:59 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-void	make_cmd(t_all *all, char cmd)
-{
-	process_cmd(&all->ps, cmd);
-	ft_lstadd(&all->ps.lst, ft_lstnew(&cmd, sizeof(char)));
-	if (!all->ps.lst)
-		push_swap_clear_exit(all, PS_MEM_ERR);
-}
 
 void	solve_operations(t_all *all, t_oprs oprs)
 {

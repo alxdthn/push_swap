@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/21 06:02:38 by nalexand          #+#    #+#             */
-/*   Updated: 2019/07/13 21:07:17 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/07/15 20:43:28 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	ft_arraydel(void ***array)
 {
 	int i;
 
-	if (*array)
+	if (array && *array)
 	{
 		i = 0;
 		while ((*array)[i])
