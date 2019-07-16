@@ -12,6 +12,6 @@ CHECKERS
 *.a
 obj
 log.txt
-ps_checker
+bench
 test.c
 clrs.html
