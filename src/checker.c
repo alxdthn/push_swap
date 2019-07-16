@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/24 18:15:03 by nalexand          #+#    #+#             */
-/*   Updated: 2019/07/16 15:57:05 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/07/16 17:29:39 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ static void	read_input(t_all *all)
 int			main(int ac, char **av)
 {
 	t_all	all;
+	int		*tmp_arr;
 
 	all.prog = CHECKER;
 	init(&all, ac, av);
@@ -64,7 +65,10 @@ int			main(int ac, char **av)
 	read_input(&all);
 	if (all.ps.flag)
 	{
-		find_marks(&all);
+		tmp_arr = get_presorted_arr(&all, all.ps.a);
+		init_marks_arr(&all, tmp_arr);
+		set_color(all.ps.marks, tmp_arr[0]);
+		ft_memdel((void **)&tmp_arr);
 		visualisation_init(&all);
 		render(&all, START);
 		mlx_loop(&all.mlx.ptr);

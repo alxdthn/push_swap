@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/14 20:08:37 by nalexand          #+#    #+#             */
-/*   Updated: 2019/07/16 16:49:42 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/07/16 20:06:07 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,26 +57,24 @@ static void	rotate_to_finish(t_all *all)
 static void	pull_b_stack(t_all *all)
 {
 	int			delta;
-	t_info		info;
 
-	get_info(&info, all->ps.a);
-	delta = (info.min_value + info.max_value) / 2;
-	while (all->ps.a[0] > 3 && !is_loop_sorted(all->ps.a, info.min_adr))
+	delta = (all->ps.min_value + all->ps.max_value) / 2;
+	while (all->ps.a[0] > 3 && !is_loop_sorted(all->ps.a, all->ps.info.min_adr))
 	{
-		if (all->ps.a[all->ps.a[0]] == info.max_value
-		|| all->ps.a[all->ps.a[0]] == info.min_value)
+		if (all->ps.a[all->ps.a[0]] == all->ps.max_value
+		|| all->ps.a[all->ps.a[0]] == all->ps.min_value)
 			make_cmd(all, RA);
 		else
 		{
 			make_cmd(all, PB);
-			if (all->ps.size > 5 && all->ps.b[all->ps.b[0]] > delta)
+			if (all->ps.size > 20 && all->ps.b[all->ps.b[0]] > delta)
 				make_cmd(all, RB);
 		}
-		get_info(&info, all->ps.a);
+		get_info(&all->ps.info, all->ps.a);
 	}
-	if (!is_loop_sorted(all->ps.a, info.min_adr))
+	if (!is_loop_sorted(all->ps.a, all->ps.info.min_adr))
 	{
-		if (all->ps.a[1] != info.max_value && all->ps.a[1] != info.min_value)
+		if (all->ps.a[1] != all->ps.max_value && all->ps.a[1] != all->ps.min_value)
 			make_cmd(all, RA);
 		make_cmd(all, SA);
 	}

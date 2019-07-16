@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/24 18:13:31 by nalexand          #+#    #+#             */
-/*   Updated: 2019/07/16 16:56:19 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/07/16 18:33:57 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,12 +91,16 @@ typedef struct	s_mark
 {
 	int			value;
 	int			color;
+	int			section_size;
+	int			section_adr;
+	int			is_section;
 }				t_mark;
 
 typedef struct	s_ps
 {
 	t_list		*lst;
 	t_mark		**marks;
+	t_info		info;
 	size_t		point;
 	char		*cmds;
 	size_t		commands_count;
@@ -104,6 +108,8 @@ typedef struct	s_ps
 	int			*b;
 	char		flag;
 	int			size;
+	int			max_value;
+	int			min_value;
 }				t_ps;
 
 typedef struct	s_img
@@ -171,8 +177,11 @@ void			get_double_rotation(int *a, int *b, int *rr);
 void			init_opers(t_oprs *oprs);
 int				get_rotation(int *r, int *rr, int size, int adr);
 
-int				get_value_adr(int *arr, int value);
-void			find_marks(t_all *all);
+t_mark			get_value_mark(t_mark **marks, int value);
+void			init_marks_arr(t_all *all, int *arr);
+int				*get_presorted_arr(t_all *all, int *arr);
+void			set_color(t_mark **marks, int size);
+void			mark_better_sorted_section(t_all *all, int *arr);
 
 int				deal_key(int key, t_all *all);
 int				loop_hook(t_all *all);

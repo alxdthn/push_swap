@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/25 18:06:49 by nalexand          #+#    #+#             */
-/*   Updated: 2019/07/16 15:51:51 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/07/16 20:02:34 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,9 @@ static void	auto_mode(t_all *all)
 {
 	if (!is_sorted(all->ps.a))
 	{
+		get_info(&all->ps.info, all->ps.a);
+		all->ps.max_value = all->ps.info.max_value;
+		all->ps.min_value = all->ps.info.min_value;
 		insert_method(all);
 	}
 }

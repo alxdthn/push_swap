@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/27 01:29:14 by nalexand          #+#    #+#             */
-/*   Updated: 2019/07/16 16:33:09 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/07/16 20:10:50 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static int	get_arr_size(t_all *all, int ac, char **av, int i)
 				push_swap_clear_exit(all, (all->prog == PUSH_SWAP)
 				? PS_ARG_ERR : CH_ARG_ERR);
 			j += ft_intlen(ft_atoi(av[i] + j));
-			while (av[i][j] && !ft_isdigit(av[i][j]))
+			while (av[i][j] && av[i][j] == ' ')
 				j++;
 			size++;
 		}
