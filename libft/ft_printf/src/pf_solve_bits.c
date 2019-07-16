@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/24 04:28:23 by nalexand          #+#    #+#             */
-/*   Updated: 2019/06/26 02:32:06 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/07/16 16:28:20 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ t_res	solve_bits(t_ftask *ftask, va_list *args)
 
 	res.len = 0;
 	if ((res.str = ft_btoa((unsigned long)va_arg(*args, unsigned long),
-	(ftask->prc == -1) ? ftask->size.value * 8 : ftask->prc, ftask->flags.sharp)))
+	(ftask->prc == -1) ? ftask->size.value * 8
+	: ftask->prc, ftask->flags.sharp)))
 	{
 		res.len = ft_strlen(res.str);
 		if (ftask->width > res.len)

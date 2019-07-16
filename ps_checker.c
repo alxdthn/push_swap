@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
+/*   ps_checker.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/13 15:45:07 by nalexand          #+#    #+#             */
-/*   Updated: 2019/07/15 18:32:35 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/07/16 16:30:37 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,8 @@ int		main(int ac, char **av)
 
 	if (ac != 6)
 	{
-		ft_putendl("usage: ./ps_checker [-y;-n] [min stack value] [max stack value] [count of tests] [max count perations]");
+		ft_putendl("usage: ./ps_checker [-y;-n] [min stack value]"\
+		"[max stack value] [count of tests] [max count perations]");
 		return (0);
 	}
 	i = ft_atoi(av[4]) - 1;

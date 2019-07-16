@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/26 17:16:30 by nalexand          #+#    #+#             */
-/*   Updated: 2019/06/28 01:39:55 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/07/16 16:27:29 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,12 +64,12 @@ static int	check_min_max(char *nb, int len, char sign)
 	char	*mask;
 
 	if (len == 10)
-	{	
+	{
 		if (sign == '+')
 			mask = "2147483647";
 		else
 			mask = "2147483648";
-		if (ft_strcmp(nb , mask) <= 0)
+		if (ft_strcmp(nb, mask) <= 0)
 			return (0);
 		else
 			return (1);

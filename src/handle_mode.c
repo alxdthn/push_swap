@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/14 19:59:11 by nalexand          #+#    #+#             */
-/*   Updated: 2019/07/15 22:14:04 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/07/16 15:50:32 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ void		handle_mode(t_all *all)
 	char	*line;
 	size_t	count;
 
-	ft_putendl("Init stacks:");
+	all->is_print = 0;
+	ft_putendl("Welcome to Handle mode!");
 	print_arr(all->ps.a, all->ps.b);
 	tmp = NULL;
 	while (42)

@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/25 18:06:49 by nalexand          #+#    #+#             */
-/*   Updated: 2019/07/15 22:57:52 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/07/16 15:51:51 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,19 +20,19 @@ static void	auto_mode(t_all *all)
 	}
 }
 
-int		main(int ac, char **av)
+int			main(int ac, char **av)
 {
 	t_all	all;
 
 	all.prog = PUSH_SWAP;
 	init(&all, ac, av);
+	all.is_print = 1;
 	if (all.ps.flag == 'h')
 		ft_putendl(SALUT);
-	else if (all.ps.flag && all.ps.flag != 'h')
-		all.ps.flag = ft_puterr(0, PS_FLAG_ERR);
 	check_matches(&all);
 	(all.ps.flag) ? handle_mode(&all) : auto_mode(&all);
+	if (all.ps.flag && all.ps.lst)
+		print_lst(all.ps.lst);
 	push_swap_clear_exit(&all, NULL);
-
 	return (0);
 }

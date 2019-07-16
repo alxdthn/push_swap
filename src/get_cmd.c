@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/30 02:56:55 by nalexand          #+#    #+#             */
-/*   Updated: 2019/06/30 09:21:02 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/07/16 15:44:41 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,11 @@ static int	get_action(char *cmd, t_task *task, size_t *ofset)
 		task->action = 's';
 	else if (*cmd == 'p')
 		task->action = 'p';
-	else if (*cmd == 'r' && ft_strclen(cmd, ' ') == 2 && (*(cmd + 1) == 'r' || *(cmd + 1) == 'a' || *(cmd + 1) == 'b'))
+	else if (*cmd == 'r' && ft_strclen(cmd, ' ') == 2
+	&& (*(cmd + 1) == 'r' || *(cmd + 1) == 'a' || *(cmd + 1) == 'b'))
 		task->action = '^';
-	else if (*cmd == 'r' && ft_strclen(cmd, ' ') == 3 && (*(cmd + 2) == 'r' || *(cmd + 2) == 'a' || *(cmd + 2) == 'b'))
+	else if (*cmd == 'r' && ft_strclen(cmd, ' ') == 3
+	&& (*(cmd + 2) == 'r' || *(cmd + 2) == 'a' || *(cmd + 2) == 'b'))
 		task->action = 'v';
 	if (task->action)
 	{
@@ -70,7 +72,7 @@ char		read_cmd(char *cmd, size_t *ofset)
 	return (ret);
 }
 
-size_t	get_cmd(t_all *all, char **line)
+size_t		get_cmd(t_all *all, char **line)
 {
 	char		cmd;
 	size_t		ofset;

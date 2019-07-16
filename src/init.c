@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/27 01:29:14 by nalexand          #+#    #+#             */
-/*   Updated: 2019/07/15 20:56:33 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/07/16 15:55:12 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ static int	get_arr_size(t_all *all, int ac, char **av, int i)
 		while (av[i][j])
 		{
 			if (!(ft_isint(av[i] + j)))
-				push_swap_clear_exit(all, (all->prog == PUSH_SWAP) ? PS_ARG_ERR : CH_ARG_ERR);
+				push_swap_clear_exit(all, (all->prog == PUSH_SWAP)
+				? PS_ARG_ERR : CH_ARG_ERR);
 			j += ft_intlen(ft_atoi(av[i] + j));
 			while (av[i][j] && !ft_isdigit(av[i][j]))
 				j++;
@@ -78,7 +79,6 @@ static void	get_flag(t_all *all, char **av)
 {
 	all->ps.flag = 0;
 	all->mlx.flag = 0;
-
 	if (av[1][0] == '-' && av[1][1]
 	&& ft_isalpha(av[1][1]))
 	{
@@ -118,6 +118,6 @@ void		init(t_all *all, int ac, char **av)
 	all->mlx.win = NULL;
 	all->mlx.a.ptr = NULL;
 	all->mlx.b.ptr = NULL;
-	all->ps.neibs = NULL;
+	all->ps.marks = NULL;
 	read_args_to_array(all, ac, av);
 }

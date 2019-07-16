@@ -6,51 +6,16 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/26 22:14:58 by nalexand          #+#    #+#             */
-/*   Updated: 2019/07/15 21:48:47 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/07/16 15:51:27 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-/*
-void	rewrite(t_list **lst, char *res, size_t mem, size_t ofset)
-{
-	if ((*lst)->next)
-		rewrite(&(*lst)->next, res, mem, ofset + (*lst)->next->content_size);
-	ft_memcpy(res + (mem - ofset), (char *)(*lst)->content, (*lst)->content_size);
-	ft_memdel((void **)&(*lst)->content);
-	ft_memdel((void **)lst);
-}
-
-void		print_lst(t_list **lst)
-{
-	size_t	mem;
-	t_list	*tmp;
-	char	*res;
-
-	if (*lst)
-	{
-		tmp = *lst;
-		mem = 0;
-		while (tmp)
-		{
-			mem += tmp->content_size;
-			tmp = tmp->next;
-		}
-		if ((res = (char *)ft_strnew(sizeof(char) * mem)))
-		{
-			rewrite(lst, res, mem, (*lst)->content_size);
-			ft_putstr(res);
-			ft_strdel(&res);
-		}
-	}
-}
-*/
-
 void	print_lst(t_list *lst)
 {
 	if (lst->next)
-		print_lst (lst->next);
+		print_lst(lst->next);
 	if (*(char *)lst->content == PA)
 		write(1, "pa\n", 3);
 	else if (*(char *)lst->content == PB)

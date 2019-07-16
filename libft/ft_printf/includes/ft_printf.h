@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/30 15:27:31 by nalexand          #+#    #+#             */
-/*   Updated: 2019/06/28 05:11:14 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/07/16 16:17:35 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,7 +137,8 @@ void					set_prc(t_res *res, int prc);
 void					set_width(t_res *res, t_ftask *ftask, char filler);
 void					set_zero(t_res *res, int width);
 
-t_res					pf_ltoa_base(unsigned long nbr, char base, t_ftask *ftask);
+t_res					pf_ltoa_base(unsigned long nbr,
+						char base, t_ftask *ftask);
 t_res					set_arg_digit(t_ftask *ftask, va_list *args);
 t_res					set_arg_string(t_ftask *ftask, va_list *args);
 t_res					solve_digit(t_ftask *ftask, long arg);

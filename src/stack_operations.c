@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/14 20:13:26 by nalexand          #+#    #+#             */
-/*   Updated: 2019/07/15 21:50:59 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/07/16 16:08:38 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	solve_operations(t_all *all, t_oprs oprs)
 		make_cmd(all, PA);
 }
 
-void get_double_rotation(int *a, int *b, int *rr)
+void	get_double_rotation(int *a, int *b, int *rr)
 {
 	if (*a && *b)
 	{
@@ -43,13 +43,13 @@ void get_double_rotation(int *a, int *b, int *rr)
 	}
 }
 
-int get_rotation(int *r, int *rr, int size, int adr, int dir)
+int		get_rotation(int *r, int *rr, int size, int adr)
 {
 	if (adr)
 	{
-		if ((*r = size - adr + dir) > size / 2)
+		if ((*r = size - adr) > size / 2)
 		{
-			*rr = adr - dir;
+			*rr = adr;
 			*r = 0;
 		}
 		return (1);
@@ -57,7 +57,7 @@ int get_rotation(int *r, int *rr, int size, int adr, int dir)
 	return (0);
 }
 
-void init_opers(t_oprs *oprs)
+void	init_opers(t_oprs *oprs)
 {
 	oprs->ra = 0;
 	oprs->rb = 0;

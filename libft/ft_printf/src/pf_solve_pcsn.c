@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/04 22:40:15 by nalexand          #+#    #+#             */
-/*   Updated: 2019/06/26 02:32:06 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/07/16 16:28:01 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,11 +115,13 @@ t_res	solve_noconv(t_ftask *ftask)
 
 t_res	set_arg_string(t_ftask *ftask, va_list *args)
 {
-	if ((ftask->type == 'c' && ftask->size.chr == 'l') || ftask->type == 'C')
+	if ((ftask->type == 'c' && ftask->size.chr == 'l')
+	|| ftask->type == 'C')
 		return (solve_uchar(ftask, va_arg(*args, wchar_t)));
 	else if (ftask->type == 'c')
 		return (solve_char(ftask, va_arg(*args, int)));
-	else if ((ftask->type == 's' && ftask->size.chr == 'l') || ftask->type == 'S')
+	else if ((ftask->type == 's' && ftask->size.chr == 'l')
+	|| ftask->type == 'S')
 		return (solve_ustr(ftask, va_arg(*args, wchar_t *)));
 	return (solve_str(ftask, va_arg(*args, char *)));
 }

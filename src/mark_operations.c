@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   neibrs_operations.c                                :+:      :+:    :+:   */
+/*   mark_operations.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/15 19:44:40 by nalexand          #+#    #+#             */
-/*   Updated: 2019/07/15 21:13:15 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/07/16 16:01:02 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	get_value_adr(int *arr, int value)
+int			get_value_adr(int *arr, int value)
 {
 	int		adr;
 
@@ -47,18 +47,6 @@ static void	sort(int *arr)
 	}
 }
 
-void	get_neibs(t_all *all, t_neibs *cur, int value)
-{
-	int		i;
-
-	i = 0;
-	while (all->ps.neibs[i]->value != value)
-		i++;
-	cur->down = all->ps.neibs[i]->down;
-	cur->up = all->ps.neibs[i]->up;
-	cur->value = all->ps.neibs[i]->value;
-}
-
 static void	set_color(int size, int *color, int i)
 {
 	int		delta;
@@ -72,29 +60,28 @@ static void	set_color(int size, int *color, int i)
 		*color = TOP_COLOR;
 }
 
-void	find_neibs(t_all *all)
+void		find_marks(t_all *all)
 {
 	int		*tmp_sort;
 	int		i;
 
 	if (!(tmp_sort = ft_memdup(all->ps.a, sizeof(int) * (all->ps.a[0]) + 1)))
 		push_swap_clear_exit(all, PS_MEM_ERR);
-	if (!(all->ps.neibs = (t_neibs **)ft_memalloc(sizeof(t_neibs *) * (all->ps.a[0] + 1))))
+	if (!(all->ps.marks = (t_mark **)ft_memalloc(sizeof(t_mark *)
+	* (all->ps.a[0] + 1))))
 	{
 		ft_memdel((void **)&tmp_sort);
 		push_swap_clear_exit(all, PS_MEM_ERR);
 	}
-	all->ps.neibs[all->ps.a[0]] = NULL;
+	all->ps.marks[all->ps.a[0]] = NULL;
 	sort(tmp_sort);
 	i = 0;
 	while (++i <= all->ps.a[0])
 	{
-		if (!(all->ps.neibs[i - 1] = (t_neibs *)malloc(sizeof(t_neibs))))
+		if (!(all->ps.marks[i - 1] = (t_mark *)malloc(sizeof(t_mark))))
 			push_swap_clear_exit(all, PS_MEM_ERR);
-		all->ps.neibs[i - 1]->value = tmp_sort[i];
-		all->ps.neibs[i - 1]->down = (i == 1) ? tmp_sort[tmp_sort[0]] : tmp_sort[i - 1];
-		all->ps.neibs[i - 1]->up = (i == tmp_sort[0]) ? tmp_sort[1] : tmp_sort[i + 1];
-		set_color(all->ps.a[0], &all->ps.neibs[i - 1]->color, i);
+		all->ps.marks[i - 1]->value = tmp_sort[i];
+		set_color(all->ps.a[0], &all->ps.marks[i - 1]->color, i);
 	}
 	ft_memdel((void **)&tmp_sort);
 }

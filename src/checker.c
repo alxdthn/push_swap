@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/24 18:15:03 by nalexand          #+#    #+#             */
-/*   Updated: 2019/07/15 22:14:26 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/07/16 15:57:05 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void	check_mode(t_all *all)
 		ft_printf("%{red}s\nOperations: %d\n", "KO", count);
 }
 
-static void		read_input(t_all *all)
+static void	read_input(t_all *all)
 {
 	t_list	*tmp;
 	char	*line;
@@ -59,11 +59,12 @@ int			main(int ac, char **av)
 
 	all.prog = CHECKER;
 	init(&all, ac, av);
+	all.is_print = 0;
 	check_matches(&all);
 	read_input(&all);
 	if (all.ps.flag)
 	{
-		find_neibs(&all);
+		find_marks(&all);
 		visualisation_init(&all);
 		render(&all, START);
 		mlx_loop(&all.mlx.ptr);

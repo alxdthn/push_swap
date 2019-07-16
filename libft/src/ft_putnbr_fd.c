@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 01:01:54 by nalexand          #+#    #+#             */
-/*   Updated: 2019/04/12 00:25:01 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/07/16 16:24:29 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	ft_putnbr_fd(int n, int fd)
 	if (n < 0)
 	{
 		n *= -1;
-		ft_putchar_fd('-', fd);
+		write(fd, "-", 1);
 	}
 	if (n > 9)
 		ft_putnbr_fd(n / 10, fd);

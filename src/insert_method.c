@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/14 20:08:37 by nalexand          #+#    #+#             */
-/*   Updated: 2019/07/15 22:56:00 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/07/16 16:08:18 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,45 +32,33 @@ static void	better_rotation(t_all *all, t_oprs *oprs, int adr_b)
 	int		dir;
 
 	init_opers(oprs);
-	get_rotation(&oprs->rb, &oprs->rrb, all->ps.b[0], adr_b, 0);
+	get_rotation(&oprs->rb, &oprs->rrb, all->ps.b[0], adr_b);
 	adr_a = get_place_to_put(all->ps.a, all->ps.b[adr_b]);
-	oprs->pa = get_rotation(&oprs->ra, &oprs->rra, all->ps.a[0], adr_a, 0);
+	oprs->pa = get_rotation(&oprs->ra, &oprs->rra, all->ps.a[0], adr_a);
 	get_double_rotation(&oprs->ra, &oprs->rb, &oprs->rr);
 	get_double_rotation(&oprs->rra, &oprs->rrb, &oprs->rrr);
 	oprs->count = oprs->ra + oprs->rb + oprs->rr
 	+ oprs->rra + oprs->rrb + oprs->rrr;
 }
 
-int	G_G = 0;
-
-static void rotate_to_finish(t_all *all)
+static void	rotate_to_finish(t_all *all)
 {
 	t_info		info;
 
 	get_info(&info, all->ps.a);
-	while (all->ps.a[1] != info.min_value)
+	while (all->ps.a[1] != info.max_value)
 	{
-		ft_printf("%d\n", G_G++);
 		if (info.min_adr > all->ps.a[0] / 2)
-		{
 			make_cmd(all, RA);
-		}
 		else
-		{
-			printf("RRA\n");
 			make_cmd(all, RRA);
-		}
 	}
-	ft_printf("ASSA");
 }
 
-void		insert_method(t_all *all)
+static void	pull_b_stack(t_all *all)
 {
-	t_oprs		oprs;
-	t_oprs		tmp_oprs;
-	t_info		info;
-	int			i;
 	int			delta;
+	t_info		info;
 
 	get_info(&info, all->ps.a);
 	delta = (info.min_value + info.max_value) / 2;
@@ -93,6 +81,16 @@ void		insert_method(t_all *all)
 			make_cmd(all, RA);
 		make_cmd(all, SA);
 	}
+}
+
+void		insert_method(t_all *all)
+{
+	t_oprs		oprs;
+	t_oprs		tmp_oprs;
+	t_info		info;
+	int			i;
+
+	pull_b_stack(all);
 	while (all->ps.b[0])
 	{
 		i = 0;
@@ -103,7 +101,6 @@ void		insert_method(t_all *all)
 			if (tmp_oprs.pa && tmp_oprs.count < oprs.count)
 				ft_memcpy(&oprs, &tmp_oprs, sizeof(t_oprs));
 		}
-		printf("%d\n", all->ps.b[0]);
 		solve_operations(all, oprs);
 	}
 	rotate_to_finish(all);

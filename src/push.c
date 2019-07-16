@@ -6,22 +6,27 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/26 04:35:02 by nalexand          #+#    #+#             */
-/*   Updated: 2019/07/15 22:04:21 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/07/16 14:47:13 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int		push(int *src, int *dst)
+void	push(int *src, int *dst, char cmd, char flag)
 {
 	if (src[0])
 	{
 		dst[0] += 1;
 		dst[dst[0]] = src[src[0]];
 		src[0] -= 1;
-		return (1);
+		if (flag)
+		{
+			if (cmd == PA)
+				write(1, "pa\n", 3);
+			else if (cmd == PB)
+				write(1, "pb\n", 3);
+		}
 	}
-	return (0);
 }
 
 char	read_push(t_task *task)

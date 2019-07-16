@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/24 18:13:31 by nalexand          #+#    #+#             */
-/*   Updated: 2019/07/15 22:10:43 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/07/16 16:08:47 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,9 @@
 # define RIGHT_BACKGROUND 0x1E1E1E
 # define POS_LINE_COLOR 0xC3C39D
 # define NEG_LINE_COLOR 0x8FBBD7
-# define TOP_COLOR 0xa8a8a8
-# define MID_COLOR 0x143885
-# define BOT_COLOR 0x851414
+# define TOP_COLOR 0xfdfdfd
+# define MID_COLOR 0x1c4fbb
+# define BOT_COLOR 0xb61b1b
 
 
 # define ESC 53
@@ -95,18 +95,16 @@ typedef struct	s_oprs
 	int			count;
 }				t_oprs;
 
-typedef struct	s_neibs
+typedef struct	s_mark
 {
 	int			value;
-	int			up;
-	int			down;
 	int			color;
-}				t_neibs;
+}				t_mark;
 
 typedef struct	s_ps
 {
 	t_list		*lst;
-	t_neibs		**neibs;
+	t_mark		**marks;
 	size_t		point;
 	char		*cmds;
 	size_t		commands_count;
@@ -129,6 +127,10 @@ typedef struct	s_mlx
 {
 	t_img		a;
 	t_img		b;
+	size_t		line_box_size;
+	size_t		line_box_width;
+	int			line_color;
+	int			bckg_color;
 	void		*ptr;
 	void		*win;
 	char		dir;
@@ -137,7 +139,7 @@ typedef struct	s_mlx
 	int			height;
 	int			elem_width;
 	int			elem_height;
-	int			bckg_color;
+	int			ofset;
 	char		flag;
 }				t_mlx;
 
@@ -146,12 +148,13 @@ typedef struct	s_all
 	t_ps		ps;
 	t_mlx		mlx;
 	char		prog;
+	char		is_print;
 }				t_all;
 
 void	init(t_all *all, int ac, char **av);
-int		push(int *src, int *dst);
-int		swap(int *arr);
-int		rotate(int *arr, char dir);
+void	push(int *src, int *dst, char cmd, char flag);
+void	swap(int *arr, char cmd, char flag);
+void	rotate(int *arr, char dir, char cmd, char flag);
 char	read_cmd(char *cmd,  size_t *ofset);
 char	read_push(t_task *task);
 char	read_swap(t_task *task);
@@ -174,10 +177,13 @@ void	make_cmd(t_all *all, char cmd);
 void	solve_operations(t_all *all, t_oprs oprs);
 void	get_double_rotation(int *a, int *b, int *rr);
 void	init_opers(t_oprs *oprs);
-int		get_rotation(int *r, int *rr, int size, int adr, int dir);
+int		get_rotation(int *r, int *rr, int size, int adr);
 
 int		get_value_adr(int *arr, int value);
-void	get_neibs(t_all *all, t_neibs *cur, int value);
-void	find_neibs(t_all *all);
+void	find_marks(t_all *all);
+
+int		deal_key(int key, t_all *all);
+int		loop_hook(t_all *all);
+int		key_press(int key, t_all *all);
 
 #endif
