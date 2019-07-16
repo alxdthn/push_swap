@@ -1,7 +1,8 @@
 */*.dSYM
 *.dSYM
 */obj
-push_swap*
+push_swap.a
+push_swap
 checker
 libft/ft_printf/obj
 libft/libft.a

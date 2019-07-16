@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/14 20:08:37 by nalexand          #+#    #+#             */
-/*   Updated: 2019/07/16 20:06:07 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/07/16 20:39:58 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,8 @@ static void	pull_b_stack(t_all *all)
 	}
 	if (!is_loop_sorted(all->ps.a, all->ps.info.min_adr))
 	{
-		if (all->ps.a[1] != all->ps.max_value && all->ps.a[1] != all->ps.min_value)
+		if (all->ps.a[1] != all->ps.max_value
+		&& all->ps.a[1] != all->ps.min_value)
 			make_cmd(all, RA);
 		make_cmd(all, SA);
 	}

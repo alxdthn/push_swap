@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/24 18:13:31 by nalexand          #+#    #+#             */
-/*   Updated: 2019/07/16 18:33:57 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/07/16 21:22:15 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,5 +186,7 @@ void			mark_better_sorted_section(t_all *all, int *arr);
 int				deal_key(int key, t_all *all);
 int				loop_hook(t_all *all);
 int				key_press(int key, t_all *all);
+void			read_ini(t_all *all);
+void			check_sizes(t_all *all);
 
 #endif

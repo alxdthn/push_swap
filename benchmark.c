@@ -1,16 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ps_checker.c                                       :+:      :+:    :+:   */
+/*   benchmark.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/13 15:45:07 by nalexand          #+#    #+#             */
-/*   Updated: 2019/07/16 16:30:37 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/07/16 20:20:03 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include "ft_printf.h"
 
 char	*get_cmd(char **av)
 {
@@ -27,7 +28,7 @@ char	*get_cmd(char **av)
 	return (cmd);
 }
 
-int		read_iput(char *cmd, int fd, char flag)
+int		read_input(char *cmd, int fd, char flag)
 {
 	size_t	i;
 	char	*line;
@@ -55,12 +56,15 @@ int		read_iput(char *cmd, int fd, char flag)
 
 int		main(int ac, char **av)
 {
-	int		count;
-	int		fd;
-	int		i;
-	int		bar;
-	char	*cmd;
-	char	flag;
+	int				count;
+	int				fd;
+	int				i;
+	int				bar;
+	char			*cmd;
+	char			flag;
+	unsigned long	global;
+	int				tests;
+
 
 	if (ac != 6)
 	{
@@ -76,6 +80,12 @@ int		main(int ac, char **av)
 	bar = ft_atoi(av[5]);
 	cmd = get_cmd(av);
 	count = 0;
+	global = 0;
+	tests = 0;
 	while (count < bar && i--)
-		count = read_iput(cmd, fd, flag);
+	{
+		count = read_input(cmd, fd, flag);
+		global += count;
+		ft_printf("%{gre}d\n", global / ++tests);
+	}
 }
