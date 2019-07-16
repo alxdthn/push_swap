@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/15 19:44:40 by nalexand          #+#    #+#             */
-/*   Updated: 2019/07/16 16:01:02 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/07/16 16:51:42 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,7 @@ int			get_value_adr(int *arr, int value)
 
 static void	sort(int *arr)
 {
-	size_t	i;
-	size_t	size;
+	int		i;
 	int		tmp;
 
 	i = 1;

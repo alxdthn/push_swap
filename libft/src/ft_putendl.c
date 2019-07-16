@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 00:34:46 by nalexand          #+#    #+#             */
-/*   Updated: 2019/07/16 16:21:50 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/07/16 16:32:28 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	ft_putendl(char const *s)
 
 	if (s && *s)
 	{
+		i = 0;
 		while (s[i])
 			i++;
 		write(1, s, i);

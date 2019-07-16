@@ -6,7 +6,7 @@
 #    By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/29 16:28:19 by nalexand          #+#    #+#              #
-#    Updated: 2019/07/16 15:52:51 by nalexand         ###   ########.fr        #
+#    Updated: 2019/07/16 16:32:54 by nalexand         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ MLX_LIB = -L /usr/local/lib/ -lmlx
 MLX_HEAD = -I /usr/local/include
 FRAMEWORK = -framework OpenGL -framework AppKit
 
-C_FLAGS = -g
+C_FLAGS = -g -Wall -Werror -Wextra
 HEADER = -I includes -I libft/includes -I libft/ft_printf/includes
 
 SRC_DIR = src/

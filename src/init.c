@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/27 01:29:14 by nalexand          #+#    #+#             */
-/*   Updated: 2019/07/16 15:55:12 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/07/16 16:33:09 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ static void	get_arr_from_args(t_all *all, int ac, char **av, int i)
 
 static void	read_args_to_array(t_all *all, int ac, char **av)
 {
-	size_t	i;
 	int		size;
 	int		arg_ofset;
 

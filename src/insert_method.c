@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/14 20:08:37 by nalexand          #+#    #+#             */
-/*   Updated: 2019/07/16 16:08:18 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/07/16 16:49:42 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ static int	get_place_to_put(int *arr, int value)
 static void	better_rotation(t_all *all, t_oprs *oprs, int adr_b)
 {
 	int		adr_a;
-	int		dir;
 
 	init_opers(oprs);
 	get_rotation(&oprs->rb, &oprs->rrb, all->ps.b[0], adr_b);
@@ -87,7 +86,6 @@ void		insert_method(t_all *all)
 {
 	t_oprs		oprs;
 	t_oprs		tmp_oprs;
-	t_info		info;
 	int			i;
 
 	pull_b_stack(all);

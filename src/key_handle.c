@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/16 15:11:09 by nalexand          #+#    #+#             */
-/*   Updated: 2019/07/16 15:45:48 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/07/16 16:51:09 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,6 @@ static void	get_back(char *res, char cmd)
 
 int			deal_key(int key, t_all *all)
 {
-	char	*cmd;
-
 	if (key == ESC)
 		push_swap_clear_exit(all, NULL);
 	else if (key == ENTER)
@@ -55,6 +53,7 @@ int			loop_hook(t_all *all)
 
 	if (!all->mlx.working)
 		return (0);
+	cmd = '\0';
 	if (all->mlx.dir && all->ps.cmds[all->ps.point])
 		cmd = all->ps.cmds[all->ps.point++];
 	else if (!all->mlx.dir && all->ps.point)

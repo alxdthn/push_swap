@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/28 02:08:39 by nalexand          #+#    #+#             */
-/*   Updated: 2019/07/13 19:18:37 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/07/16 16:47:53 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void		check_matches(t_all *all)
 {
-	size_t	i;
-	size_t	j;
+	int		i;
+	int		j;
 	int		value;
 
 	i = 1;

@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/26 22:14:58 by nalexand          #+#    #+#             */
-/*   Updated: 2019/07/16 15:51:27 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/07/16 16:47:24 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	print_arr(int *a, int *b)
 {
 	size_t	i;
 	size_t	j;
-	size_t	len;
+	int		len;
 
 	i = a[0];
 	j = b[0];

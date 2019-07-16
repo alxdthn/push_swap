@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/30 02:56:55 by nalexand          #+#    #+#             */
-/*   Updated: 2019/07/16 15:44:41 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/07/16 16:49:21 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ char		read_cmd(char *cmd, size_t *ofset)
 		(*ofset)++;
 		return (QUIT);
 	}
+	ret = '\0';
 	if (!get_action(cmd + *ofset, &task, ofset)
 		|| !get_stack(cmd + *ofset, &task, ofset))
 		return (0);
