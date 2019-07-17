@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/24 18:13:31 by nalexand          #+#    #+#             */
-/*   Updated: 2019/07/16 21:22:15 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/07/17 21:21:09 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,9 +91,7 @@ typedef struct	s_mark
 {
 	int			value;
 	int			color;
-	int			section_size;
-	int			section_adr;
-	int			is_section;
+	int			level;
 }				t_mark;
 
 typedef struct	s_ps
@@ -180,8 +178,8 @@ int				get_rotation(int *r, int *rr, int size, int adr);
 t_mark			get_value_mark(t_mark **marks, int value);
 void			init_marks_arr(t_all *all, int *arr);
 int				*get_presorted_arr(t_all *all, int *arr);
-void			set_color(t_mark **marks, int size);
-void			mark_better_sorted_section(t_all *all, int *arr);
+void			set_marks(t_mark **marks, int size);
+void			pull_b_stack(t_all *all);
 
 int				deal_key(int key, t_all *all);
 int				loop_hook(t_all *all);

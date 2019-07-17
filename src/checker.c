@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/24 18:15:03 by nalexand          #+#    #+#             */
-/*   Updated: 2019/07/16 21:20:57 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/07/17 21:12:11 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int			main(int ac, char **av)
 		read_ini(&all);
 		tmp_arr = get_presorted_arr(&all, all.ps.a);
 		init_marks_arr(&all, tmp_arr);
-		set_color(all.ps.marks, tmp_arr[0]);
+		set_marks(all.ps.marks, tmp_arr[0]);
 		ft_memdel((void **)&tmp_arr);
 		visualisation_init(&all);
 		render(&all, START);

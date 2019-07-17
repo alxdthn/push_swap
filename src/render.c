@@ -6,21 +6,11 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/16 15:13:55 by nalexand          #+#    #+#             */
-/*   Updated: 2019/07/16 16:15:40 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/07/17 17:23:13 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-static int	get_line_color(t_all *all, int value)
-{
-	int		i;
-
-	i = 0;
-	while (all->ps.marks[i]->value != value)
-		i++;
-	return (all->ps.marks[i]->color);
-}
 
 static void	init_box(t_all *all, int value)
 {
@@ -28,7 +18,7 @@ static void	init_box(t_all *all, int value)
 	all->mlx.line_box_width = all->mlx.elem_width * ABS(value);
 	all->mlx.ofset = (all->mlx.a.size_line - all->mlx.line_box_width) / 2 + 0.5;
 	if (value && all->mlx.flag)
-		all->mlx.line_color = get_line_color(all, value);
+		all->mlx.line_color = get_value_mark(all->ps.marks, value).color;
 	else
 		all->mlx.line_color = (value > 0) ? POS_LINE_COLOR : NEG_LINE_COLOR;
 }

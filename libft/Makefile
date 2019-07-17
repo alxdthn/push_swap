@@ -6,7 +6,7 @@
 #    By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/08 15:02:28 by nalexand          #+#    #+#              #
-#    Updated: 2019/06/30 02:24:06 by nalexand         ###   ########.fr        #
+#    Updated: 2019/07/17 20:44:28 by nalexand         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,7 @@ SRC_DIR = src/
 OBJ_DIR = obj/
 
 SRC =	ft_arraydel.c \
+		ft_satoi.c \
 		ft_atoi.c \
 		ft_btoa.c \
 		ft_bzero.c \

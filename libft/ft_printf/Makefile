@@ -6,7 +6,7 @@
 #    By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/11 16:58:18 by nalexand          #+#    #+#              #
-#    Updated: 2019/06/30 02:05:49 by nalexand         ###   ########.fr        #
+#    Updated: 2019/07/17 16:00:05 by nalexand         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,9 +45,9 @@ SRCS = $(addprefix $(SRC_DIR), $(SRC))
 
 OBJ = $(addprefix $(OBJ_DIR), $(patsubst %.c, %.o, $(SRC)))
 
-all: $(OBJ_DIR) $(NAME)
+all: $(NAME)
 
-$(NAME): $(OBJ)
+$(NAME): $(OBJ_DIR) $(OBJ)
 	ar rc $@ $(OBJ)
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c

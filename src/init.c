@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/27 01:29:14 by nalexand          #+#    #+#             */
-/*   Updated: 2019/07/16 20:10:50 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/07/17 20:46:38 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static int	get_arr_size(t_all *all, int ac, char **av, int i)
 			if (!(ft_isint(av[i] + j)))
 				push_swap_clear_exit(all, (all->prog == PUSH_SWAP)
 				? PS_ARG_ERR : CH_ARG_ERR);
-			j += ft_intlen(ft_atoi(av[i] + j));
+			ft_satoi(av[i], &j);
 			while (av[i][j] && av[i][j] == ' ')
 				j++;
 			size++;
@@ -37,7 +37,7 @@ static int	get_arr_size(t_all *all, int ac, char **av, int i)
 
 static void	get_arr_from_args(t_all *all, int ac, char **av, int i)
 {
-	int		j;
+	size_t		j;
 	int		k;
 
 	k = all->ps.a[0];
@@ -46,8 +46,7 @@ static void	get_arr_from_args(t_all *all, int ac, char **av, int i)
 		j = 0;
 		while (av[i][j])
 		{
-			all->ps.a[k] = ft_atoi(av[i] + j);
-			j += ft_intlen(all->ps.a[k]);
+			all->ps.a[k] = ft_satoi(av[i], &j);
 			while (av[i][j] && av[i][j] != '-'
 			&& av[i][j] != '+' && !ft_isdigit(av[i][j]))
 				j++;
@@ -61,7 +60,9 @@ static void	read_args_to_array(t_all *all, int ac, char **av)
 	int		size;
 	int		arg_ofset;
 
-	arg_ofset = ((int)all->ps.flag) ? 1 : 0;
+	arg_ofset = all->ps.flag;
+	if (arg_ofset && ac == 2)
+		push_swap_clear_exit(all, NULL);
 	size = get_arr_size(all, ac, av, arg_ofset);
 	all->ps.a = (int *)malloc(sizeof(int) * (size + 1));
 	all->ps.b = (int *)malloc(sizeof(int) * (size + 1));
@@ -104,9 +105,8 @@ void		init(t_all *all, int ac, char **av)
 	{
 		(all->prog == PUSH_SWAP) ? ft_putendl(PS_USAGE)
 		: ft_putendl(CH_USAGE);
-		exit(EXIT_SUCCESS);
+		exit(EXIT_FAILURE);
 	}
-	get_flag(all, av);
 	all->ps.commands_count = 0;
 	all->ps.point = 0;
 	all->ps.a = NULL;
@@ -118,5 +118,6 @@ void		init(t_all *all, int ac, char **av)
 	all->mlx.a.ptr = NULL;
 	all->mlx.b.ptr = NULL;
 	all->ps.marks = NULL;
+	get_flag(all, av);
 	read_args_to_array(all, ac, av);
 }

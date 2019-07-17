@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/15 19:44:40 by nalexand          #+#    #+#             */
-/*   Updated: 2019/07/16 20:00:57 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/07/17 21:21:24 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_mark		get_value_mark(t_mark **marks, int value)
 	return (*(marks)[i]);
 }
 
-void		set_color(t_mark **marks, int size)
+void		set_marks(t_mark **marks, int size)
 {
 	int		delta;
 	int		i;
@@ -36,11 +36,20 @@ void		set_color(t_mark **marks, int size)
 	while (i < size)
 	{
 		if (i < delta)
+		{
+			marks[i]->level = 1;
 			marks[i]->color = BOT_COLOR;
+		}
 		else if (i < delta * 2)
+		{
+			marks[i]->level = 2;
 			marks[i]->color = MID_COLOR;
+		}
 		else
+		{
+			marks[i]->level = 3;
 			marks[i]->color = TOP_COLOR;
+		}
 		i++;
 	}
 }
@@ -51,7 +60,7 @@ int			*get_presorted_arr(t_all *all, int *arr)
 	int		i;
 	int		tmp;
 
-	if (!(res = ft_memdup(arr, sizeof(int) * (arr[0]) + 1)))
+	if (!(res = ft_memdup(arr, sizeof(int) * (arr[0] + 1))))
 		push_swap_clear_exit(all, PS_MEM_ERR);
 	i = 1;
 	while (i < res[0])
@@ -86,6 +95,5 @@ void		init_marks_arr(t_all *all, int *arr)
 		if (!(all->ps.marks[i - 1] = (t_mark *)malloc(sizeof(t_mark))))
 			push_swap_clear_exit(all, PS_MEM_ERR);
 		all->ps.marks[i - 1]->value = arr[i];
-		all->ps.marks[i - 1]->is_section = 0;
 	}
 }

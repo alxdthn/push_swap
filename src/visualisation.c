@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/29 06:41:10 by nalexand          #+#    #+#             */
-/*   Updated: 2019/07/16 21:22:11 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/07/17 15:47:47 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,9 @@ static void	read_line(t_all *all, int fd, int *res, char *str)
 	push_swap_clear_exit(all, "ini file error!");
 }
 
-void	read_ini(t_all *all)
+void		read_ini(t_all *all)
 {
 	int		fd;
-	int		width;
-	int		height;
 
 	fd = open("push_swap.ini", O_RDONLY);
 	if (fd < 3)

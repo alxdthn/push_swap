@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/13 15:45:07 by nalexand          #+#    #+#             */
-/*   Updated: 2019/07/16 20:20:03 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/07/16 21:30:09 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ int		main(int ac, char **av)
 	char			flag;
 	unsigned long	global;
 	int				tests;
-
 
 	if (ac != 6)
 	{
