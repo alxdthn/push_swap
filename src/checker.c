@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/24 18:15:03 by nalexand          #+#    #+#             */
-/*   Updated: 2019/07/17 21:12:11 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/07/18 04:48:26 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ int			main(int ac, char **av)
 	t_all	all;
 	int		*tmp_arr;
 
+	ft_bzero(&all, sizeof(t_all));
 	all.prog = CHECKER;
 	init(&all, ac, av);
 	all.is_print = 0;

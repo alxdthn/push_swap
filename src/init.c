@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/27 01:29:14 by nalexand          #+#    #+#             */
-/*   Updated: 2019/07/18 04:01:26 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/07/18 05:30:23 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,17 +107,6 @@ void		init(t_all *all, int ac, char **av)
 		: ft_putendl(CH_USAGE);
 		exit(EXIT_FAILURE);
 	}
-	all->ps.commands_count = 0;
-	all->ps.point = 0;
-	all->ps.a = NULL;
-	all->ps.b = NULL;
-	all->ps.lst = NULL;
-	all->ps.cmds = NULL;
-	all->mlx.ptr = NULL;
-	all->mlx.win = NULL;
-	all->mlx.a.ptr = NULL;
-	all->mlx.b.ptr = NULL;
-	all->ps.marks = NULL;
 	get_flag(all, av);
 	read_args_to_array(all, ac, av);
 }

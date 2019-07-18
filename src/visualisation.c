@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/29 06:41:10 by nalexand          #+#    #+#             */
-/*   Updated: 2019/07/17 15:47:47 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/07/18 18:44:07 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,8 @@ static void	mlx_init_params(t_all *all)
 	all->mlx.b.data = (int *)mlx_get_data_addr(all->mlx.b.ptr,
 	&all->mlx.b.bpp, &all->mlx.b.size_line, &all->mlx.b.endian);
 	all->mlx.b.size_line /= 4;
+	all->mlx.logo.ptr = mlx_xpm_file_to_image(all->mlx.ptr,
+	"src/logo2.xpm", &all->mlx.logo.bpp, &all->mlx.logo.bpp);
 }
 
 void		visualisation_init(t_all *all)

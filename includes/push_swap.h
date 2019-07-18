@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/24 18:13:31 by nalexand          #+#    #+#             */
-/*   Updated: 2019/07/17 21:21:09 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/07/18 06:24:47 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@
 # define RR 15
 # define START 42
 # define ABS(x) ((x) > 0 ? (x) : -(x))
+# define LIMIT 10
 
 typedef struct	s_task
 {
@@ -123,6 +124,7 @@ typedef struct	s_mlx
 {
 	t_img		a;
 	t_img		b;
+	t_img		logo;
 	size_t		line_box_size;
 	size_t		line_box_width;
 	int			line_color;

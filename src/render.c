@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/16 15:13:55 by nalexand          #+#    #+#             */
-/*   Updated: 2019/07/17 17:23:13 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/07/18 18:56:09 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,31 +50,37 @@ static void	put_box(t_all *all, int value, ssize_t *i, int *data)
 	}
 }
 
+static void	put_logo(t_all *all)
+{
+	if (all->mlx.logo.ptr)
+		mlx_put_image_to_window(all->mlx.ptr,
+		all->mlx.win, all->mlx.logo.ptr, 10, 10);
+}
+
 void		render(t_all *all, char cmd)
 {
 	ssize_t	i;
 	int		j;
 
-	if (cmd > 9 || cmd == SA || cmd == RA || cmd == RRA)
+	if ((cmd > 9 || cmd == SA || cmd == RA || cmd == RRA) && !(j = 0))
 	{
-		j = 0;
 		i = all->mlx.a.size_line * all->mlx.height - 1;
 		all->mlx.bckg_color = LEFT_BACKGROUND;
 		while (i >= 0)
 			put_box(all, (j < all->ps.a[0])
-			? all->ps.a[j++ + 1] : 0, &i, all->mlx.a.data);
+			? all->ps.a[++j] : 0, &i, all->mlx.a.data);
 		mlx_put_image_to_window(all->mlx.ptr,
 		all->mlx.win, all->mlx.a.ptr, 0, 0);
 	}
-	if (cmd > 9 || cmd == SB || cmd == RB || cmd == RRB)
+	if ((cmd > 9 || cmd == SB || cmd == RB || cmd == RRB) && !(j = 0))
 	{
-		j = 0;
 		i = all->mlx.b.size_line * all->mlx.height - 1;
 		all->mlx.bckg_color = RIGHT_BACKGROUND;
 		while (i >= 0)
 			put_box(all, (j < all->ps.b[0])
-			? all->ps.b[j++ + 1] : 0, &i, all->mlx.b.data);
+			? all->ps.b[++j] : 0, &i, all->mlx.b.data);
 		mlx_put_image_to_window(all->mlx.ptr, all->mlx.win,
 		all->mlx.b.ptr, all->mlx.width / 2, 0);
 	}
+	put_logo(all);
 }

@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/25 18:06:49 by nalexand          #+#    #+#             */
-/*   Updated: 2019/07/17 21:11:50 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/07/18 05:35:44 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int			main(int ac, char **av)
 {
 	t_all	all;
 
+	ft_bzero(&all, sizeof(t_all));
 	all.prog = PUSH_SWAP;
 	init(&all, ac, av);
 	all.is_print = 1;
