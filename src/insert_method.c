@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/14 20:08:37 by nalexand          #+#    #+#             */
-/*   Updated: 2019/07/17 23:00:31 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/07/18 04:00:39 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,24 +26,13 @@ static int	get_place_to_put(int *arr, int value)
 	return (0);
 }
 
-static int	get_level(t_mark **marks, int *arr, int *level)
-{
-	int		i;
-
-	i = 0;
-	while (++i <= arr[0])
-	{
-		if (get_value_mark(marks, arr[i]).level == *level)
-			return (1);
-	}
-	return (0);
-}
-
 static void	better_rotation(t_all *all, t_oprs *oprs, int adr_b, int *level)
 {
 	int		adr_a;
+	int		i;
 
-	if (all->ps.size <= 10 || get_value_mark(all->ps.marks, all->ps.b[adr_b]).level == *level)
+	if (all->ps.size <= 10
+	|| get_value_mark(all->ps.marks, all->ps.b[adr_b]).level == *level)
 	{
 		init_opers(oprs);
 		get_rotation(&oprs->rb, &oprs->rrb, all->ps.b[0], adr_b);
@@ -56,8 +45,11 @@ static void	better_rotation(t_all *all, t_oprs *oprs, int adr_b, int *level)
 	}
 	else
 		oprs->count = INT32_MAX;
-	if (!(get_level(all->ps.marks, all->ps.b, level)))
-		(*level)--;
+	i = 0;
+	while (++i <= all->ps.b[0])
+		if (get_value_mark(all->ps.marks, all->ps.b[i]).level == *level)
+			return ;
+	(*level)--;
 }
 
 static void	rotate_to_finish(t_all *all)

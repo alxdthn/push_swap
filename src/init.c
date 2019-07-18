@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/27 01:29:14 by nalexand          #+#    #+#             */
-/*   Updated: 2019/07/17 20:46:38 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/07/18 04:01:26 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static int	get_arr_size(t_all *all, int ac, char **av, int i)
 
 static void	get_arr_from_args(t_all *all, int ac, char **av, int i)
 {
-	size_t		j;
+	size_t	j;
 	int		k;
 
 	k = all->ps.a[0];

@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/17 17:56:17 by nalexand          #+#    #+#             */
-/*   Updated: 2019/07/17 22:23:09 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/07/18 04:01:34 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ static void	delta_presort(t_all *all)
 		else
 		{
 			make_cmd(all, PB);
-			if (get_value_mark(all->ps.marks, all->ps.b[all->ps.b[0]]).level == 2)
+			if (get_value_mark(all->ps.marks,
+			all->ps.b[all->ps.b[0]]).level == 2)
 				make_cmd(all, RB);
 		}
 		get_info(&all->ps.info, all->ps.a);
