@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/14 19:59:11 by nalexand          #+#    #+#             */
-/*   Updated: 2019/07/16 15:50:32 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/07/19 17:53:42 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,15 +32,15 @@ void		handle_mode(t_all *all)
 	char	*line;
 	size_t	count;
 
-	all->is_print = 0;
-	ft_putendl("Welcome to Handle mode!");
+	all->u.flags.print_cmds = 0;
+	ft_putendl(SALUT);
 	print_arr(all->ps.a, all->ps.b);
 	tmp = NULL;
 	while (42)
 	{
 		ret = get_next_line(0, &line);
 		if (ret < 0)
-			push_swap_clear_exit(all, PS_INPUT_ERR);
+			all->exit_function(all, ERROR);
 		count = get_cmd(all, &line);
 		tmp = all->ps.lst;
 		solve_and_print(all, tmp, count);

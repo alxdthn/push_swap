@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/15 19:44:40 by nalexand          #+#    #+#             */
-/*   Updated: 2019/07/17 21:21:24 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/07/19 17:52:53 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int			*get_presorted_arr(t_all *all, int *arr)
 	int		tmp;
 
 	if (!(res = ft_memdup(arr, sizeof(int) * (arr[0] + 1))))
-		push_swap_clear_exit(all, PS_MEM_ERR);
+		all->exit_function(all, ERROR);
 	i = 1;
 	while (i < res[0])
 	{
@@ -86,14 +86,14 @@ void		init_marks_arr(t_all *all, int *arr)
 	* (all->ps.a[0] + 1))))
 	{
 		ft_memdel((void **)&arr);
-		push_swap_clear_exit(all, PS_MEM_ERR);
+		all->exit_function(all, ERROR);
 	}
 	all->ps.marks[all->ps.a[0]] = NULL;
 	i = 0;
 	while (++i <= arr[0])
 	{
 		if (!(all->ps.marks[i - 1] = (t_mark *)malloc(sizeof(t_mark))))
-			push_swap_clear_exit(all, PS_MEM_ERR);
+			all->exit_function(all, ERROR);
 		all->ps.marks[i - 1]->value = arr[i];
 	}
 }

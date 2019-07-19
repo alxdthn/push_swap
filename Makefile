@@ -6,7 +6,7 @@
 #    By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/29 16:28:19 by nalexand          #+#    #+#              #
-#    Updated: 2019/07/17 22:36:30 by nalexand         ###   ########.fr        #
+#    Updated: 2019/07/19 17:57:35 by nalexand         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ MLX_LIB = -L /usr/local/lib/ -lmlx
 MLX_HEAD = -I /usr/local/include
 FRAMEWORK = -framework OpenGL -framework AppKit
 
-C_FLAGS = -g
+C_FLAGS = -g -Wall -Werror -Wextra
 HEADER = -I includes -I libft/includes -I libft/ft_printf/includes
 
 SRC_DIR = src/
@@ -33,18 +33,19 @@ PS_SRC =	push_swap.c \
 			handle_mode.c \
 			insert_method.c \
 			pull_b.c \
-			stack_operations.c
+			stack_operations.c \
+			push_swap_clear_exit.c
 CH_SRC =	checker.c \
 			visualisation.c \
 			key_handle.c \
-			render.c
+			render.c \
+			checker_clear_exit.c
 SRC =		init.c \
 			process_commands.c \
 			is_sorted.c \
 			push.c \
 			swap.c \
 			rotate.c \
-			clear_exit.c \
 			print.c \
 			check_matches.c \
 			mark_operations.c \
@@ -58,7 +59,7 @@ CH_OBJ = $(addprefix $(OBJ_DIR), $(patsubst %.c, %.o, $(CH_SRC)))
 all: $(OBJ_DIR) $(PS) $(CH)
 
 $(PS): $(LIBFT) $(FTPRINTF) $(LIB) $(PS_LIB)
-	gcc $(C_FLAGS) -o $@ $(LIB) $(LIBFT) $(FTPRINTF) $(PS_LIB) $(HEADER) $(MLX_HEAD) $(FRAMEWORK) $(MLX_LIB)
+	gcc $(C_FLAGS) -o $@ $(LIB) $(LIBFT) $(FTPRINTF) $(PS_LIB) $(HEADER)
 $(CH): $(LIBFT) $(FTPRINTF) $(LIB) $(CH_LIB) 
 	gcc $(C_FLAGS) -o $@ $(LIB) $(LIBFT) $(FTPRINTF) $(CH_LIB) $(HEADER) $(MLX_HEAD) $(FRAMEWORK) $(MLX_LIB)
 

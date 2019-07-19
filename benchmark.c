@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/13 15:45:07 by nalexand          #+#    #+#             */
-/*   Updated: 2019/07/16 21:30:09 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/07/19 17:56:24 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	*get_cmd(char **av)
 	ft_strdel(&tmp);
 	tmp = ft_strjoin(cmd, av[3]);
 	ft_strdel(&cmd);
-	cmd = ft_strjoin(tmp, "; ./push_swap $ARG | ./checker $ARG >> log.txt; echo $ARG >> log.txt");
+	cmd = ft_strjoin(tmp, "; ./push_swap $ARG | ./checker -g $ARG >> log.txt; echo $ARG >> log.txt");
 	ft_strdel(&tmp);
 	return (cmd);
 }

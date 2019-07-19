@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/29 06:41:10 by nalexand          #+#    #+#             */
-/*   Updated: 2019/07/18 18:44:07 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/07/19 17:54:23 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,16 @@
 void		check_sizes(t_all *all)
 {
 	get_info(&all->ps.info, all->ps.a);
-	if (all->ps.flag && all->ps.a[0] > 1275)
+	if (all->u.flags.visu && all->ps.a[0] > 1275)
 	{
 		ft_putendl("checker: For visualisation mode maximum 1275 values");
-		all->ps.flag = 0;
+		all->u.flags.visu = 0;
 	}
-	if (all->ps.flag && (all->ps.info.max_value > 1275
+	if (all->u.flags.visu && (all->ps.info.max_value > 1275
 	|| all->ps.info.min_value < -1275))
 	{
 		ft_putendl("checker: For visualisation mode max value = 1275");
-		all->ps.flag = 0;
+		all->u.flags.visu = 0;
 	}
 }
 
@@ -35,6 +35,8 @@ static void	read_line(t_all *all, int fd, int *res, char *str)
 	line = NULL;
 	if (get_next_line(fd, &line))
 	{
+		if (!line)
+			all->exit_function(all, ERROR);
 		if (!ft_strncmp(line, str, ft_strlen(str)))
 		{
 			if (ft_isint(line + ft_strlen(str)))
@@ -47,7 +49,7 @@ static void	read_line(t_all *all, int fd, int *res, char *str)
 	}
 	if (line)
 		ft_strdel(&line);
-	push_swap_clear_exit(all, "ini file error!");
+	all->exit_function(all, "ini file error!");
 }
 
 void		read_ini(t_all *all)
@@ -56,17 +58,22 @@ void		read_ini(t_all *all)
 
 	fd = open("push_swap.ini", O_RDONLY);
 	if (fd < 3)
-		push_swap_clear_exit(all, "ini file error!");
-	read_line(all, fd, &all->mlx.width, "width: ");
-	read_line(all, fd, &all->mlx.height, "height: ");
-	if (all->mlx.width < 300 || all->mlx.height < 300
-	|| all->mlx.width > 3000 || all->mlx.height > 3000)
-		push_swap_clear_exit(all, "resolution error!");
+	{
+		all->mlx.width = 1000;
+		all->mlx.height = 500;
+	}
+	else
+	{
+		read_line(all, fd, &all->mlx.width, "width: ");
+		read_line(all, fd, &all->mlx.height, "height: ");
+		if (all->mlx.width < 300 || all->mlx.height < 300
+		|| all->mlx.width > 3000 || all->mlx.height > 3000)
+			all->exit_function(all, "resolution error!");
+	}
 }
 
 static void	mlx_init_params(t_all *all)
 {
-	all->mlx.working = 0;
 	all->mlx.dir = 1;
 	all->mlx.ptr = mlx_init();
 	all->mlx.win = mlx_new_window(all->mlx.ptr,

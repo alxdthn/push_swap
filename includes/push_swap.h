@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/24 18:13:31 by nalexand          #+#    #+#             */
-/*   Updated: 2019/07/18 06:24:47 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/07/19 17:56:54 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,8 @@
 # include "ft_printf.h"
 # include <mlx.h>
 # define PS_USAGE		"usage: push_swap [-h] [array of non-repeat ints]"
-# define CH_USAGE		"usage: checker [-v] [array of non-repeat ints]w"
-# define PS_MEM_ERR		"push_swap: Mem alocate failture!"
-# define CH_MEM_ERR		"checker: Mem alocate failture!"
-# define PS_ARG_ERR		"push_swap: Invalid argument!"
-# define CH_ARG_ERR		"checker: Invalid argument!"
-# define PS_MATCH_ERR	"push_swap: Matches forbidden!"
-# define CH_MATCH_ERR	"checker: Matches forbidden!"
-# define PS_CMD_ERR		"push_swap: Invalid command!"
-# define CH_CMD_ERR		"checker: Invalid command!"
-# define PS_FLAG_ERR	"push_swap: Unknown flag"
-# define CH_FLAG_ERR	"checker: Unknown flag"
-# define PS_INPUT_ERR	"push_swap: Uncknown input error"
-# define CH_INPUT_ERR	"checker: Uncknown input error"
+# define CH_USAGE		"usage: checker [-vg] [array of non-repeat ints]"
+# define ERROR			"Error"
 # define SALUT			"push_swap: Welcome to handle mode"
 # define LEFT_BACKGROUND 0x252526
 # define RIGHT_BACKGROUND 0x1E1E1E
@@ -105,7 +94,6 @@ typedef struct	s_ps
 	size_t		commands_count;
 	int			*a;
 	int			*b;
-	char		flag;
 	int			size;
 	int			max_value;
 	int			min_value;
@@ -138,26 +126,42 @@ typedef struct	s_mlx
 	int			elem_width;
 	int			elem_height;
 	int			ofset;
-	char		flag;
 }				t_mlx;
+
+typedef struct	s_flgs
+{
+	char		print_cmds : 1;
+	char		visu : 1;
+	char		good_out : 1;
+	char		handle : 1;
+	char		rus : 1;
+}				t_flgs;
+
+typedef union	u_uniflg
+{
+	t_flgs		flags;
+	char		is_flag;
+}				t_uniflg;
 
 typedef struct	s_all
 {
 	t_ps		ps;
 	t_mlx		mlx;
+	t_uniflg	u;
+	void		(*exit_function)(struct s_all *, char *);
 	char		prog;
-	char		is_print;
 }				t_all;
 
 void			init(t_all *all, int ac, char **av);
 void			push(int *src, int *dst, char cmd, char flag);
 void			swap(int *arr, char cmd, char flag);
 void			rotate(int *arr, char dir, char cmd, char flag);
-char			read_cmd(char *cmd, size_t *ofset);
+char			read_cmd(t_all *all, char *cmd, size_t *ofset);
 char			read_push(t_task *task);
 char			read_swap(t_task *task);
 char			read_rotate(t_task *task);
 void			push_swap_clear_exit(t_all *all, char *message);
+void			checker_clear_exit(t_all *all, char *message);
 void			print_arr(int *a, int *b);
 int				is_sorted(int *arr);
 int				is_loop_sorted(int *arr, int adr);
@@ -174,7 +178,6 @@ void			hard_insert_method(t_all *all);
 void			make_cmd(t_all *all, char cmd);
 void			solve_operations(t_all *all, t_oprs oprs);
 void			get_double_rotation(int *a, int *b, int *rr);
-void			init_opers(t_oprs *oprs);
 int				get_rotation(int *r, int *rr, int size, int adr);
 
 t_mark			get_value_mark(t_mark **marks, int value);

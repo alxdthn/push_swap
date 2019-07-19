@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/16 15:11:09 by nalexand          #+#    #+#             */
-/*   Updated: 2019/07/16 16:51:09 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/07/19 17:54:49 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static void	get_back(char *res, char cmd)
 int			deal_key(int key, t_all *all)
 {
 	if (key == ESC)
-		push_swap_clear_exit(all, NULL);
+		all->exit_function(all, NULL);
 	else if (key == ENTER)
 		all->mlx.working = (all->mlx.working) ? 0 : 1;
 	else if (key == UP)

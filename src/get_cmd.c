@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/30 02:56:55 by nalexand          #+#    #+#             */
-/*   Updated: 2019/07/16 16:49:21 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/07/19 17:53:15 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static int	get_stack(char *cmd, t_task *task, size_t *ofset)
 	return (task->is_valid = 0);
 }
 
-char		read_cmd(char *cmd, size_t *ofset)
+char		read_cmd(t_all *all, char *cmd, size_t *ofset)
 {
 	t_task	task;
 	char	ret;
@@ -58,6 +58,8 @@ char		read_cmd(char *cmd, size_t *ofset)
 	if (*cmd == 'q')
 	{
 		(*ofset)++;
+		if (all->prog == CHECKER)
+			return (0);
 		return (QUIT);
 	}
 	ret = '\0';
@@ -83,15 +85,15 @@ size_t		get_cmd(t_all *all, char **line)
 	ret = 0;
 	while ((*line)[ofset])
 	{
-		if (!(cmd = read_cmd((*line), &ofset)))
-			push_swap_clear_exit(all, CH_CMD_ERR);
+		if (!(cmd = read_cmd(all, *line, &ofset)))
+			all->exit_function(all, ERROR);
 		ft_lstadd(&all->ps.lst, ft_lstnew(&cmd, sizeof(char)));
-		ret++;
 		if (!all->ps.lst)
 		{
 			ft_strdel(line);
-			push_swap_clear_exit(all, PS_MEM_ERR);
+			all->exit_function(all, ERROR);
 		}
+		ret++;
 		while ((*line)[ofset] == ' ')
 			ofset++;
 	}

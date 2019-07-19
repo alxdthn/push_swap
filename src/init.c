@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/27 01:29:14 by nalexand          #+#    #+#             */
-/*   Updated: 2019/07/18 05:30:23 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/07/19 17:44:19 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,7 @@ static int	get_arr_size(t_all *all, int ac, char **av, int i)
 		while (av[i][j])
 		{
 			if (!(ft_isint(av[i] + j)))
-				push_swap_clear_exit(all, (all->prog == PUSH_SWAP)
-				? PS_ARG_ERR : CH_ARG_ERR);
+				all->exit_function(all, ERROR);
 			ft_satoi(av[i], &j);
 			while (av[i][j] && av[i][j] == ' ')
 				j++;
@@ -60,15 +59,14 @@ static void	read_args_to_array(t_all *all, int ac, char **av)
 	int		size;
 	int		arg_ofset;
 
-	arg_ofset = all->ps.flag;
+	arg_ofset = (all->u.is_flag) ? 1 : 0;
 	if (arg_ofset && ac == 2)
-		push_swap_clear_exit(all, NULL);
+		all->exit_function(all, NULL);
 	size = get_arr_size(all, ac, av, arg_ofset);
 	all->ps.a = (int *)malloc(sizeof(int) * (size + 1));
 	all->ps.b = (int *)malloc(sizeof(int) * (size + 1));
 	if (!all->ps.a || !all->ps.b)
-		push_swap_clear_exit(all, (all->prog == PUSH_SWAP)
-		? PS_MEM_ERR : CH_MEM_ERR);
+		all->exit_function(all, ERROR);
 	all->ps.a[0] = size;
 	all->ps.b[0] = 0;
 	get_arr_from_args(all, ac, av, arg_ofset);
@@ -77,25 +75,22 @@ static void	read_args_to_array(t_all *all, int ac, char **av)
 
 static void	get_flag(t_all *all, char **av)
 {
-	all->ps.flag = 0;
-	all->mlx.flag = 0;
 	if (av[1][0] == '-' && av[1][1]
 	&& ft_isalpha(av[1][1]))
 	{
-		if (ft_strequ(av[1], "-h") && all->prog == PUSH_SWAP)
-			all->ps.flag = 1;
-		else if (ft_strequ(av[1], "-v") && all->prog == CHECKER)
-			all->ps.flag = 1;
-		else if (ft_strequ(av[1], "-vrus") && all->prog == CHECKER)
+		if (ft_strnequ(av[1], "-h", 3) && all->prog == PUSH_SWAP)
+			all->u.flags.handle = 1;
+		else if (ft_strnequ(av[1], "-v", 3) && all->prog == CHECKER)
+			all->u.flags.visu = 1;
+		else if (ft_strnequ(av[1], "-vrus", 6) && all->prog == CHECKER)
 		{
-			all->mlx.flag = 1;
-			all->ps.flag = 1;
+			all->u.flags.visu = 1;
+			all->u.flags.rus = 1;
 		}
+		else if (ft_strnequ(av[1], "-g", 3) && all->prog == CHECKER)
+			all->u.flags.good_out = 1;
 		else
-		{
-			push_swap_clear_exit(all, (all->prog == PUSH_SWAP)
-			? PS_FLAG_ERR : CH_FLAG_ERR);
-		}
+			all->exit_function(all, ERROR);
 	}
 }
 

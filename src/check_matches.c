@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/28 02:08:39 by nalexand          #+#    #+#             */
-/*   Updated: 2019/07/16 16:47:53 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/07/19 17:52:30 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,7 @@ void		check_matches(t_all *all)
 		while (j < all->ps.a[0])
 		{
 			if (value == all->ps.a[j + 1])
-				push_swap_clear_exit(all, (all->prog == PUSH_SWAP)
-				? PS_MATCH_ERR : CH_MATCH_ERR);
+				all->exit_function(all, ERROR);
 			j++;
 		}
 		i++;

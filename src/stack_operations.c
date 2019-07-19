@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/14 20:13:26 by nalexand          #+#    #+#             */
-/*   Updated: 2019/07/16 16:08:38 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/07/19 17:46:52 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,15 +55,4 @@ int		get_rotation(int *r, int *rr, int size, int adr)
 		return (1);
 	}
 	return (0);
-}
-
-void	init_opers(t_oprs *oprs)
-{
-	oprs->ra = 0;
-	oprs->rb = 0;
-	oprs->rr = 0;
-	oprs->rra = 0;
-	oprs->rrb = 0;
-	oprs->rrr = 0;
-	oprs->pa = 0;
 }

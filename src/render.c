@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/16 15:13:55 by nalexand          #+#    #+#             */
-/*   Updated: 2019/07/18 18:56:09 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/07/19 17:48:01 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void	init_box(t_all *all, int value)
 	all->mlx.line_box_size = all->mlx.a.size_line * all->mlx.elem_height;
 	all->mlx.line_box_width = all->mlx.elem_width * ABS(value);
 	all->mlx.ofset = (all->mlx.a.size_line - all->mlx.line_box_width) / 2 + 0.5;
-	if (value && all->mlx.flag)
+	if (value && all->u.flags.rus)
 		all->mlx.line_color = get_value_mark(all->ps.marks, value).color;
 	else
 		all->mlx.line_color = (value > 0) ? POS_LINE_COLOR : NEG_LINE_COLOR;

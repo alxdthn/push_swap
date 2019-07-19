@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/24 18:15:03 by nalexand          #+#    #+#             */
-/*   Updated: 2019/07/18 04:48:26 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/07/19 17:54:11 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,20 @@ static void	check_mode(t_all *all)
 		make_cmd(all, all->ps.cmds[all->ps.point++]);
 		count++;
 	}
-	if (!all->ps.b[0] && is_sorted(all->ps.a))
-		ft_printf("%{gre}s\nOperations: %d\n", "OK", count);
+	if (all->u.flags.good_out)
+	{
+		if (!all->ps.b[0] && is_sorted(all->ps.a))
+			ft_printf("%{gre}s\nOperations: %d\n", "OK", count);
+		else
+			ft_printf("%{red}s\nOperations: %d\n", "KO", count);
+	}
 	else
-		ft_printf("%{red}s\nOperations: %d\n", "KO", count);
+	{
+		if (!all->ps.b[0] && is_sorted(all->ps.a))
+			ft_putendl("OK");
+		else
+			ft_putendl("KO");
+	}
 }
 
 static void	read_input(t_all *all)
@@ -38,12 +48,14 @@ static void	read_input(t_all *all)
 	count = 0;
 	while ((ret = get_next_line(0, &line)))
 	{
+		if (!line)
+			all->exit_function(all, ERROR);
 		if (ret < 0)
-			push_swap_clear_exit(all, CH_INPUT_ERR);
+			all->exit_function(all, ERROR);
 		count += get_cmd(all, &line);
 	}
 	if (!(all->ps.cmds = (char *)malloc(sizeof(char) * (count + 1))))
-		push_swap_clear_exit(all, CH_MEM_ERR);
+		all->exit_function(all, ERROR);
 	all->ps.cmds[count] = 0;
 	tmp = all->ps.lst;
 	while (tmp)
@@ -60,12 +72,12 @@ int			main(int ac, char **av)
 
 	ft_bzero(&all, sizeof(t_all));
 	all.prog = CHECKER;
+	all.exit_function = &checker_clear_exit;
 	init(&all, ac, av);
-	all.is_print = 0;
 	check_matches(&all);
 	read_input(&all);
 	check_sizes(&all);
-	if (all.ps.flag)
+	if (all.u.flags.visu)
 	{
 		read_ini(&all);
 		tmp_arr = get_presorted_arr(&all, all.ps.a);
@@ -78,5 +90,6 @@ int			main(int ac, char **av)
 	}
 	else
 		check_mode(&all);
+	all.exit_function(&all, NULL);
 	return (0);
 }

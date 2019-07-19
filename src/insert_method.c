@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/14 20:08:37 by nalexand          #+#    #+#             */
-/*   Updated: 2019/07/18 18:37:44 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/07/19 18:04:50 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void	better_rotation(t_all *all, t_oprs *oprs, int adr_b, int *level)
 	if (all->ps.size <= LIMIT
 	|| get_value_mark(all->ps.marks, all->ps.b[adr_b]).level == *level)
 	{
-		init_opers(oprs);
+		ft_memset(oprs, 0, sizeof(t_oprs));
 		get_rotation(&oprs->rb, &oprs->rrb, all->ps.b[0], adr_b);
 		adr_a = get_place_to_put(all->ps.a, all->ps.b[adr_b]);
 		oprs->pa = get_rotation(&oprs->ra, &oprs->rra, all->ps.a[0], adr_a);
@@ -72,6 +72,8 @@ void		insert_method(t_all *all)
 	int			level;
 
 	pull_b_stack(all);
+	ft_bzero(&oprs, sizeof(t_oprs));
+	ft_bzero(&tmp_oprs, sizeof(t_oprs));
 	level = 1;
 	while (all->ps.b[0])
 	{
