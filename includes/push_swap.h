@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/24 18:13:31 by nalexand          #+#    #+#             */
-/*   Updated: 2019/07/19 17:56:54 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/07/19 20:20:18 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,8 @@
 # include "libft.h"
 # include "ft_printf.h"
 # include <mlx.h>
-# define PS_USAGE		"usage: push_swap [-h] [array of non-repeat ints]"
-# define CH_USAGE		"usage: checker [-vg] [array of non-repeat ints]"
-# define ERROR			"Error"
-# define SALUT			"push_swap: Welcome to handle mode"
+# define ERROR	"Error"
+# define SALUT	"push_swap: Welcome to handle mode"
 # define LEFT_BACKGROUND 0x252526
 # define RIGHT_BACKGROUND 0x1E1E1E
 # define POS_LINE_COLOR 0xC3C39D

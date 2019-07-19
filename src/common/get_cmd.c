@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/30 02:56:55 by nalexand          #+#    #+#             */
-/*   Updated: 2019/07/19 17:53:15 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/07/19 20:32:02 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ size_t		get_cmd(t_all *all, char **line)
 		if (!(cmd = read_cmd(all, *line, &ofset)))
 			all->exit_function(all, ERROR);
 		ft_lstadd(&all->ps.lst, ft_lstnew(&cmd, sizeof(char)));
-		if (!all->ps.lst)
+		if (!all->ps.lst || (all->prog == CHECKER && (*line)[ofset]))
 		{
 			ft_strdel(line);
 			all->exit_function(all, ERROR);

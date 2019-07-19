@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/27 01:29:14 by nalexand          #+#    #+#             */
-/*   Updated: 2019/07/19 17:44:19 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/07/19 20:20:42 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,11 +97,7 @@ static void	get_flag(t_all *all, char **av)
 void		init(t_all *all, int ac, char **av)
 {
 	if (ac < 2)
-	{
-		(all->prog == PUSH_SWAP) ? ft_putendl(PS_USAGE)
-		: ft_putendl(CH_USAGE);
-		exit(EXIT_FAILURE);
-	}
+		exit(EXIT_SUCCESS);
 	get_flag(all, av);
 	read_args_to_array(all, ac, av);
 }
