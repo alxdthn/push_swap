@@ -6,12 +6,12 @@
 #    By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/11 16:58:18 by nalexand          #+#    #+#              #
-#    Updated: 2019/07/17 16:00:05 by nalexand         ###   ########.fr        #
+#    Updated: 2019/07/19 20:35:00 by nalexand         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libftprintf.a
-C_FLAGS = -g -Wall -Werror -Wextra
+C_FLAGS = -Wall -Werror -Wextra
 HEADER = -I includes -I ../includes
 
 SRC_DIR = src/
