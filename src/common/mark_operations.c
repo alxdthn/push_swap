@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/15 19:44:40 by nalexand          #+#    #+#             */
-/*   Updated: 2019/07/19 17:52:53 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/07/20 15:06:41 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void		set_marks(t_mark **marks, int size)
 			marks[i]->level = 3;
 			marks[i]->color = TOP_COLOR;
 		}
-		i++;
+		++i;
 	}
 }
 
