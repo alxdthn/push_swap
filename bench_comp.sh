@@ -1,1 +1,1 @@
-gcc -o bench benchmark.c -I libft/includes -I libft/ft_printf/includes/ libft/libft.a libft/ft_printf/libftprintf.a
+gcc -o bench benchmark.c -I libftprintf/includes libftprintf/libftprintf.a

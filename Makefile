@@ -6,7 +6,7 @@
 #    By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/29 16:28:19 by nalexand          #+#    #+#              #
-#    Updated: 2019/07/19 20:13:17 by nalexand         ###   ########.fr        #
+#    Updated: 2019/08/02 11:52:01 by nalexand         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,14 +17,13 @@ COM_LIB = common.a
 PS_LIB = push_swap.a
 CH_LIB = checker.a
 
-LIBFT = libft/libft.a
-FTPRINTF = libft/ft_printf/libftprintf.a
+LIBFT = libftprintf/libftprintf.a
 MLX_LIB = -L /usr/local/lib/ -lmlx
 MLX_HEAD = -I /usr/local/include
 FRAMEWORK = -framework OpenGL -framework AppKit
 
 C_FLAGS = -Wall -Werror -Wextra
-HEADER = -I includes -I libft/includes -I libft/ft_printf/includes
+HEADER = -I includes -I libftprintf/includes
 
 SRC_DIR = src/
 OBJ_DIR = obj/
@@ -62,18 +61,16 @@ CH_OBJ = $(addprefix $(OBJ_DIR), $(patsubst %.c, %.o, $(CH_SRC)))
 all: $(PS) $(CH)
 
 $(PS): $(LIBFT) $(FTPRINTF) $(COM_LIB) $(PS_LIB)
-	gcc $(C_FLAGS) -o $@ $(COM_LIB) $(LIBFT) $(FTPRINTF) $(PS_LIB) $(HEADER)
+	gcc $(C_FLAGS) -o $@ $(COM_LIB) $(LIBFT) $(PS_LIB)
 $(CH): $(LIBFT) $(FTPRINTF) $(COM_LIB) $(CH_LIB)
-	gcc $(C_FLAGS) -o $@ $(COM_LIB) $(LIBFT) $(FTPRINTF) $(CH_LIB) $(HEADER) $(MLX_HEAD) $(FRAMEWORK) $(MLX_LIB)
+	gcc $(C_FLAGS) -o $@ $(COM_LIB) $(LIBFT) $(CH_LIB) $(MLX_HEAD) $(FRAMEWORK) $(MLX_LIB)
 
 $(LIBFT):
-	make -C libft/
-$(FTPRINTF):
-	make -C libft/ft_printf/
+	make -C libftprintf/
 
-$(COM_LIB): $(COM_OBJ) 
+$(COM_LIB): $(COM_OBJ)
 	@ar rc $@ $^
-$(PS_LIB): $(PS_OBJ) 
+$(PS_LIB): $(PS_OBJ)
 	@ar rc $@ $^
 $(CH_LIB): $(CH_OBJ)
 	@ar rc $@ $^
@@ -98,13 +95,14 @@ fclean: clean
 	rm -f $(PS)
 	rm -f $(CH)
 	rm -rf *.dSYM
+
 fclean_all: fclean
-	make -C libft/ fclean
-	make -C libft/ft_printf fclean
+	make -C libftprintf/ fclean
+
 re: fclean all
+
 re_all: re
-	make -C libft/ re
-	make -C libft/ft_printf re	
+	make -C libftprintf/ re
+
 relib:
-	make -C libft/ re
-	make -C libft/ft_printf re
+	make -C libftprintf/ re

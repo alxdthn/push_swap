@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/29 06:41:10 by nalexand          #+#    #+#             */
-/*   Updated: 2019/07/19 17:54:23 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/02 12:02:47 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static void	read_line(t_all *all, int fd, int *res, char *str)
 	}
 	if (line)
 		ft_strdel(&line);
-	all->exit_function(all, "ini file error!");
+	all->exit_function(all, ERROR);
 }
 
 void		read_ini(t_all *all)
@@ -68,7 +68,7 @@ void		read_ini(t_all *all)
 		read_line(all, fd, &all->mlx.height, "height: ");
 		if (all->mlx.width < 300 || all->mlx.height < 300
 		|| all->mlx.width > 3000 || all->mlx.height > 3000)
-			all->exit_function(all, "resolution error!");
+			all->exit_function(all, ERROR);
 	}
 }
 

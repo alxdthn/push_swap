@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/13 15:45:07 by nalexand          #+#    #+#             */
-/*   Updated: 2019/07/19 17:56:24 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/02 11:46:23 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ int		read_input(char *cmd, int fd, char flag)
 
 	system (cmd);
 	get_next_line(fd, &line);
-	ft_putendl(line);
 	ft_strdel(&line);
 	get_next_line(fd, &line);
 	ft_putendl(line);
