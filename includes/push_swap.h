@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/24 18:13:31 by nalexand          #+#    #+#             */
-/*   Updated: 2019/07/20 15:05:54 by nalexand         ###   ########.fr       */
+/*   Updated: 2020/01/20 20:55:57 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ typedef struct	s_info
 	int			min_value;
 	int			max_adr;
 	int			max_value;
+	int			abs_max;
 }				t_info;
 
 typedef struct	s_oprs

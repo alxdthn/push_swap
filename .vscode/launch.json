@@ -21,7 +21,7 @@
 		"type": "cppdbg",
 		"request": "launch",
 		"program": "${workspaceFolder}/checker",
-		"args": ["-vrus", "-2", "-3"],
+		"args": ["-vrus", "-1", "-2", "-3"],
 		"stopAtEntry": false,
 		"cwd": "${workspaceFolder}",
 		"environment": [],

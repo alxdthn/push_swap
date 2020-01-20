@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/29 06:41:10 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/02 12:02:47 by nalexand         ###   ########.fr       */
+/*   Updated: 2020/01/20 20:56:32 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,9 +101,9 @@ void		visualisation_init(t_all *all)
 	all->mlx.elem_height = (double)all->mlx.height
 	/ (double)all->ps.a[0] + 0.5;
 	if (all->mlx.elem_height * all->ps.a[0] > all->mlx.height)
-		all->mlx.elem_height -= 1;
+		all->mlx.elem_height--;
 	all->mlx.elem_width = (double)all->mlx.a.size_line
-	/ (double)all->ps.info.max_value + 0.5;
-	if (all->mlx.elem_width * all->ps.info.max_value > all->mlx.a.size_line)
+	/ (double)all->ps.info.abs_max + 0.5;
+	if (all->mlx.elem_width * all->ps.info.abs_max > all->mlx.a.size_line)
 		all->mlx.elem_width--;
 }
