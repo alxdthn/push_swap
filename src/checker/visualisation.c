@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/29 06:41:10 by nalexand          #+#    #+#             */
-/*   Updated: 2020/01/20 20:56:32 by nalexand         ###   ########.fr       */
+/*   Updated: 2020/01/24 21:13:08 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,15 +81,15 @@ static void	mlx_init_params(t_all *all)
 	all->mlx.a.ptr = mlx_new_image(all->mlx.ptr,
 	all->mlx.width / 2, all->mlx.height);
 	all->mlx.a.data = (int *)mlx_get_data_addr(all->mlx.a.ptr,
-	&all->mlx.a.bpp, &all->mlx.a.size_line, &all->mlx.a.endian);
+		&all->mlx.a.bpp, &all->mlx.a.size_line, &all->mlx.a.endian);
 	all->mlx.a.size_line /= 4;
 	all->mlx.b.ptr = mlx_new_image(all->mlx.ptr,
 	all->mlx.width / 2, all->mlx.height);
 	all->mlx.b.data = (int *)mlx_get_data_addr(all->mlx.b.ptr,
-	&all->mlx.b.bpp, &all->mlx.b.size_line, &all->mlx.b.endian);
+		&all->mlx.b.bpp, &all->mlx.b.size_line, &all->mlx.b.endian);
 	all->mlx.b.size_line /= 4;
 	all->mlx.logo.ptr = mlx_xpm_file_to_image(all->mlx.ptr,
-	"src/logo2.xpm", &all->mlx.logo.bpp, &all->mlx.logo.bpp);
+		"src/logo2.xpm", &all->mlx.logo.bpp, &all->mlx.logo.bpp);
 }
 
 void		visualisation_init(t_all *all)
@@ -99,11 +99,12 @@ void		visualisation_init(t_all *all)
 	mlx_loop_hook(all->mlx.ptr, loop_hook, all);
 	mlx_hook(all->mlx.win, 2, 0, key_press, all);
 	all->mlx.elem_height = (double)all->mlx.height
-	/ (double)all->ps.a[0] + 0.5;
+		/ (double)all->ps.a[0] + 0.5;
 	if (all->mlx.elem_height * all->ps.a[0] > all->mlx.height)
 		all->mlx.elem_height--;
+	ft_printf("%d\n", all->ps.info.abs_max);
 	all->mlx.elem_width = (double)all->mlx.a.size_line
-	/ (double)all->ps.info.abs_max + 0.5;
+		/ (double)all->ps.info.abs_max + 0.5;
 	if (all->mlx.elem_width * all->ps.info.abs_max > all->mlx.a.size_line)
 		all->mlx.elem_width--;
 }
